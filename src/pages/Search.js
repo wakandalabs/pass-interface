@@ -1,25 +1,24 @@
 import React from 'react';
 import {
   Box,
-  Center,
+  Center, Heading,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Select
+  Select, Stack
 } from "@chakra-ui/react";
 import {Search2Icon} from "@chakra-ui/icons";
 
 function Search() {
   return (
     <Box pl={16} pr={16}>
-      <Box height={300}>
-        <Center>
-          Search
-        </Center>
-        <Center>
-        </Center>
-      </Box>
+      <Center height={300}>
+        <Stack align={"center"} spacing={2}>
+          <Heading size={"2xl"}>Search World</Heading>
+          <Heading size={"md"}>of Wakanda</Heading>
+        </Stack>
+      </Center>
       <Center mt={-7}>
         <InputGroup width={"50%"} alignItems={"center"} h={14}>
           <InputLeftElement
