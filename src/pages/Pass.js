@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box} from "@chakra-ui/react";
 
-function Following() {
+function Pass() {
   return (
     <Box>
-      Not Found
+      My pass
     </Box>
   );
 }
 
-export default Following;
+export default Pass;

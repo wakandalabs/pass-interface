@@ -13,24 +13,26 @@ import {
 } from "@chakra-ui/react";
 import {Logo} from "./Logo";
 import {ChevronDownIcon, Search2Icon} from "@chakra-ui/icons";
+import { useHistory } from "react-router-dom";
 
 export function TheHeader() {
   const loggedIn = true
   const isDarkMode = useColorModeValue(false, true)
   const {toggleColorMode} = useColorMode()
+  const history = useHistory();
 
   return (
     <Stack direction={"row"} p={4} h={20} bgColor={"transparent"} align={"center"} spacing={2}>
       <Logo h={10} bg={"white"} p={2} borderRadius={"md"}/>
-      <Button variant="ghost"><Heading size="sm">Explore</Heading></Button>
-      <Button variant="ghost"><Heading size="sm">My pass</Heading></Button>
-      <Button variant="ghost"><Heading size="sm">Following</Heading></Button>
+      <Button variant="ghost" onClick={() => history.push("/")}><Heading size="sm">Explore</Heading></Button>
+      <Button variant="ghost" onClick={() => history.push("/pass")}><Heading size="sm">My pass</Heading></Button>
+      <Button variant="ghost" onClick={() => history.push("/following")}><Heading size="sm">Following</Heading></Button>
       <Menu>
         <MenuButton as={Button} px={4} py={2} borderRadius="md" rightIcon={<ChevronDownIcon/>} variant="ghost">
           <Heading size="sm">Community</Heading>
         </MenuButton>
         <MenuList>
-          <MenuItem><Heading size="xs" p={1}>WKDT Token</Heading></MenuItem>
+          <MenuItem onClick={() => history.push("/wkdt")}><Heading size="xs" p={1}>WKDT Token</Heading></MenuItem>
           <MenuItem><Heading size="xs" p={1}>Voting</Heading></MenuItem>
           <MenuItem><Heading size="xs" p={1}>Suggest feature</Heading></MenuItem>
         </MenuList>

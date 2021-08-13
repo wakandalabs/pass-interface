@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box} from "@chakra-ui/react";
 
-function Following() {
+function Search() {
   return (
     <Box>
-      Not Found
+      Search
     </Box>
   );
 }
 
-export default Following;
+export default Search;

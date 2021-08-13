@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box} from "@chakra-ui/react";
 
-function Following() {
+function Wkdt() {
   return (
     <Box>
-      Not Found
+      WKDT Token
     </Box>
   );
 }
 
-export default Following;
+export default Wkdt;
