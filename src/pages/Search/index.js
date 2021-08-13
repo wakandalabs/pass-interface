@@ -15,12 +15,12 @@ function Index() {
     <Box pl={4} pr={4}>
       <Center height={300}>
         <Stack align={"center"} spacing={2}>
-          <Heading size={"2xl"}>Index World</Heading>
+          <Heading size={"2xl"}>Search World</Heading>
           <Heading size={"md"}>of Wakanda</Heading>
         </Stack>
       </Center>
       <Center mt={-7}>
-        <InputGroup width={"50%"} alignItems={"center"} h={14}>
+        <InputGroup maxW={600} alignItems={"center"} h={14}>
           <InputLeftElement
             pointerEvents="none"
             h={"100%"}
