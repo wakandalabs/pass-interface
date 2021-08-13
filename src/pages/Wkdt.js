@@ -3,7 +3,7 @@ import {Box} from "@chakra-ui/react";
 
 function Wkdt() {
   return (
-    <Box>
+    <Box pl={16} pr={16}>
       WKDT Token
     </Box>
   );
