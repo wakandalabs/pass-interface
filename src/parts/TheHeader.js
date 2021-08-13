@@ -7,7 +7,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Switch,
   useColorMode,
   useColorModeValue, Heading, MenuDivider, IconButton
 } from "@chakra-ui/react";
@@ -66,9 +65,7 @@ export function TheHeader() {
                 <Heading fontSize="md">Edit profile</Heading>
               </MenuItem>
               <MenuItem onClick={toggleColorMode} closeOnSelect={false}>
-                <Heading fontSize="md">Dark theme</Heading>
-                <Spacer/>
-                <Switch isChecked={isDarkMode}/>
+                <Heading fontSize="md">{isDarkMode ? "Light" : "Dark"} theme</Heading>
               </MenuItem>
               <MenuItem><Heading fontSize="md">Log out</Heading></MenuItem>
             </MenuList>
