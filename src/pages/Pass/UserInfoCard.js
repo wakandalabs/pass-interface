@@ -10,9 +10,11 @@ export function UserInfoCard({address}) {
       <Avatar bg="teal.500"/>
       <Stack direction={"row"} align={"center"} spacing={2}>
         <Heading fontSize="xl">@ID</Heading>
-        <Button size={"xs"} onClick={onCopy} width={36} colorScheme={"gray"} color={"gray"}>
-          {hasCopied ? "Copied!" :  address }
-        </Button>
+        <Stack>
+          <Button size={"xs"} onClick={onCopy} width={36} colorScheme={"gray"} color={"gray"}>
+            {hasCopied ? "Copied!" :  address }
+          </Button>
+        </Stack>
       </Stack>
       <Text>DESC</Text>
       <Spacer/>
