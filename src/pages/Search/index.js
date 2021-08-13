@@ -10,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import {Search2Icon} from "@chakra-ui/icons";
 
-function Search() {
+function Index() {
   return (
     <Box pl={16} pr={16}>
       <Center height={300}>
         <Stack align={"center"} spacing={2}>
-          <Heading size={"2xl"}>Search World</Heading>
+          <Heading size={"2xl"}>Index World</Heading>
           <Heading size={"md"}>of Wakanda</Heading>
         </Stack>
       </Center>
@@ -26,10 +26,10 @@ function Search() {
             h={"100%"}
             children={<Search2Icon color="gray.300" />}
           />
-          <Input type="tel" placeholder="Search..." size="lg" bgColor={"white"} h={"100%"}/>
+          <Input type="tel" placeholder="Index..." size="lg" bgColor={"white"} h={"100%"}/>
           <InputRightElement children={
             <Select variant="filled">
-              <option value="Pass">Pass</option>
+              <option value="Index">Index</option>
               <option value="User">User</option>
             </Select>
           } w={"auto"} h={"100%"} pr={2}/>
@@ -41,4 +41,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default Index;

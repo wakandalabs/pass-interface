@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box} from "@chakra-ui/react";
 
-function Explore() {
+function Index() {
   return (
     <Box pl={16} pr={16}>
-      Explore
+      Following
     </Box>
   );
 }
 
-export default Explore;
+export default Index;

@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box} from "@chakra-ui/react";
 
-function Following() {
+function Index() {
   return (
     <Box pl={16} pr={16}>
-      Following
+      WKDT Token
     </Box>
   );
 }
 
-export default Following;
+export default Index;

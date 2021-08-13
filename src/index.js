@@ -1,12 +1,12 @@
 import React from 'react';
 import {Switch, Route} from "react-router-dom"
 import ReactDOM from 'react-dom';
-import Explore from './pages/Explore';
-import Following from "./pages/Following";
-import Pass from "./pages/Pass";
-import Wkdt from "./pages/Wkdt";
-import Search from "./pages/Search";
-import Wallet from "./pages/Wallet";
+import Explore from './pages/Explore/index';
+import Following from "./pages/Following/index";
+import Pass from "./pages/Pass/index";
+import Wkdt from "./pages/Wkdt/index";
+import Search from "./pages/Search/index";
+import Wallet from "./pages/Wallet/index";
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import Providers from "./global/providers.comp";

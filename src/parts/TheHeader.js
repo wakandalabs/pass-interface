@@ -38,7 +38,7 @@ export function TheHeader() {
         </MenuList>
       </Menu>
       <Spacer/>
-      <IconButton aria-label="Search" variant={"ghost"} icon={<Search2Icon />} onClick={() => history.push("/search")}/>
+      <IconButton aria-label="Index" variant={"ghost"} icon={<Search2Icon />} onClick={() => history.push("/search")}/>
       {loggedIn ? (
         <>
           <Button colorScheme="blue">Create</Button>

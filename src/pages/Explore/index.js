@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box} from "@chakra-ui/react";
 
-function Wallet() {
+function Index() {
   return (
     <Box pl={16} pr={16}>
-      Wallet
+      Explore
     </Box>
   );
 }
 
-export default Wallet;
+export default Index;

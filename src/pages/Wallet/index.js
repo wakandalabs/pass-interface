@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box} from "@chakra-ui/react";
 
-function Wkdt() {
+function Index() {
   return (
     <Box pl={16} pr={16}>
-      WKDT Token
+      Wallet
     </Box>
   );
 }
 
-export default Wkdt;
+export default Index;
