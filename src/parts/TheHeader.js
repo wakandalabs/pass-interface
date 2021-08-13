@@ -62,6 +62,12 @@ export function TheHeader() {
               <MenuItem onClick={() => history.push("/pass")}>
                 <Heading size="sm">My pass</Heading>
               </MenuItem>
+              <MenuItem onClick={() => history.push("/pass")}>
+                <Heading size="sm">Stake</Heading>
+              </MenuItem>
+              <MenuItem onClick={() => history.push("/pass")}>
+                <Heading size="sm">Mining</Heading>
+              </MenuItem>
               <MenuItem isDisabled={true}>
                 <Heading size="sm">Edit profile</Heading>
               </MenuItem>
