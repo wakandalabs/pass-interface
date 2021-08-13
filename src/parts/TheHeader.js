@@ -59,14 +59,8 @@ export function TheHeader() {
                 </Stack>
               </Stack>
               <MenuDivider />
-              <MenuItem onClick={() => history.push("/pass")}>
-                <Heading size="sm">My pass</Heading>
-              </MenuItem>
-              <MenuItem onClick={() => history.push("/pass")}>
-                <Heading size="sm">Stake</Heading>
-              </MenuItem>
-              <MenuItem onClick={() => history.push("/pass")}>
-                <Heading size="sm">Mining</Heading>
+              <MenuItem onClick={() => history.push("/wallet")}>
+                <Heading size="sm">My wallet</Heading>
               </MenuItem>
               <MenuItem isDisabled={true}>
                 <Heading size="sm">Edit profile</Heading>

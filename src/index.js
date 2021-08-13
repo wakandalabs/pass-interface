@@ -6,6 +6,7 @@ import Following from "./pages/Following";
 import Pass from "./pages/Pass";
 import Wkdt from "./pages/Wkdt";
 import Search from "./pages/Search";
+import Wallet from "./pages/Wallet";
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import Providers from "./global/providers.comp";
@@ -20,6 +21,7 @@ ReactDOM.render(
       <Route exact path="/search" component={Search}/>
       <Route exact path="/pass" component={Pass}/>
       <Route exact path="/wkdt" component={Wkdt}/>
+      <Route exact path="/wallet" component={Wallet}/>
     </Switch>
   </Providers>,
   document.getElementById('root')
