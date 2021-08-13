@@ -59,7 +59,7 @@ export function TheHeader() {
                 </Stack>
               </Stack>
               <MenuDivider />
-              <MenuItem>
+              <MenuItem onClick={() => history.push("/pass")}>
                 <Heading size="sm">My pass</Heading>
               </MenuItem>
               <MenuItem isDisabled={true}>
