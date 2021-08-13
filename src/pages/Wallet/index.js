@@ -12,9 +12,11 @@ import {
 
 function Index() {
   return (
-    <Stack pl={16} pr={16} spacing={4}>
-      <Heading fontSize={"md"}>My Wakanda Token</Heading>
-      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={8}>
+    <Stack pl={4} pr={4} spacing={4}>
+      <Stack>
+        <Heading fontSize={"md"}>My Wakanda Token</Heading>
+      </Stack>
+      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={4}>
         <Stat>
           <StatLabel>Balance</StatLabel>
           <StatNumber>345,670 WKDT</StatNumber>
@@ -27,14 +29,13 @@ function Index() {
         </Stat>
       </StatGroup>
       <Stack>
-        <Heading fontSize={"md"}>My Stake on Wakanda Pass</Heading>
+        <Heading fontSize={"md"} mt={4}>My Stake on Wakanda Pass</Heading>
         <Stack direction={"row"} align={"center"}>
           <Text fontSize={"sm"}>Automatically restake rewards</Text>
           <Switch size={"sm"}/>
         </Stack>
-
       </Stack>
-      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={8}>
+      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={4}>
         <Stat>
           <StatLabel>Current Stake</StatLabel>
           <StatNumber>345,670 WKDT</StatNumber>
@@ -61,8 +62,10 @@ function Index() {
           <StatNumber>0 WKDT</StatNumber>
         </Stat>
       </StatGroup>
-      <Heading fontSize={"md"}>My Rewards</Heading>
-      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={8}>
+      <Stack>
+        <Heading fontSize={"md"} mt={4}>My Rewards</Heading>
+      </Stack>
+      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={4}>
         <Stat>
           <StatLabel>Epoch Rewards</StatLabel>
           <StatNumber>345,670 WKDT</StatNumber>

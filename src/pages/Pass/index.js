@@ -14,7 +14,7 @@ import {UserAvatar} from "./UserAvatar";
 
 function Index() {
   return (
-    <Box pl={16} pr={16}>
+    <Box pl={4} pr={4}>
       <Stack height={500} direction={"row"} mb={4}>
         <UserInfoCard address={"99999999"}/>
         <UserAvatar/>

@@ -3,7 +3,7 @@ import {Box} from "@chakra-ui/react";
 
 function Index() {
   return (
-    <Box pl={16} pr={16}>
+    <Box pl={4} pr={4}>
       Following
     </Box>
   );

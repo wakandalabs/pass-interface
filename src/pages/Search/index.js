@@ -12,7 +12,7 @@ import {Search2Icon} from "@chakra-ui/icons";
 
 function Index() {
   return (
-    <Box pl={16} pr={16}>
+    <Box pl={4} pr={4}>
       <Center height={300}>
         <Stack align={"center"} spacing={2}>
           <Heading size={"2xl"}>Index World</Heading>
