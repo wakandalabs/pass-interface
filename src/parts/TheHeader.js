@@ -22,7 +22,7 @@ export function TheHeader(props) {
       <TheHeaderMenu/>
       <Spacer/>
       <Stack>
-        <IconButton aria-label="Index" variant={"ghost"} icon={<Search2Icon />} onClick={() => history.push("/search")}/>
+        <IconButton aria-label="Index" variant={"ghost"} icon={<Search2Icon/>} onClick={() => history.push("/search")}/>
       </Stack>
       <Stack direction={"row"}>
         {loggedIn ? (
@@ -31,9 +31,7 @@ export function TheHeader(props) {
             <TheHeaderUserInfo/>
           </>
         ) : (
-          <>
-            <Button colorScheme="blue">Log In</Button>
-          </>
+          <Button colorScheme="blue">Log In</Button>
         )}
       </Stack>
     </Stack>
