@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter, Switch, Route} from "react-router-dom"
+import {Switch, Route} from "react-router-dom"
 import ReactDOM from 'react-dom';
 import Explore from './pages/Explore/index';
 import Following from "./pages/Following/index";
@@ -14,7 +14,6 @@ import {TheHeader} from "./parts/TheHeader";
 
 ReactDOM.render(
   <Providers>
-    <HashRouter>
       <TheHeader/>
       <Switch>
         <Route exact path="/" component={Explore}/>
@@ -24,7 +23,6 @@ ReactDOM.render(
         <Route exact path="/wkdt" component={Wkdt}/>
         <Route exact path="/wallet" component={Wallet}/>
       </Switch>
-    </HashRouter>
   </Providers>,
   document.getElementById('root')
 );
