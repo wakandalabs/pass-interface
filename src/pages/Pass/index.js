@@ -18,9 +18,10 @@ import {LikedPass} from "./LikedPass";
 import {About} from "./About";
 import {useHistory} from "react-router-dom";
 import qs from "qs";
+import {HiddenPass} from "./HiddenPass";
 
 function Index() {
-  const tabs = ["sale", "owned", "created", "liked", "about"]
+  const tabs = ["sale", "owned", "created", "hidden", "liked", "about"]
 
   const history = useHistory();
   const {tab} = qs.parse(history.location.search.replace(/^\?/, ''))
@@ -52,6 +53,7 @@ function Index() {
             <Tab><Heading fontSize={"md"}>Sale</Heading></Tab>
             <Tab><Heading fontSize={"md"}>Owned</Heading></Tab>
             <Tab><Heading fontSize={"md"}>Created</Heading></Tab>
+            <Tab><Heading fontSize={"md"}>Hidden</Heading></Tab>
             <Tab><Heading fontSize={"md"}>Liked</Heading></Tab>
             <Tab><Heading fontSize={"md"}>About</Heading></Tab>
           </TabList>
@@ -64,6 +66,9 @@ function Index() {
             </TabPanel>
             <TabPanel>
               <CreatedPass/>
+            </TabPanel>
+            <TabPanel>
+              <HiddenPass/>
             </TabPanel>
             <TabPanel>
               <LikedPass/>
