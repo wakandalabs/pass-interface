@@ -3,7 +3,7 @@ import {
   Button,
   Stack,
   Spacer,
-  IconButton
+  IconButton,
 } from "@chakra-ui/react";
 import {Logo} from "./Logo";
 import {Search2Icon} from "@chakra-ui/icons";
@@ -17,7 +17,7 @@ export function TheHeader(props) {
 
   return (
     <Stack direction={"row"} p={4} h={20} bgColor={"blackAlpha.300"} align={"center"} spacing={2} position={"fixed"}
-           w={"100%"} top={0} left={0} zIndex={9} {...props} >
+           w={"100%"} top={0} left={0} zIndex={9} backdropFilter={"blur(4px)"} {...props}>
       <Logo h={10} bg={"white"} p={2} borderRadius={"md"}/>
       <TheHeaderMenu/>
       <Spacer/>
