@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from "react-router-dom"
+import {HashRouter, Switch, Route} from "react-router-dom"
 import ReactDOM from 'react-dom';
 import Explore from './pages/Explore/index';
 import Following from "./pages/Following/index";
@@ -14,15 +14,17 @@ import {TheHeader} from "./parts/TheHeader";
 
 ReactDOM.render(
   <Providers>
-    <TheHeader />
-    <Switch>
-      <Route exact path="/" component={Explore}/>
-      <Route exact path="/following" component={Following}/>
-      <Route exact path="/search" component={Search}/>
-      <Route exact path="/pass" component={Pass}/>
-      <Route exact path="/wkdt" component={Wkdt}/>
-      <Route exact path="/wallet" component={Wallet}/>
-    </Switch>
+    <HashRouter>
+      <TheHeader />
+      <Switch>
+        <Route exact path="/" component={Explore}/>
+        <Route exact path="/following" component={Following}/>
+        <Route exact path="/search" component={Search}/>
+        <Route exact path="/pass" component={Pass}/>
+        <Route exact path="/wkdt" component={Wkdt}/>
+        <Route exact path="/wallet" component={Wallet}/>
+      </Switch>
+    </HashRouter>
   </Providers>,
   document.getElementById('root')
 );
