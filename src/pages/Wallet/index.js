@@ -9,6 +9,7 @@ import {
   StatNumber,
   Button, Text, Switch
 } from "@chakra-ui/react";
+import {TransferToken} from "./TransferToken";
 
 function Index() {
   return (
@@ -22,8 +23,7 @@ function Index() {
           <StatNumber>345,670 WKDT</StatNumber>
           <StatHelpText mt={4}>
             <Stack direction={"row"}>
-              <Button size={"sm"}>Send</Button>
-              <Button size={"sm"}>Receive</Button>
+              <TransferToken address={"aassssssss"}/>
             </Stack>
           </StatHelpText>
         </Stat>
