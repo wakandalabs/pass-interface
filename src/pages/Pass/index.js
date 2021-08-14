@@ -11,6 +11,11 @@ import {
 } from "@chakra-ui/react";
 import {UserInfoCard} from "./UserInfoCard";
 import {UserAvatar} from "./UserAvatar";
+import {SalePass} from "./SalePass";
+import {OwnedPass} from "./OwnedPass";
+import {CreatedPass} from "./CreatedPass";
+import {LikedPass} from "./LikedPass";
+import {About} from "./About";
 
 function Index() {
   return (
@@ -30,19 +35,19 @@ function Index() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <p>one!</p>
+              <SalePass/>
             </TabPanel>
             <TabPanel>
-              <p>two!</p>
+             <OwnedPass/>
             </TabPanel>
             <TabPanel>
-              <p>three!</p>
+             <CreatedPass/>
             </TabPanel>
             <TabPanel>
-              <p>four!</p>
+              <LikedPass/>
             </TabPanel>
             <TabPanel>
-              <p>About</p>
+             <About/>
             </TabPanel>
           </TabPanels>
         </Tabs>
