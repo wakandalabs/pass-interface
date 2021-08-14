@@ -11,12 +11,13 @@ import {useHistory} from "react-router-dom";
 import {TheHeaderMenu} from "./TheHeaderMenu";
 import {TheHeaderUserInfo} from "./TheHeaderUserInfo";
 
-export function TheHeader() {
+export function TheHeader(props) {
   const loggedIn = true
   const history = useHistory();
 
   return (
-    <Stack direction={"row"} p={4} h={20} bgColor={"transparent"} align={"center"} spacing={2}>
+    <Stack direction={"row"} p={4} h={20} bgColor={"blackAlpha.300"} align={"center"} spacing={2} position={"fixed"}
+           w={"100%"} top={0} left={0} zIndex={9} {...props} >
       <Logo h={10} bg={"white"} p={2} borderRadius={"md"}/>
       <TheHeaderMenu/>
       <Spacer/>
@@ -39,8 +40,8 @@ export function TheHeader() {
   )
 }
 
-export default function WrappedTheHeader() {
+export default function WrappedTheHeader(props) {
   return (
-    <TheHeader/>
+    <TheHeader {...props}/>
   )
 }

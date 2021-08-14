@@ -15,7 +15,7 @@ import {TheHeader} from "./parts/TheHeader";
 ReactDOM.render(
   <Providers>
     <HashRouter>
-      <TheHeader />
+      <TheHeader/>
       <Switch>
         <Route exact path="/" component={Explore}/>
         <Route exact path="/following" component={Following}/>

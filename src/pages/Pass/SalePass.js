@@ -2,7 +2,7 @@ import {Box} from "@chakra-ui/react";
 
 export function SalePass() {
   return (
-    <Box>
+    <Box h={500}>
     Sale
     </Box>
   )
