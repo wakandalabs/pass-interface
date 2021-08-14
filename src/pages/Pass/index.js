@@ -20,8 +20,25 @@ import {useHistory} from "react-router-dom";
 import qs from "qs";
 
 function Index() {
+  const tabs = ["sale", "owned", "created", "liked", "about"]
+
   const history = useHistory();
-  const tab = qs.parse(history.location.search.replace(/^\?/, ''))
+  const {tab} = qs.parse(history.location.search.replace(/^\?/, ''))
+  const [tabIndex, setTabIndex] = React.useState(getTabIndex(tab))
+
+  function getTabIndex(tab) {
+    const index = tabs.findIndex((item) => item === tab)
+    return (index < 0) ? 0 : index
+  }
+
+  const handleTabsChange = (index) => {
+    setTabIndex(index)
+    if (index === 0){
+      history.push("pass")
+    }else{
+      history.push("pass?tab=" + tabs[index])
+    }
+  }
 
   return (
     <Box pl={4} pr={4}>
@@ -30,29 +47,29 @@ function Index() {
         <UserAvatar/>
       </Stack>
       <Stack>
-        <Tabs>
+        <Tabs index={tabIndex} onChange={handleTabsChange}>
           <TabList>
-            <Tab><Heading fontSize={"md"} onClick={() => history.push("pass")}>Sale</Heading></Tab>
-            <Tab><Heading fontSize={"md"} onClick={() => history.push("pass?tab=owned")}>Owned</Heading></Tab>
-            <Tab><Heading fontSize={"md"} onClick={() => history.push("pass?tab=created")}>Created</Heading></Tab>
-            <Tab><Heading fontSize={"md"} onClick={() => history.push("pass?tab=liked")}>Liked</Heading></Tab>
-            <Tab><Heading fontSize={"md"} onClick={() => history.push("pass?tab=about")}>About</Heading></Tab>
+            <Tab><Heading fontSize={"md"}>Sale</Heading></Tab>
+            <Tab><Heading fontSize={"md"}>Owned</Heading></Tab>
+            <Tab><Heading fontSize={"md"}>Created</Heading></Tab>
+            <Tab><Heading fontSize={"md"}>Liked</Heading></Tab>
+            <Tab><Heading fontSize={"md"}>About</Heading></Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
               <SalePass/>
             </TabPanel>
             <TabPanel>
-             <OwnedPass/>
+              <OwnedPass/>
             </TabPanel>
             <TabPanel>
-             <CreatedPass/>
+              <CreatedPass/>
             </TabPanel>
             <TabPanel>
               <LikedPass/>
             </TabPanel>
             <TabPanel>
-             <About/>
+              <About/>
             </TabPanel>
           </TabPanels>
         </Tabs>
