@@ -21,14 +21,21 @@ import qs from "qs";
 import {HiddenPass} from "./HiddenPass";
 
 function Index() {
-  const tabs = ["sale", "owned", "created", "hidden", "liked", "about"]
+  const tabs = [
+    {key: "sale", label: "Sale"},
+    {key: "owned", label: "Owned"},
+    {key: "created", label: "Created"},
+    {key: "hidden", label: "Hidden"},
+    {key: "liked", label: "Liked"},
+    {key: "about", label: "About"},
+  ]
 
   const history = useHistory();
   const {tab} = qs.parse(history.location.search.replace(/^\?/, ''))
   const [tabIndex, setTabIndex] = React.useState(getTabIndex(tab))
 
   function getTabIndex(tab) {
-    const index = tabs.findIndex((item) => item === tab)
+    const index = tabs.findIndex((item) => item.key === tab)
     return (index < 0) ? 0 : index
   }
 
@@ -37,7 +44,7 @@ function Index() {
     if (index === 0){
       history.push("pass")
     }else{
-      history.push("pass?tab=" + tabs[index])
+      history.push("pass?tab=" + tabs[index].key)
     }
   }
 
@@ -50,12 +57,9 @@ function Index() {
       <Stack>
         <Tabs index={tabIndex} onChange={handleTabsChange}>
           <TabList>
-            <Tab><Heading fontSize={"md"}>Sale</Heading></Tab>
-            <Tab><Heading fontSize={"md"}>Owned</Heading></Tab>
-            <Tab><Heading fontSize={"md"}>Created</Heading></Tab>
-            <Tab><Heading fontSize={"md"}>Hidden</Heading></Tab>
-            <Tab><Heading fontSize={"md"}>Liked</Heading></Tab>
-            <Tab><Heading fontSize={"md"}>About</Heading></Tab>
+            {tabs.map((tab, index) => (
+              <Tab key={index}><Heading fontSize={"md"}>{tab.label}</Heading></Tab>
+            ))}
           </TabList>
           <TabPanels>
             <TabPanel>
