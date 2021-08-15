@@ -6,16 +6,13 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Stack, useColorMode,
-  useColorModeValue
+  Stack,
 } from "@chakra-ui/react";
 import React from "react";
 import {useHistory} from "react-router-dom";
 
 export function TheHeaderUserInfo() {
   const history = useHistory();
-  const isDarkMode = useColorModeValue(false, true)
-  const {toggleColorMode} = useColorMode()
 
   return (
     <Menu isLazy={true}>
@@ -40,9 +37,6 @@ export function TheHeaderUserInfo() {
         </MenuItem>
         <MenuItem isDisabled={true}>
           <Heading fontSize="md">Edit profile</Heading>
-        </MenuItem>
-        <MenuItem onClick={toggleColorMode} closeOnSelect={false}>
-          <Heading fontSize="md">{isDarkMode ? "Light" : "Dark"} theme</Heading>
         </MenuItem>
         <MenuItem><Heading fontSize="md">Log out</Heading></MenuItem>
       </MenuList>
