@@ -9,7 +9,7 @@ import Wkdt from "./pages/Wkdt/index";
 import Search from "./pages/Search/index";
 import Wallet from "./pages/Wallet/index";
 import NotFound from "./pages/not-found";
-import {Initialize} from "./pages/Initialize";
+import Initialize from "./pages/Initialize";
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import Providers from "./global/providers.comp";

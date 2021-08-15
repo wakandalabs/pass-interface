@@ -3,65 +3,34 @@ import {invariant} from "@onflow/util-invariant";
 import {tx} from "../util/tx";
 
 const CODE = cdc`
-  import FungibleToken from 0xFungibleToken
-  import NonFungibleToken from 0xNonFungibleToken
-  import Vibranium from 0xVibranium
-  import WakandaItems from 0xWakandaItems
-  import WakandaItemsMarket from 0xWakandaItemsMarket
+import FungibleToken from 0xFungibleToken
+import NonFungibleToken from 0xNonFungibleToken
+import WakandaToken from 0xWakandaToken
+import WakandaPass from 0xWakandaPass
 
-  pub fun hasVibranium(_ address: Address): Bool {
-    let receiver = getAccount(address)
-      .getCapability<&Vibranium.Vault{FungibleToken.Receiver}>(Vibranium.ReceiverPublicPath)
-      .check()
+transaction {
+  prepare(signer: AuthAccount) {
+    if(signer.borrow<&WakandaToken.Vault>(from: WakandaToken.TokenStoragePath) == nil) {
+      signer.save(<-WakandaToken.createEmptyVault(), to: WakandaToken.TokenStoragePath)
+      signer.link<&WakandaToken.Vault{FungibleToken.Receiver}>(
+        WakandaToken.TokenPublicReceiverPath,
+        target: WakandaToken.TokenStoragePath
+      )
+      signer.link<&WakandaToken.Vault{FungibleToken.Balance}>(
+          WakandaToken.TokenPublicBalancePath,
+          target: WakandaToken.TokenStoragePath
+      )
+    }
 
-    let balance = getAccount(address)
-      .getCapability<&Vibranium.Vault{FungibleToken.Balance}>(Vibranium.BalancePublicPath)
-      .check()
-
-    return receiver && balance
-  }
-
-  pub fun hasItems(_ address: Address): Bool {
-    return getAccount(address)
-      .getCapability<&WakandaItems.Collection{NonFungibleToken.CollectionPublic, WakandaItems.WakandaItemsCollectionPublic}>(WakandaItems.CollectionPublicPath)
-      .check()
-  }
-
-  pub fun hasMarket(_ address: Address): Bool {
-    return getAccount(address)
-      .getCapability<&WakandaItemsMarket.Collection{WakandaItemsMarket.CollectionPublic}>(WakandaItemsMarket.CollectionPublicPath)
-      .check()
-  }
-
-  transaction {
-    prepare(acct: AuthAccount) {
-      if !hasVibranium(acct.address) {
-        if acct.borrow<&Vibranium.Vault>(from: Vibranium.VaultStoragePath) == nil {
-          acct.save(<-Vibranium.createEmptyVault(), to: Vibranium.VaultStoragePath)
-        }
-        acct.unlink(Vibranium.ReceiverPublicPath)
-        acct.unlink(Vibranium.BalancePublicPath)
-        acct.link<&Vibranium.Vault{FungibleToken.Receiver}>(Vibranium.ReceiverPublicPath, target: Vibranium.VaultStoragePath)
-        acct.link<&Vibranium.Vault{FungibleToken.Balance}>(Vibranium.BalancePublicPath, target: Vibranium.VaultStoragePath)
-      }
-
-      if !hasItems(acct.address) {
-        if acct.borrow<&WakandaItems.Collection>(from: WakandaItems.CollectionStoragePath) == nil {
-          acct.save(<-WakandaItems.createEmptyCollection(), to: WakandaItems.CollectionStoragePath)
-        }
-        acct.unlink(WakandaItems.CollectionPublicPath)
-        acct.link<&WakandaItems.Collection{NonFungibleToken.CollectionPublic, WakandaItems.WakandaItemsCollectionPublic}>(WakandaItems.CollectionPublicPath, target: WakandaItems.CollectionStoragePath)
-      }
-
-      if !hasMarket(acct.address) {
-        if acct.borrow<&WakandaItemsMarket.Collection>(from: WakandaItemsMarket.CollectionStoragePath) == nil {
-          acct.save(<-WakandaItemsMarket.createEmptyCollection(), to: WakandaItemsMarket.CollectionStoragePath)
-        }
-        acct.unlink(WakandaItemsMarket.CollectionPublicPath)
-        acct.link<&WakandaItemsMarket.Collection{WakandaItemsMarket.CollectionPublic}>(WakandaItemsMarket.CollectionPublicPath, target:WakandaItemsMarket.CollectionStoragePath)
-      }
+    if signer.borrow<&WakandaPass.Collection>(from: WakandaPass.CollectionStoragePath) == nil {
+      let collection <- WakandaPass.createEmptyCollection() as! @WakandaPass.Collection
+      signer.save(<-collection, to: WakandaPass.CollectionStoragePath)
+      signer.link<&{NonFungibleToken.CollectionPublic, WakandaPass.CollectionPublic}>(
+        WakandaPass.CollectionPublicPath,
+        target: WakandaPass.CollectionStoragePath)
     }
   }
+}
 `
 
 export async function initializeAccount(address, opts = {}) {

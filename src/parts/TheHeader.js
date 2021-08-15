@@ -31,7 +31,7 @@ export function TheHeader(props) {
         {loggedIn ? (
           <>
             <Button colorScheme="blue">Create</Button>
-            <TheHeaderUserInfo />
+            <TheHeaderUserInfo/>
           </>
         ) : (
           <Button colorScheme="blue" onClick={logIn}>Log In</Button>

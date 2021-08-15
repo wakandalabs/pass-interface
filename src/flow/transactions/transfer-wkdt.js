@@ -5,42 +5,29 @@ import {invariant} from "@onflow/util-invariant";
 
 const CODE = fcl.cdc`
 import FungibleToken from 0xFungibleToken
-import Vibranium from 0xVibranium
+import WakandaToken from 0xWakandaToken
 
 transaction(amount: UFix64, to: Address) {
-
-    // The Vault resource that holds the tokens that are being transferred
     let sentVault: @FungibleToken.Vault
 
     prepare(signer: AuthAccount) {
-
-        // Get a reference to the signer's stored vault
-        let vaultRef = signer.borrow<&Vibranium.Vault>(from: Vibranium.VaultStoragePath)
-      ?? panic("Could not borrow reference to the owner's Vault!")
-
-        // Withdraw tokens from the signer's stored vault
+        let vaultRef = signer.borrow<&WakandaToken.Vault>(from: WakandaToken.TokenStoragePath) ?? panic("Could not borrow reference to the owner's Vault!")
         self.sentVault <- vaultRef.withdraw(amount: amount)
     }
 
     execute {
-
-        // Get the recipient's public account object
         let recipient = getAccount(to)
-
-        // Get a reference to the recipient's Receiver
-        let receiverRef = recipient.getCapability(Vibranium.ReceiverPublicPath)!.borrow<&{FungibleToken.Receiver}>()
-      ?? panic("Could not borrow receiver reference to the recipient's Vault")
-
-        // Deposit the withdrawn tokens in the recipient's receiver
+        let receiverRef = recipient.getCapability(WakandaToken.TokenPublicReceiverPath)
+            .borrow<&{FungibleToken.Receiver}>() ?? panic("Could not borrow receiver reference to the recipient's Vault")
         receiverRef.deposit(from: <-self.sentVault)
     }
 }
 `
 
 // prettier-ignore
-export function transferVibranium({amount, to}, opts = {}) {
-  invariant(amount != null, "transferVibranium({amount, to}) -- amount required")
-  invariant(to != null, "transferVibranium({amount, to}) -- to required")
+export function transferWkdt({amount, to}, opts = {}) {
+  invariant(amount != null, "transferWakandaToken({amount, to}) -- amount required")
+  invariant(to != null, "transferWakandaToken({amount, to}) -- to required")
 
   return tx([
     fcl.transaction(CODE),

@@ -1,42 +1,32 @@
-import {send, decode, script, args, arg, cdc} from "@onflow/fcl";
-import {Address} from "@onflow/types";
+import {send, decode, script, args, arg, cdc} from "@onflow/fcl"
+import {Address} from "@onflow/types"
 
 const CODE = cdc`
-  import FungibleToken from 0xFungibleToken
-  import NonFungibleToken from 0xNonFungibleToken
-  import Vibranium from 0xVibranium
-  import WakandaItems from 0xWakandaItems
-  import WakandaItemsMarket from 0xWakandaItemsMarket
+  import WakandaToken from 0xWakandaToken
+  import WakandaPass from 0xWakandaPass
 
-  pub fun hasVibranium(_ address: Address): Bool {
+  pub fun hasWakandaToken(_ address: Address): Bool {
     let receiver: Bool = getAccount(address)
-      .getCapability<&Vibranium.Vault{FungibleToken.Receiver}>(Vibranium.ReceiverPublicPath)
+      .getCapability(/public/wakandaTokenReceiver)
       .check()
 
     let balance: Bool = getAccount(address)
-      .getCapability<&Vibranium.Vault{FungibleToken.Balance}>(Vibranium.BalancePublicPath)
+      .getCapability(/public/wakandaTokenBalance)
       .check()
 
     return receiver && balance
   }
 
-  pub fun hasWakandaItems(_ address: Address): Bool {
+  pub fun hasWakandaPass(_ address: Address): Bool {
     return getAccount(address)
-      .getCapability<&WakandaItems.Collection{NonFungibleToken.CollectionPublic, WakandaItems.WakandaItemsCollectionPublic}>(WakandaItems.CollectionPublicPath)
-      .check()
-  }
-
-  pub fun hasWakandaItemsMarket(_ address: Address): Bool {
-    return getAccount(address)
-      .getCapability<&WakandaItemsMarket.Collection{WakandaItemsMarket.CollectionPublic}>(WakandaItemsMarket.CollectionPublicPath)
+      .getCapability(/public/wakandaPassCollection)
       .check()
   }
 
   pub fun main(address: Address): {String: Bool} {
     let ret: {String: Bool} = {}
-    ret["Vibranium"] = hasVibranium(address)
-    ret["WakandaItems"] = hasWakandaItems(address)
-    ret["WakandaItemsMarket"] = hasWakandaItemsMarket(address)
+    ret["WakandaToken"] = hasWakandaToken(address)
+    ret["WakandaPass"] = hasWakandaPass(address)
     return ret
   }
 `
