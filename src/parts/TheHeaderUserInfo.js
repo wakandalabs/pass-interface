@@ -22,8 +22,7 @@ export function TheHeaderUserInfo() {
         {user.addr}
       </MenuButton>
       <MenuList>
-        <Stack m={3} spacing={2}>
-          <Heading fontSize="md">{user.addr}</Heading>
+        <Stack ml={3} mr={3} spacing={2}>
           <Stack>
             <Heading fontSize="xs" color={"gray"}>My balance</Heading>
             <Heading fontSize="sm">200 WKDT</Heading>
