@@ -15,9 +15,11 @@ function Index() {
   return (
     <Center>
       <Stack pl={4} pr={4} spacing={4} w={650}>
+        <Heading>My wallet</Heading>
+        <Divider/>
         <StatGroup>
           <Stat>
-            <StatLabel>My balance</StatLabel>
+            <StatLabel>balance</StatLabel>
             <Stack direction={"row"} align={"baseline"}>
               <StatNumber>345,670</StatNumber>
               <Heading fontSize={"md"}>WKDT</Heading>

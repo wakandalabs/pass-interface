@@ -36,6 +36,9 @@ export function TheHeaderUserInfo() {
         <MenuItem onClick={() => history.push("/wallet")}>
           <Heading fontSize="md">My wallet</Heading>
         </MenuItem>
+        <MenuItem onClick={() => history.push("/initialize")}>
+          <Heading fontSize="md">Initialize</Heading>
+        </MenuItem>
         <MenuItem>
           <Heading fontSize="md">Edit profile</Heading>
         </MenuItem>
