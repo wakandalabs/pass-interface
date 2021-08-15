@@ -22,7 +22,7 @@ import {HiddenPass} from "./HiddenPass";
 
 function Index() {
   const tabs = [
-    {key: "sale", label: "Sale", path: ""},
+    {key: "sale", label: "Sale", path: "sale"},
     {key: "owned", label: "Owned", path: "owned"},
     {key: "created", label: "Created", path: "created"},
     {key: "hidden", label: "Hidden", path: "hidden"},
@@ -41,7 +41,11 @@ function Index() {
 
   const handleTabsChange = (index) => {
     setTabIndex(index)
-    history.push("pass?tab=" + tabs[index].path)
+    if (index === 0){
+      history.push("pass")
+    } else {
+      history.push("pass?tab=" + tabs[index].path)
+    }
   }
 
   return (
