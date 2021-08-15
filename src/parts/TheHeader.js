@@ -15,7 +15,7 @@ import {useCurrentUser} from "../hooks/use-current-user";
 
 export function TheHeader(props) {
   const history = useHistory();
-  const [loggedIn, {logIn}] = useCurrentUser()
+  const [user, loggedIn, {logIn}] = useCurrentUser()
 
   return (
     <Stack direction={"row"} p={4} h={20} bgColor={"transparent"} align={"center"} spacing={2} position={"fixed"}
