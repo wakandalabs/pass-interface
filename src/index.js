@@ -1,3 +1,4 @@
+import "./global/config";
 import React from 'react';
 import {Switch, Route} from "react-router-dom"
 import ReactDOM from 'react-dom';
@@ -7,6 +8,7 @@ import Pass from "./pages/Pass/index";
 import Wkdt from "./pages/Wkdt/index";
 import Search from "./pages/Search/index";
 import Wallet from "./pages/Wallet/index";
+import NotFound from "./pages/not-found";
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import Providers from "./global/providers.comp";
@@ -22,6 +24,7 @@ ReactDOM.render(
         <Route exact path="/pass" component={Pass}/>
         <Route exact path="/wkdt" component={Wkdt}/>
         <Route exact path="/wallet" component={Wallet}/>
+        <Route component={NotFound}/>
       </Switch>
   </Providers>,
   document.getElementById('root')

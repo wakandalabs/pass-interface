@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   Button,
   Stack,
@@ -11,10 +11,11 @@ import {useHistory} from "react-router-dom";
 import {TheHeaderMenu} from "./TheHeaderMenu";
 import {TheHeaderUserInfo} from "./TheHeaderUserInfo";
 import {ColorModeSwitcher} from "./ColorModeSwitcher";
+import {useCurrentUser} from "../hooks/use-current-user";
 
 export function TheHeader(props) {
-  const loggedIn = false
   const history = useHistory();
+  const [loggedIn, {logIn}] = useCurrentUser()
 
   return (
     <Stack direction={"row"} p={4} h={20} bgColor={"transparent"} align={"center"} spacing={2} position={"fixed"}
@@ -30,10 +31,10 @@ export function TheHeader(props) {
         {loggedIn ? (
           <>
             <Button colorScheme="blue">Create</Button>
-            <TheHeaderUserInfo/>
+            <TheHeaderUserInfo />
           </>
         ) : (
-          <Button colorScheme="blue">Log In</Button>
+          <Button colorScheme="blue" onClick={logIn}>Log In</Button>
         )}
       </Stack>
     </Stack>

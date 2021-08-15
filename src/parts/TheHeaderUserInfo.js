@@ -10,9 +10,11 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import {useHistory} from "react-router-dom";
+import {useCurrentUser} from "../hooks/use-current-user";
 
 export function TheHeaderUserInfo() {
   const history = useHistory();
+  const [user, {logOut}] = useCurrentUser()
 
   return (
     <Menu isLazy={true}>
@@ -35,10 +37,10 @@ export function TheHeaderUserInfo() {
         <MenuItem onClick={() => history.push("/wallet")}>
           <Heading fontSize="md">My wallet</Heading>
         </MenuItem>
-        <MenuItem isDisabled={true}>
+        <MenuItem>
           <Heading fontSize="md">Edit profile</Heading>
         </MenuItem>
-        <MenuItem><Heading fontSize="md">Log out</Heading></MenuItem>
+        <MenuItem><Heading fontSize="md" onClick={logOut}>Log out</Heading></MenuItem>
       </MenuList>
     </Menu>
   )
