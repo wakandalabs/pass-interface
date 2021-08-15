@@ -14,16 +14,16 @@ import {useCurrentUser} from "../hooks/use-current-user";
 
 export function TheHeaderUserInfo() {
   const history = useHistory();
-  const [user, {logOut}] = useCurrentUser()
+  const [user, loggedIn, {logOut}] = useCurrentUser()
 
   return (
     <Menu isLazy={true}>
       <MenuButton as={Button} px={4} py={2} borderRadius="md">
-        Address
+        {user.addr}
       </MenuButton>
       <MenuList>
         <Stack m={3} spacing={2}>
-          <Heading fontSize="md">Address</Heading>
+          <Heading fontSize="md">{user.addr}</Heading>
           <Stack>
             <Heading fontSize="xs" color={"gray"}>My balance</Heading>
             <Heading fontSize="sm">200 WKDT</Heading>
