@@ -6,17 +6,20 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalOverlay, Tab,
+  ModalOverlay, Stack, Tab,
   TabList, TabPanel, TabPanels,
   Tabs, useDisclosure
 } from "@chakra-ui/react";
 import {TransferTokenReceive} from "./TransferTokenReceive";
 import {TransferTokenSend} from "./TransferTokenSend";
+import {useCurrentUser} from "../../hooks/use-current-user";
 
 
-export function TransferToken({address}) {
+export function TransferToken() {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const [tabIndex, setTabIndex] = React.useState(0)
+  const [user] = useCurrentUser()
+  const address = user.addr
 
   function handleTransfer(index) {
     onOpen()
@@ -24,7 +27,7 @@ export function TransferToken({address}) {
   }
 
   return (
-    <>
+    <Stack direction={"row"}>
       <Button size={"sm"} onClick={() => handleTransfer(0)}>Send</Button>
       <Button size={"sm"} onClick={() => handleTransfer(1)}>Receive</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -50,7 +53,7 @@ export function TransferToken({address}) {
           </ModalBody>
         </ModalContent>
       </Modal>
-    </>
+    </Stack>
   )
 }
 

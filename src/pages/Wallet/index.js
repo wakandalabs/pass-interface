@@ -7,89 +7,97 @@ import {
   StatHelpText,
   StatLabel,
   StatNumber,
-  Button, Text, Switch
+  Button, Text, Switch, Center, Spacer, Box, Divider
 } from "@chakra-ui/react";
 import {TransferToken} from "./TransferToken";
 
 function Index() {
   return (
-    <Stack pl={4} pr={4} spacing={4}>
-      <Stack>
-        <Heading fontSize={"md"}>My Wakanda Token</Heading>
-      </Stack>
-      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={4}>
-        <Stat>
-          <StatLabel>Balance</StatLabel>
-          <StatNumber>345,670 WKDT</StatNumber>
-          <StatHelpText mt={4}>
-            <Stack direction={"row"}>
-              <TransferToken address={"aassssssss"}/>
+    <Center>
+      <Stack pl={4} pr={4} spacing={4} w={650}>
+        <StatGroup>
+          <Stat>
+            <StatLabel>My balance</StatLabel>
+            <Stack direction={"row"} align={"baseline"}>
+              <StatNumber>345,670</StatNumber>
+              <Heading fontSize={"md"}>WKDT</Heading>
             </Stack>
-          </StatHelpText>
-        </Stat>
-      </StatGroup>
-      <Stack>
-        <Heading fontSize={"md"} mt={4}>My Stake on Wakanda Pass</Heading>
+            <StatHelpText mt={4}>
+              <TransferToken/>
+            </StatHelpText>
+          </Stat>
+        </StatGroup>
+        <Divider/>
         <Stack direction={"row"} align={"center"}>
-          <Text fontSize={"sm"}>Automatically restake rewards</Text>
+          <Heading fontSize={"sm"}>Automatically restake rewards</Heading>
           <Switch size={"sm"}/>
         </Stack>
-      </Stack>
-      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={4}>
-        <Stat>
-          <StatLabel>Current Stake</StatLabel>
-          <StatNumber>345,670 WKDT</StatNumber>
-          <StatHelpText mt={4}>
+        <Box spacing={0}>
+          <Text fontSize={"sm"} color={"gray.500"}>Current stake amount</Text>
+          <Stack direction={"row"} align={"center"}>
+            <Heading fontSize={"sm"}>200 WKDT</Heading>
+            <Spacer/>
             <Button size={"sm"}>Unstake</Button>
-          </StatHelpText>
-        </Stat>
-        <Stat>
-          <StatLabel>Add Stake</StatLabel>
-          <StatNumber>45 WKDT</StatNumber>
-          <StatHelpText mt={4}>
+          </Stack>
+        </Box>
+        <Stack spacing={1}>
+          <Text fontSize={"sm"} color={"gray.500"}>Add stake token</Text>
+          <Stack direction={"row"} align={"center"}>
+            <Heading fontSize={"sm"}>200 WKDT</Heading>
+            <Spacer/>
             <Button size={"sm"}>Stake</Button>
-          </StatHelpText>
-        </Stat>
-        <Stat>
-          <StatLabel>Request Unstake</StatLabel>
-          <StatNumber>0 WKDT</StatNumber>
-          <StatHelpText mt={4}>
+          </Stack>
+        </Stack>
+        <Stack spacing={1}>
+          <Text fontSize={"sm"} color={"gray.500"}>Request for cancellation of stake amount</Text>
+          <Stack direction={"row"} align={"center"}>
+            <Heading fontSize={"sm"}>200 WKDT</Heading>
+            <Spacer/>
             <Button size={"sm"}>Restake</Button>
-          </StatHelpText>
-        </Stat>
-        <Stat>
-          <StatLabel>Next Round Stake</StatLabel>
-          <StatNumber>0 WKDT</StatNumber>
-        </Stat>
-      </StatGroup>
-      <Stack>
-        <Heading fontSize={"md"} mt={4}>My Rewards</Heading>
+          </Stack>
+        </Stack>
+        <Stack spacing={3}>
+          <Text fontSize={"sm"} color={"gray.500"}>Second epoch of stake amount</Text>
+          <Heading fontSize={"sm"}>200 WKDT</Heading>
+        </Stack>
+        <Stack spacing={3}>
+          <Text fontSize={"sm"} color={"gray.500"}>Second epoch start time</Text>
+          <Heading fontSize={"sm"}>2021年8月17日</Heading>
+        </Stack>
+        <Divider/>
+
+        <Stack spacing={3}>
+          <Text fontSize={"sm"} color={"gray.500"}>Calculated rewards for this epoch</Text>
+          <Heading fontSize={"sm"}>200 WKDT</Heading>
+        </Stack>
+
+        <Stack spacing={1}>
+          <Text fontSize={"sm"} color={"gray.500"}>Rewards already distributed</Text>
+          <Stack direction={"row"} align={"center"}>
+            <Heading fontSize={"sm"}>200 WKDT</Heading>
+            <Spacer/>
+            <Button size={"sm"}>Receive</Button>
+          </Stack>
+        </Stack>
+
+        <Divider/>
+
+        <Stack spacing={3}>
+          <Text fontSize={"sm"} color={"gray.500"}>Unstaking token</Text>
+          <Heading fontSize={"sm"}>200 WKDT</Heading>
+        </Stack>
+
+        <Stack spacing={1}>
+          <Text fontSize={"sm"} color={"gray.500"}>Unstaked token</Text>
+          <Stack direction={"row"} align={"center"}>
+            <Heading fontSize={"sm"}>200 WKDT</Heading>
+            <Spacer/>
+            <Button size={"sm"}>Receive</Button>
+          </Stack>
+        </Stack>
+        <Stack h={20}/>
       </Stack>
-      <StatGroup border="1px" borderRadius={8} borderColor={"gray.300"} p={4}>
-        <Stat>
-          <StatLabel>Epoch Rewards</StatLabel>
-          <StatNumber>345,670 WKDT</StatNumber>
-        </Stat>
-        <Stat>
-          <StatLabel>Had Distribute Rewards</StatLabel>
-          <StatNumber>45 WKDT</StatNumber>
-          <StatHelpText mt={4}>
-            <Button size={"sm"}>Receive</Button>
-          </StatHelpText>
-        </Stat>
-        <Stat>
-          <StatLabel>Unstaking</StatLabel>
-          <StatNumber>0 WKDT</StatNumber>
-        </Stat>
-        <Stat>
-          <StatLabel>Had Unstake</StatLabel>
-          <StatNumber>0 WKDT</StatNumber>
-          <StatHelpText mt={4}>
-            <Button size={"sm"}>Receive</Button>
-          </StatHelpText>
-        </Stat>
-      </StatGroup>
-    </Stack>
+    </Center>
   );
 }
 
