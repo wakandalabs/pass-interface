@@ -31,22 +31,6 @@ export function useWkdtBalance(address) {
     balance,
     status,
     refresh,
-    async mint(amount) {
-      setStatus(PROCESSING)
-      await fetch(process.env.REACT_APP_API_VIBRANIUM_MINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          recipient: address,
-          amount: amount,
-        }),
-      })
-      await fetchWkdtBalance(address).then(setBalance)
-      setStatus(IDLE)
-    },
-
     async transfer(amount, to) {
       await transferWkdt(
         {amount: amount, to: to},

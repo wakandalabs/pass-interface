@@ -8,8 +8,8 @@ import {
 import {Logo} from "./Logo";
 import {Search2Icon} from "@chakra-ui/icons";
 import {useHistory} from "react-router-dom";
-import {TheHeaderMenu} from "./TheHeaderMenu";
-import {TheHeaderUserInfo} from "./TheHeaderUserInfo";
+import TheHeaderMenu from "./TheHeaderMenu";
+import TheHeaderUserInfo from "./TheHeaderUserInfo";
 import {ColorModeSwitcher} from "./ColorModeSwitcher";
 import {useCurrentUser} from "../hooks/use-current-user";
 

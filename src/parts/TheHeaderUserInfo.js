@@ -5,16 +5,21 @@ import {
   MenuButton,
   MenuDivider,
   MenuItem,
-  MenuList,
+  MenuList, Spinner,
   Stack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, {Suspense} from "react";
 import {useHistory} from "react-router-dom";
 import {useCurrentUser} from "../hooks/use-current-user";
+import {useWkdtBalance} from "../hooks/use-wkdt-balance";
+import {IDLE} from "../global/constants";
 
 export function TheHeaderUserInfo() {
   const history = useHistory();
   const [user, loggedIn, {logOut}] = useCurrentUser()
+  const wkdt = useWkdtBalance(user.addr)
+
+  console.log(wkdt)
 
   return (
     <Menu isLazy={true}>
@@ -25,7 +30,11 @@ export function TheHeaderUserInfo() {
         <Stack ml={3} mr={3} spacing={2}>
           <Stack>
             <Heading fontSize="xs" color={"gray"}>My balance</Heading>
-            <Heading fontSize="sm">200 WKDT</Heading>
+            <Heading fontSize="sm">
+              {(wkdt.status !== IDLE || wkdt.status !== IDLE) && (
+                  <Spinner size="sm"/>
+              )}
+              WKDT</Heading>
           </Stack>
           <Stack>
             <Heading fontSize="xs" color={"gray"}>My locked balance</Heading>
@@ -50,6 +59,8 @@ export function TheHeaderUserInfo() {
 
 export default function WrappedTheHeaderUserInfo() {
   return (
-    <TheHeaderUserInfo/>
+    <Suspense fallback={null}>
+      <TheHeaderUserInfo/>
+    </Suspense>
   )
 }

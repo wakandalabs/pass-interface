@@ -10,7 +10,7 @@ import WakandaPass from 0xWakandaPass
 
 transaction {
   prepare(signer: AuthAccount) {
-    if(signer.borrow<&WakandaToken.Vault>(from: WakandaToken.TokenStoragePath) == nil) {
+    if !WakandaToken.check(signer.address) {
       signer.save(<-WakandaToken.createEmptyVault(), to: WakandaToken.TokenStoragePath)
       signer.link<&WakandaToken.Vault{FungibleToken.Receiver}>(
         WakandaToken.TokenPublicReceiverPath,
@@ -22,12 +22,17 @@ transaction {
       )
     }
 
-    if signer.borrow<&WakandaPass.Collection>(from: WakandaPass.CollectionStoragePath) == nil {
+    if !WakandaPass.check(signer.address) {
       let collection <- WakandaPass.createEmptyCollection() as! @WakandaPass.Collection
       signer.save(<-collection, to: WakandaPass.CollectionStoragePath)
       signer.link<&{NonFungibleToken.CollectionPublic, WakandaPass.CollectionPublic}>(
         WakandaPass.CollectionPublicPath,
         target: WakandaPass.CollectionStoragePath)
+    }
+    
+    if !WakandaProfile.check(signer.address) {
+      signer.save(<- WakandaProfile.new(), to: WakandaProfile.ProfileStoragePath)
+      signer.link<&WakandaProfile.WakandaProfileBase{WakandaProfile.WakandaProfilePublic}>(WakandaProfile.ProfilePublicPath, target: WakandaProfile.ProfileStoragePath)
     }
   }
 }
