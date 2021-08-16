@@ -1,4 +1,5 @@
-import {Box} from "@chakra-ui/react";
+import {Box, Center, Spinner} from "@chakra-ui/react";
+import React, {Suspense} from "react";
 
 export function About() {
   return (
@@ -8,8 +9,18 @@ export function About() {
   )
 }
 
+export function AboutSkeleton() {
+  return (
+    <Center h={"40%"}>
+      <Spinner />
+    </Center>
+  )
+}
+
 export default function WrappedAbout() {
   return (
-    <About />
+    <Suspense fallback={<AboutSkeleton />}>
+      <About />
+    </Suspense>
   )
 }

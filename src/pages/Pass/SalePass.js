@@ -1,4 +1,5 @@
-import {Box} from "@chakra-ui/react";
+import {Box, Center, Spinner} from "@chakra-ui/react";
+import React, {Suspense} from "react";
 
 export function SalePass({address}) {
   return (
@@ -8,8 +9,18 @@ export function SalePass({address}) {
   )
 }
 
+export function SalePassSkeleton() {
+  return (
+    <Center h={"40%"}>
+      <Spinner />
+    </Center>
+  )
+}
+
 export default function WrappedSalePass(props) {
   return (
-    <SalePass {...props}/>
+    <Suspense fallback={<SalePassSkeleton />}>
+      <SalePass {...props}/>
+    </Suspense>
   )
 }

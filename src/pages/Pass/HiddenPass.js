@@ -1,4 +1,5 @@
-import {Box} from "@chakra-ui/react";
+import {Box, Center, Spinner} from "@chakra-ui/react";
+import React, {Suspense} from "react";
 
 export function HiddenPass({address}) {
   return (
@@ -8,8 +9,19 @@ export function HiddenPass({address}) {
   )
 }
 
+export function HiddenPassSkeleton() {
+  return (
+    <Center h={"40%"}>
+      <Spinner />
+    </Center>
+  )
+}
+
+
 export default function WrappedHiddenPass(props) {
   return (
-    <HiddenPass {...props}/>
+    <Suspense fallback={<HiddenPassSkeleton />}>
+      <HiddenPass {...props}/>
+    </Suspense>
   )
 }

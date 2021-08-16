@@ -18,7 +18,7 @@ import LikedPass from "./LikedPass";
 import About from "./About";
 import {useHistory} from "react-router-dom";
 import qs from "qs";
-import {HiddenPass} from "./HiddenPass";
+import HiddenPass from "./HiddenPass";
 import {useCurrentUser} from "../../hooks/use-current-user";
 
 export function Pass() {

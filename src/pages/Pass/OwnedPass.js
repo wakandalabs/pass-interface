@@ -1,4 +1,5 @@
-import {Box} from "@chakra-ui/react";
+import {Box, Center, Spinner} from "@chakra-ui/react";
+import React, {Suspense} from "react";
 
 export function OwnedPass({address}) {
   return (
@@ -8,8 +9,18 @@ export function OwnedPass({address}) {
   )
 }
 
+export function OwnedPassSkeleton() {
+  return (
+    <Center h={"40%"}>
+      <Spinner/>
+    </Center>
+  )
+}
+
 export default function WrappedOwnedPass(props) {
   return (
-    <OwnedPass {...props}/>
+    <Suspense fallback={<OwnedPassSkeleton/>}>
+      <OwnedPass {...props}/>
+    </Suspense>
   )
 }
