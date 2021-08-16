@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Center, Heading, SimpleGrid, Stack} from "@chakra-ui/react";
 
-function Index() {
+export function Wkdt() {
   return (
     <Center>
       <Stack pl={4} pr={4} spacing={8} textAlign={"center"} maxW={"650"}>
@@ -29,4 +29,8 @@ function Index() {
   );
 }
 
-export default Index;
+export default function WrappedWkdt() {
+  return (
+    <Wkdt/>
+  )
+}

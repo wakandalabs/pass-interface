@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import {
   Stack,
   Heading,
@@ -10,8 +10,22 @@ import {
   Button, Text, Switch, Center, Spacer, Box, Divider
 } from "@chakra-ui/react";
 import {TransferToken} from "./TransferToken";
+import {fmtWkdt} from "../../util/fmt-wkdt";
+import {fmtFlow} from "../../util/fmt-flow";
+import {useFlowBalance} from "../../hooks/use-flow-balance";
+import {useWkdtBalance} from "../../hooks/use-wkdt-balance";
+import {useCurrentUser} from "../../hooks/use-current-user";
+import {IDLE, PROCESSING} from "../../global/constants";
+import {BeatLoader} from "react-spinners";
 
-function Index() {
+export function Wallet() {
+  const [cu] = useCurrentUser()
+  const wkdt = useWkdtBalance(cu.addr)
+  const flow = useFlowBalance(cu.addr)
+
+  console.log(wkdt)
+  console.log(flow)
+
   return (
     <Center>
       <Stack pl={4} pr={4} spacing={4} w={650}>
@@ -19,14 +33,31 @@ function Index() {
         <Divider/>
         <StatGroup>
           <Stat>
-            <StatLabel>balance</StatLabel>
+            <StatLabel>Wakanda Token</StatLabel>
             <Stack direction={"row"} align={"baseline"}>
-              <StatNumber>345,670</StatNumber>
+              {(wkdt.status === PROCESSING) && (
+                <BeatLoader size={4}/>
+              )}
+              {(wkdt.status === IDLE) && (
+                <StatNumber>{fmtWkdt(wkdt.balance)}</StatNumber>
+              )}
               <Heading fontSize={"md"}>WKDT</Heading>
             </Stack>
             <StatHelpText mt={4}>
               <TransferToken/>
             </StatHelpText>
+          </Stat>
+          <Stat>
+            <StatLabel>Flow</StatLabel>
+            <Stack direction={"row"} align={"baseline"}>
+              {(flow.status === PROCESSING) && (
+                <BeatLoader size={4}/>
+              )}
+              {(flow.status === IDLE) && (
+                <StatNumber>{fmtFlow(flow.balance)}</StatNumber>
+              )}
+              <Heading fontSize={"md"}>FLOW</Heading>
+            </Stack>
           </Stat>
         </StatGroup>
         <Divider/>
@@ -103,4 +134,100 @@ function Index() {
   );
 }
 
-export default Index;
+export default function WrappedWallet() {
+  return (
+    <Suspense fallback={
+      <Center>
+        <Stack pl={4} pr={4} spacing={4} w={650}>
+          <Heading>My wallet</Heading>
+          <Divider/>
+          <StatGroup>
+            <Stat>
+              <StatLabel>Wakanda Token</StatLabel>
+              <Stack direction={"row"} align={"baseline"}>
+                <BeatLoader size={4}/>
+              </Stack>
+            </Stat>
+            <Stat>
+              <StatLabel>Flow</StatLabel>
+              <Stack direction={"row"} align={"baseline"}>
+                <BeatLoader size={4}/>
+              </Stack>
+            </Stat>
+          </StatGroup>
+          <Divider/>
+          <Stack direction={"row"} align={"center"}>
+            <Heading fontSize={"sm"}>Automatically restake rewards</Heading>
+            <Switch size={"sm"}/>
+          </Stack>
+          <Box spacing={0}>
+            <Text fontSize={"sm"} color={"gray.500"}>Current stake amount</Text>
+            <Stack direction={"row"} align={"center"}>
+              <BeatLoader size={4}/>
+              <Spacer/>
+              <Button size={"sm"} isLoading loadingText={"Unstake"}/>
+            </Stack>
+          </Box>
+          <Stack spacing={1}>
+            <Text fontSize={"sm"} color={"gray.500"}>Add stake token</Text>
+            <Stack direction={"row"} align={"center"}>
+              <BeatLoader size={4}/>
+              <Spacer/>
+              <Button size={"sm"} isLoading loadingText={"Stake"}/>
+            </Stack>
+          </Stack>
+          <Stack spacing={1}>
+            <Text fontSize={"sm"} color={"gray.500"}>Request for cancellation of stake amount</Text>
+            <Stack direction={"row"} align={"center"}>
+              <BeatLoader size={4}/>
+              <Spacer/>
+              <Button size={"sm"} isLoading loadingText={"Restake"}/>
+            </Stack>
+          </Stack>
+          <Stack spacing={3}>
+            <Text fontSize={"sm"} color={"gray.500"}>Second epoch of stake amount</Text>
+            <BeatLoader size={4}/>
+          </Stack>
+          <Stack spacing={3}>
+            <Text fontSize={"sm"} color={"gray.500"}>Second epoch start time</Text>
+            <BeatLoader size={4}/>
+          </Stack>
+          <Divider/>
+
+          <Stack spacing={3}>
+            <Text fontSize={"sm"} color={"gray.500"}>Calculated rewards for this epoch</Text>
+            <BeatLoader size={4}/>
+          </Stack>
+
+          <Stack spacing={1}>
+            <Text fontSize={"sm"} color={"gray.500"}>Rewards already distributed</Text>
+            <Stack direction={"row"} align={"center"}>
+              <BeatLoader size={4}/>
+              <Spacer/>
+              <Button size={"sm"} isLoading loadingText={"Receive"}/>
+            </Stack>
+          </Stack>
+
+          <Divider/>
+
+          <Stack spacing={3}>
+            <Text fontSize={"sm"} color={"gray.500"}>Unstaking token</Text>
+            <BeatLoader size={4}/>
+          </Stack>
+
+          <Stack spacing={1}>
+            <Text fontSize={"sm"} color={"gray.500"}>Unstaked token</Text>
+            <Stack direction={"row"} align={"center"}>
+              <BeatLoader size={4}/>
+              <Spacer/>
+              <Button size={"sm"} isLoading loadingText={"Receive"}/>
+            </Stack>
+          </Stack>
+          <Stack h={20}/>
+        </Stack>
+      </Center>
+    }>
+      <Wallet/>
+    </Suspense>
+  )
+}

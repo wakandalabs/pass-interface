@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import {Search2Icon} from "@chakra-ui/icons";
 
-function Index() {
+export function Search() {
   return (
     <Box pl={4} pr={4}>
       <Center height={300}>
@@ -35,10 +35,12 @@ function Index() {
           } w={"auto"} h={"100%"} pr={2}/>
         </InputGroup>
       </Center>
-
-
     </Box>
   );
 }
 
-export default Index;
+export default function WrappedSearch() {
+  return (
+    <Search/>
+  )
+}

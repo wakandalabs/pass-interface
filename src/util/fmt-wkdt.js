@@ -1,4 +1,4 @@
-export function fmtVibranium(balance, cur = false) {
+export function fmtWkdt(balance, cur = false) {
     if (balance == null) return null
     return [
         String(balance).replace(/0+$/, "").replace(/\.$/, ""),

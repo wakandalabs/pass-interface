@@ -20,7 +20,7 @@ import {useHistory} from "react-router-dom";
 import qs from "qs";
 import {HiddenPass} from "./HiddenPass";
 
-function Index() {
+export function Pass() {
   const tabs = [
     {key: "sale", label: "Sale", path: "sale"},
     {key: "owned", label: "Owned", path: "owned"},
@@ -87,4 +87,8 @@ function Index() {
   );
 }
 
-export default Index;
+export default function WrappedPass() {
+  return (
+    <Pass/>
+  )
+}

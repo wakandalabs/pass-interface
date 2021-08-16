@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from "@chakra-ui/react";
 
-function Index() {
+export function Following() {
   return (
     <Box pl={4} pr={4}>
       Following
@@ -9,4 +9,8 @@ function Index() {
   );
 }
 
-export default Index;
+export default function WrappedFollowing() {
+  return (
+    <Following/>
+  )
+}
