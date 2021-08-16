@@ -1,5 +1,5 @@
 import {
-  Avatar, Box,
+  Avatar,
   Button,
   Heading,
   IconButton, Skeleton, SkeletonCircle,
@@ -17,6 +17,10 @@ export function UserInfoCard({address}) {
   const {hasCopied, onCopy} = useClipboard(address)
   const profile = useWakandaProfile(address)
   const history = useHistory()
+
+  if (profile.profile === false) {
+    return <UserInfoCardSkeleton />
+  }
 
   return (
     <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
@@ -40,28 +44,32 @@ export function UserInfoCard({address}) {
   )
 }
 
-export default function WrappedUserInfoCard(props) {
+export function UserInfoCardSkeleton() {
   const history = useHistory()
-
   return (
-    <Suspense fallback={
-      <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
-        <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
-        <Stack direction={"row"} align={"center"} spacing={4}>
-          <Skeleton w={"100px"} h={"30px"}/>
-          <Skeleton w={"200px"} h={"30px"}/>
-        </Stack>
-        <Skeleton h={"20px"}/>
-        <Skeleton h={"20px"}/>
-        <Skeleton h={"20px"} w={"200px"}/>
-        <Spacer/>
-        <Stack direction={"row"} spacing={3}>
-          <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
-          <Button>Follow</Button>
-        </Stack>
+    <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
+      <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
+      <Stack direction={"row"} align={"center"} spacing={4}>
+        <Skeleton w={"100px"} h={"30px"}/>
+        <Skeleton w={"200px"} h={"30px"}/>
       </Stack>
-    }>
+      <Skeleton h={"20px"}/>
+      <Skeleton h={"20px"}/>
+      <Skeleton h={"20px"} w={"200px"}/>
+      <Spacer/>
+      <Stack direction={"row"} spacing={3}>
+        <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
+        <Button>Follow</Button>
+      </Stack>
+    </Stack>
+  )
+}
+
+export default function WrappedUserInfoCard(props) {
+  return (
+    <Suspense fallback={<UserInfoCardSkeleton/>}>
       <UserInfoCard {...props}/>
     </Suspense>
   )
 }
+
