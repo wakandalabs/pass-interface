@@ -39,7 +39,7 @@ export const $computedInit = selectorFamily({
       async ({get}) => {
         const all = get($init(address))
 
-        return all.WakandaToken  && all.WakandaPass
+        return all.WakandaToken  && all.WakandaPass && all.WakandaProfile
       },
 })
 

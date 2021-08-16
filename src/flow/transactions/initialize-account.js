@@ -7,6 +7,7 @@ import FungibleToken from 0xFungibleToken
 import NonFungibleToken from 0xNonFungibleToken
 import WakandaToken from 0xWakandaToken
 import WakandaPass from 0xWakandaPass
+import WakandaProfile from 0xWakandaProfile
 
 transaction {
   prepare(signer: AuthAccount) {
