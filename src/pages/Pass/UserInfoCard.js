@@ -2,7 +2,7 @@ import {
   Avatar,
   Button,
   Heading,
-  IconButton,
+  IconButton, Skeleton, SkeletonCircle,
   Spacer,
   Stack,
   Text,
@@ -41,7 +41,22 @@ export function UserInfoCard({address}) {
 
 export default function WrappedUserInfoCard(props) {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={
+      <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
+        <SkeletonCircle size="12"/>
+        <Stack direction={"row"} align={"center"} spacing={4}>
+          <Skeleton w={24} h={30}/>
+          <Stack>
+            <Skeleton w={40} h={30} colorScheme={"gray"} color={"gray"}/>
+          </Stack>
+        </Stack>
+        <Skeleton h={30}/>
+        <Spacer/>
+        <Stack direction={"row"} spacing={3}>
+          <Button>Follow</Button>
+        </Stack>
+      </Stack>
+    }>
       <UserInfoCard {...props}/>
     </Suspense>
   )
