@@ -4,7 +4,7 @@ import React from "react";
 export function UserAvatar({address}) {
 
   return (
-    <Stack height={"100%"} width={"50%"} p={16} spacing={3} bgColor={"gray.200"}>
+    <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
       {address}
     </Stack>
   )
