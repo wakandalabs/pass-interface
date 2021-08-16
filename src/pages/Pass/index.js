@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Box,
+  Box, Button, Center,
   Heading,
   Stack,
   Tab,
@@ -34,8 +34,8 @@ export function Pass() {
   const history = useHistory();
   const {tab} = qs.parse(history.location.search.replace(/^\?/, ''))
   const [tabIndex, setTabIndex] = React.useState(getTabIndex(tab))
-  const [cu] = useCurrentUser()
-  const address = cu.addr
+  const [user, loggedIn, {logIn}] = useCurrentUser()
+  const address = user.addr
 
   function getTabIndex(tab) {
     const index = tabs.findIndex((item) => item.key === tab)
@@ -49,6 +49,21 @@ export function Pass() {
     } else {
       history.push("pass?tab=" + tabs[index].path)
     }
+  }
+
+  if (!loggedIn) {
+    return (
+      <Center>
+        <Stack pl={4} pr={4} spacing={3} w={650}>
+          <Heading>My wakanda pass</Heading>
+          <Heading fontSize={"md"}>Welcome to the world of wakanda!</Heading>
+          <Heading fontSize={"md"}>Wakanda Pass is NFTs of this world, you can make it easily!</Heading>
+          <Box>
+            <Button onClick={logIn}>Log In</Button>
+          </Box>
+        </Stack>
+      </Center>
+    )
   }
 
   return (

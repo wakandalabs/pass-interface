@@ -20,12 +20,24 @@ import {BeatLoader} from "react-spinners";
 import {RepeatIcon} from "@chakra-ui/icons";
 
 export function Wallet() {
-  const [cu] = useCurrentUser()
+  const [cu, loggedIn, {logIn}] = useCurrentUser()
   const wkdt = useWkdtBalance(cu.addr)
   const flow = useFlowBalance(cu.addr)
 
-  console.log(wkdt)
-  console.log(flow)
+  if (!loggedIn) {
+    return (
+      <Center>
+        <Stack pl={4} pr={4} spacing={3} w={650}>
+          <Heading>My wallet</Heading>
+          <Heading fontSize={"md"}>Welcome to the world of wakanda!</Heading>
+          <Heading fontSize={"md"}>Wakanda Token</Heading>
+          <Box>
+            <Button onClick={logIn}>Log In</Button>
+          </Box>
+        </Stack>
+      </Center>
+    )
+  }
 
   return (
     <Center>

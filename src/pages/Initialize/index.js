@@ -1,13 +1,28 @@
-import {Button, Center, Divider, Heading, Spacer, Stack} from "@chakra-ui/react";
+import {Box, Button, Center, Divider, Heading, Spacer, Stack} from "@chakra-ui/react";
 import {useInitialized} from "../../hooks/use-initialized";
 import {useCurrentUser} from "../../hooks/use-current-user";
 import {IDLE, PROCESSING} from "../../global/constants";
-import {Suspense} from "react";
+import React, {Suspense} from "react";
 import StatusItem from "./StatusItem";
 
 export function Initialize() {
-  const [cu] = useCurrentUser()
+  const [cu, loggedIn, {logIn}] = useCurrentUser()
   const init = useInitialized(cu.addr)
+
+  if (!loggedIn) {
+    return (
+      <Center>
+        <Stack pl={4} pr={4} spacing={3} w={650}>
+          <Heading>Initialized account</Heading>
+          <Heading fontSize={"md"}>Welcome to the world of wakanda!</Heading>
+          <Heading fontSize={"md"}>You need initialized your account to use our services.</Heading>
+          <Box>
+            <Button onClick={logIn}>Log In</Button>
+          </Box>
+        </Stack>
+      </Center>
+    )
+  }
 
   return (
     <Center>

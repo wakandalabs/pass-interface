@@ -1,4 +1,5 @@
 import {
+  Box,
   Button, Center, FormControl, FormLabel, Heading, Input, Stack,
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
@@ -6,7 +7,7 @@ import {useWakandaProfile} from "../../hooks/use-wakanda-profile";
 import {useCurrentUser} from "../../hooks/use-current-user";
 
 export function Setting() {
-  const [cu] = useCurrentUser()
+  const [cu, loggedIn, {logIn}] = useCurrentUser()
   const profile = useWakandaProfile(cu.addr)
   const [name, setName] = React.useState(profile.profile.name)
   const [avatar, setAvatar] = React.useState(profile.profile.avatar)
@@ -14,6 +15,21 @@ export function Setting() {
   const [bio, setBio] = React.useState(profile.profile.bio)
   const [website, setWebsite] = React.useState(profile.profile.website)
   const [email, setEmail] = React.useState(profile.profile.email)
+
+  if (!loggedIn) {
+    return (
+      <Center>
+        <Stack pl={4} pr={4} spacing={3} w={650}>
+          <Heading>Edit profile</Heading>
+          <Heading fontSize={"md"}>Welcome to the world of wakanda!</Heading>
+          <Heading fontSize={"md"}>You can set preferred display name and manage other personal settings</Heading>
+          <Box>
+            <Button onClick={logIn}>Log In</Button>
+          </Box>
+        </Stack>
+      </Center>
+    )
+  }
 
   return (
     <Center>

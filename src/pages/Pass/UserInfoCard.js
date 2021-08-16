@@ -1,5 +1,5 @@
 import {
-  Avatar,
+  Avatar, Box,
   Button,
   Heading,
   IconButton, Skeleton, SkeletonCircle,
@@ -21,33 +21,16 @@ export function UserInfoCard({address}) {
   return (
     <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
       <Avatar bg="teal.500"/>
-      { (profile.profile != null) && (
-        <>
-          <Stack direction={"row"} align={"center"} spacing={4}>
-            <Heading fontSize="xl">{profile.profile.name}</Heading>
-            <Stack>
-              <Button size={"xs"} onClick={onCopy} width={36} colorScheme={"gray"} color={"gray"}>
-                {hasCopied ? "Copied!" : address}
-              </Button>
-            </Stack>
-          </Stack>
-          <Text>{profile.profile.bio}</Text>
-        </>
-      ) }
+      <Stack direction={"row"} align={"center"} spacing={4}>
+        <Heading fontSize="xl">{profile.profile.name}</Heading>
+        <Stack>
+          <Button size={"xs"} onClick={onCopy} width={36} colorScheme={"gray"} color={"gray"}>
+            {hasCopied ? "Copied!" : address}
+          </Button>
+        </Stack>
+      </Stack>
+      <Text>{profile.profile.bio}</Text>
 
-      { (profile.profile === null) && (
-        <>
-          <Stack direction={"row"} align={"center"} spacing={4}>
-            <Heading fontSize="xl">Display name</Heading>
-            <Stack>
-              <Button size={"xs"} onClick={onCopy} width={36} colorScheme={"gray"} color={"gray"}>
-                {hasCopied ? "Copied!" : address}
-              </Button>
-            </Stack>
-          </Stack>
-          <Text>Bio</Text>
-        </>
-      ) }
       <Spacer/>
       <Stack direction={"row"} spacing={3}>
         <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
