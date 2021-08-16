@@ -32,7 +32,7 @@ export function TheHeaderUserInfo() {
             <Heading fontSize="xs" color={"gray"}>My balance</Heading>
             <Heading fontSize="sm">
               {(wkdt.status !== IDLE || wkdt.status !== IDLE) && (
-                  <Spinner size="sm"/>
+                <Spinner size="sm"/>
               )}
               WKDT</Heading>
           </Stack>
@@ -41,7 +41,7 @@ export function TheHeaderUserInfo() {
             <Heading fontSize="sm">200 WKDT</Heading>
           </Stack>
         </Stack>
-        <MenuDivider />
+        <MenuDivider/>
         <MenuItem onClick={() => history.push("/wallet")}>
           <Heading fontSize="md">My wallet</Heading>
         </MenuItem>
@@ -58,8 +58,19 @@ export function TheHeaderUserInfo() {
 }
 
 export default function WrappedTheHeaderUserInfo() {
+  const [user] = useCurrentUser()
+
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={
+      <Menu isLazy={true}>
+        <MenuButton as={Button} px={4} py={2} borderRadius="md">
+          {user.addr}
+        </MenuButton>
+        <MenuList>
+          <Spinner/>
+        </MenuList>
+      </Menu>
+    }>
       <TheHeaderUserInfo/>
     </Suspense>
   )
