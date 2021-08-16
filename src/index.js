@@ -11,6 +11,7 @@ import Wallet from "./pages/Wallet/index";
 import NotFound from "./pages/not-found";
 import Initialize from "./pages/Initialize";
 import reportWebVitals from './reportWebVitals';
+import Setting from './pages/Setting/index';
 import * as serviceWorker from './serviceWorker';
 import Providers from "./global/providers.comp";
 import {TheHeader} from "./parts/TheHeader";
@@ -26,6 +27,7 @@ ReactDOM.render(
         <Route exact path="/wkdt" component={Wkdt}/>
         <Route exact path="/wallet" component={Wallet}/>
         <Route exact path="/initialize" component={Initialize}/>
+        <Route exact path="/setting" component={Setting}/>
         <Route component={NotFound}/>
       </Switch>
   </Providers>,

@@ -1,5 +1,6 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {fetchWakandaProfile} from "../flow/scripts/get-wakanda-profile";
+import {updateWakandaProfile} from "../flow/transactions/update-wakanda-profile";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {sleep} from "../util/sleep";
 
@@ -29,6 +30,24 @@ export function useWakandaProfile(address) {
   return {
     profile,
     status,
-    refresh
+    refresh,
+    async update(name, avatar, color, bio, website, email) {
+      await updateWakandaProfile({name, avatar, color, bio, website, email}, {
+        onStart() {
+          setStatus(PROCESSING)
+        },
+        async onSuccess() {
+          await refresh()
+          setStatus(SUCCESS)
+        },
+        async onComplete() {
+          await sleep(IDLE_DELAY)
+          setStatus(IDLE)
+        },
+        async onError() {
+          setStatus(ERROR)
+        },
+      })
+    }
   }
 }

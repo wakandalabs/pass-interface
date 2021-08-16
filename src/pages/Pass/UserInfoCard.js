@@ -7,22 +7,20 @@ import {
   Stack,
   Text,
   useClipboard,
-  useDisclosure
 } from "@chakra-ui/react";
 import {EditIcon} from "@chakra-ui/icons";
 import React, {Suspense} from "react";
 import {useWakandaProfile} from "../../hooks/use-wakanda-profile";
-import {EditProfile} from "../../parts/EditProfile";
-
+import {useHistory} from "react-router-dom";
 
 export function UserInfoCard({address}) {
   const {hasCopied, onCopy} = useClipboard(address)
   const profile = useWakandaProfile(address)
-  const {isOpen, onOpen, onClose} = useDisclosure()
+  const history = useHistory()
 
   return (
     <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
-      <Avatar bg="teal.500" src={profile.profile.avatar}/>
+      <Avatar bg="teal.500"/>
       <Stack direction={"row"} align={"center"} spacing={4}>
         <Heading fontSize="xl">{profile.profile.name}</Heading>
         <Stack>
@@ -31,11 +29,10 @@ export function UserInfoCard({address}) {
           </Button>
         </Stack>
       </Stack>
-      <Text>{profile.profile.info}</Text>
+      <Text>{profile.profile.bio}</Text>
       <Spacer/>
       <Stack direction={"row"} spacing={3}>
-        <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={onOpen}/>
-        <EditProfile isOpen={isOpen} onClose={onClose}/>
+        <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
         <Button>Follow</Button>
       </Stack>
     </Stack>
