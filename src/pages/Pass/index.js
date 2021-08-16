@@ -9,13 +9,13 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import {UserInfoCard} from "./UserInfoCard";
-import {UserAvatar} from "./UserAvatar";
-import {SalePass} from "./SalePass";
-import {OwnedPass} from "./OwnedPass";
-import {CreatedPass} from "./CreatedPass";
-import {LikedPass} from "./LikedPass";
-import {About} from "./About";
+import UserInfoCard from "./UserInfoCard";
+import UserAvatar from "./UserAvatar";
+import SalePass from "./SalePass";
+import OwnedPass from "./OwnedPass";
+import CreatedPass from "./CreatedPass";
+import LikedPass from "./LikedPass";
+import About from "./About";
 import {useHistory} from "react-router-dom";
 import qs from "qs";
 import {HiddenPass} from "./HiddenPass";
@@ -35,6 +35,7 @@ export function Pass() {
   const {tab} = qs.parse(history.location.search.replace(/^\?/, ''))
   const [tabIndex, setTabIndex] = React.useState(getTabIndex(tab))
   const [cu] = useCurrentUser()
+  const address = cu.addr
 
   function getTabIndex(tab) {
     const index = tabs.findIndex((item) => item.key === tab)
@@ -43,7 +44,7 @@ export function Pass() {
 
   const handleTabsChange = (index) => {
     setTabIndex(index)
-    if (index === 0){
+    if (index === 0) {
       history.push("pass")
     } else {
       history.push("pass?tab=" + tabs[index].path)
@@ -53,7 +54,7 @@ export function Pass() {
   return (
     <Box pl={4} pr={4}>
       <Stack height={500} direction={"row"} mb={4}>
-        <UserInfoCard address={cu.addr}/>
+        <UserInfoCard address={address}/>
         <UserAvatar/>
       </Stack>
       <Stack>

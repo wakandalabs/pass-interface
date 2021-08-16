@@ -1,6 +1,6 @@
 import {Box} from "@chakra-ui/react";
 
-export function HiddenPass() {
+export function HiddenPass({address}) {
   return (
     <Box>
       Hidden
@@ -8,8 +8,8 @@ export function HiddenPass() {
   )
 }
 
-export default function WrappedHiddenPass() {
+export default function WrappedHiddenPass(props) {
   return (
-    <HiddenPass />
+    <HiddenPass {...props}/>
   )
 }

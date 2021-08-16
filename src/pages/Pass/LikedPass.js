@@ -1,6 +1,6 @@
 import {Box} from "@chakra-ui/react";
 
-export function LikedPass() {
+export function LikedPass({address}) {
   return (
     <Box>
       Liked Pass
@@ -8,8 +8,8 @@ export function LikedPass() {
   )
 }
 
-export default function WrappedLikedPass() {
+export default function WrappedLikedPass(props) {
   return (
-    <LikedPass />
+    <LikedPass {...props}/>
   )
 }

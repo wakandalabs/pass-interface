@@ -10,8 +10,8 @@ export function UserAvatar({address}) {
   )
 }
 
-export default function WrappedUserAvatar() {
+export default function WrappedUserAvatar(props) {
   return (
-    <UserAvatar/>
+    <UserAvatar {...props}/>
   )
 }

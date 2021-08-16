@@ -1,6 +1,6 @@
 import {Box} from "@chakra-ui/react";
 
-export function OwnedPass() {
+export function OwnedPass({address}) {
   return (
     <Box>
       Owned
@@ -8,8 +8,8 @@ export function OwnedPass() {
   )
 }
 
-export default function WrappedOwnedPass() {
+export default function WrappedOwnedPass(props) {
   return (
-    <OwnedPass />
+    <OwnedPass {...props}/>
   )
 }
