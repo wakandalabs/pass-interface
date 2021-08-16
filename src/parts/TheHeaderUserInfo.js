@@ -12,7 +12,7 @@ import {useCurrentUser} from "../hooks/use-current-user";
 
 export function TheHeaderUserInfo() {
   const history = useHistory();
-  const [user, {logOut}] = useCurrentUser()
+  const [user, loggedIn, {logOut}] = useCurrentUser()
 
   return (
     <Stack>
