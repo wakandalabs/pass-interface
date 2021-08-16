@@ -1,22 +1,13 @@
-import React from 'react';
-import {Box, Button, Center, Heading, Stack} from "@chakra-ui/react";
+import React, {Suspense} from 'react';
+import {Box, Center, Spinner} from "@chakra-ui/react";
 import {useCurrentUser} from "../../hooks/use-current-user";
 
 export function Following() {
-  const [user, loggedIn, {logIn}] = useCurrentUser()
+  const [user, loggedIn] = useCurrentUser()
 
   if (!loggedIn) {
     return (
-      <Center>
-        <Stack pl={4} pr={4} spacing={3} w={650}>
-          <Heading>My following</Heading>
-          <Heading fontSize={"md"}>Welcome to the world of wakanda!</Heading>
-          <Heading fontSize={"md"}>You can follow other people interesting!</Heading>
-          <Box>
-            <Button onClick={logIn}>Log In</Button>
-          </Box>
-        </Stack>
-      </Center>
+     <FollowingSkeleton />
     )
   }
 
@@ -27,8 +18,20 @@ export function Following() {
   );
 }
 
-export default function WrappedFollowing() {
+export function FollowingSkeleton() {
   return (
-    <Following/>
+    <Center h={"40vh"}>
+      <Spinner />
+    </Center>
   )
 }
+
+export default function WrappedFollowing() {
+  return (
+    <Suspense fallback={<FollowingSkeleton />}>
+      <Following/>
+    </Suspense>
+
+  )
+}
+
