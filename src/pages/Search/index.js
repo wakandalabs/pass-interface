@@ -26,10 +26,10 @@ export function Search() {
             h={"100%"}
             children={<Search2Icon color="gray.300" />}
           />
-          <Input placeholder="Search..." size="lg" bgColor={"white"} h={"100%"}/>
+          <Input placeholder="Search..." size="lg" h={"100%"} variant={"filled"}/>
           <InputRightElement children={
             <Select variant="filled">
-              <option value="Index">Index</option>
+              <option value="Index">Pass</option>
               <option value="User">User</option>
             </Select>
           } w={"auto"} h={"100%"} pr={2}/>
