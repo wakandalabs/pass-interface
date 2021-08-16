@@ -21,9 +21,9 @@ export function UserInfoCard({address}) {
   const {isOpen, onOpen, onClose} = useDisclosure()
 
   return (
-    <Stack height={"100%"} width={"50%"} p={16} spacing={4}>
+    <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
       <Avatar bg="teal.500" src={profile.profile.avatar}/>
-      <Stack direction={"row"} align={"center"} spacing={2}>
+      <Stack direction={"row"} align={"center"} spacing={4}>
         <Heading fontSize="xl">{profile.profile.name}</Heading>
         <Stack>
           <Button size={"xs"} onClick={onCopy} width={36} colorScheme={"gray"} color={"gray"}>
@@ -33,7 +33,7 @@ export function UserInfoCard({address}) {
       </Stack>
       <Text>{profile.profile.info}</Text>
       <Spacer/>
-      <Stack direction={"row"}>
+      <Stack direction={"row"} spacing={3}>
         <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={onOpen}/>
         <EditProfile isOpen={isOpen} onClose={onClose}/>
         <Button>Follow</Button>

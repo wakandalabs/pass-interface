@@ -14,7 +14,7 @@ export function Search() {
   return (
     <Box pl={4} pr={4}>
       <Center height={300}>
-        <Stack align={"center"} spacing={2}>
+        <Stack align={"center"} spacing={3}>
           <Heading size={"2xl"}>Search World</Heading>
           <Heading size={"md"}>of Wakanda</Heading>
         </Stack>

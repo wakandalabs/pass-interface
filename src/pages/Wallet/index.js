@@ -29,7 +29,7 @@ export function Wallet() {
 
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={4} w={650}>
+      <Stack pl={4} pr={4} spacing={3} w={650}>
         <Heading>My wallet</Heading>
         <Divider/>
         <StatGroup>
@@ -145,7 +145,7 @@ export default function WrappedWallet() {
   return (
     <Suspense fallback={
       <Center>
-        <Stack pl={4} pr={4} spacing={4} w={650}>
+        <Stack pl={4} pr={4} spacing={3} w={650}>
           <Heading>My wallet</Heading>
           <Divider/>
           <StatGroup>

@@ -11,7 +11,7 @@ export function Initialize() {
 
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={4} w={650}>
+      <Stack pl={4} pr={4} spacing={3} w={650}>
         <Heading>Initialize account</Heading>
         <Divider/>
         <StatusItem status={init.status} name={"WakandaToken"} item={init.WakandaToken}/>
@@ -35,7 +35,7 @@ export default function WrappedInitialize() {
   return (
     <Suspense fallback={
       <Center>
-        <Stack pl={4} pr={4} spacing={4} w={650}>
+        <Stack pl={4} pr={4} spacing={3} w={650}>
           <Heading>Initialize account</Heading>
           <Divider/>
           <StatusItem status={PROCESSING} name={"WakandaToken"} item={false}/>

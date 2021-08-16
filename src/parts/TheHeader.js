@@ -27,7 +27,7 @@ export function TheHeader(props) {
         <IconButton aria-label="Index" variant={"ghost"} icon={<Search2Icon/>} onClick={() => history.push("/search")}/>
         <ColorModeSwitcher/>
       </Stack>
-      <Stack direction={"row"} spacing={2}>
+      <Stack direction={"row"} spacing={3}>
         {loggedIn ? (
           <>
             <Button colorScheme="blue">Create</Button>
