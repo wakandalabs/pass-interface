@@ -1,5 +1,5 @@
-import React from 'react';
-import {Box} from "@chakra-ui/react";
+import React, {Suspense} from 'react';
+import {Box, Center, Spinner} from "@chakra-ui/react";
 
 export function Explore() {
   return (
@@ -9,8 +9,18 @@ export function Explore() {
   );
 }
 
+export function ExploreSkeleton() {
+  return (
+    <Center h={"40vh"}>
+      <Spinner />
+    </Center>
+  )
+}
+
 export default function WrappedExplore() {
   return (
-    <Explore/>
+    <Suspense fallback={<ExploreSkeleton />}>
+      <Explore/>
+    </Suspense>
   )
 }
