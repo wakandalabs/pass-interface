@@ -3,7 +3,7 @@ import {Box, Center, Spinner} from "@chakra-ui/react";
 import {useCurrentUser} from "../../hooks/use-current-user";
 
 export function Following() {
-  const {loggedIn} = useCurrentUser()
+  const [cu, loggedIn] = useCurrentUser()
 
   if (!loggedIn) {
     return (
