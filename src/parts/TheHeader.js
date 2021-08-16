@@ -18,7 +18,7 @@ export function TheHeader(props) {
   const [user, loggedIn, {logIn}] = useCurrentUser()
 
   return (
-    <Stack direction={"row"} p={4} h={20} bgColor={"transparent"} align={"center"} spacing={2} position={"fixed"}
+    <Stack direction={"row"} p={4} h={20} bgColor={"transparent"} align={"center"} spacing={3} position={"fixed"}
            w={"100%"} top={0} left={0} zIndex={9} backdropFilter={"blur(8px)"} {...props}>
       <Logo h={10} bg={"white"} p={2} borderRadius={"md"}/>
       <TheHeaderMenu/>
