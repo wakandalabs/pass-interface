@@ -1,4 +1,4 @@
-import {Button, Flex, Text, useClipboard} from "@chakra-ui/react";
+import {Button, Flex, Stack, Text, useClipboard} from "@chakra-ui/react";
 import QRCode from "qrcode.react";
 import React from "react";
 
@@ -7,11 +7,14 @@ export function TransferTokenReceive({address}) {
 
   return (
     <Flex direction="column" align="center">
-      <QRCode
-        value={address}
-        size={200}
-        fgColor="#000000"
-      />
+      <Stack bgColor={"white"} p={2}>
+        <QRCode
+          value={address}
+          size={200}
+          fgColor="#000000"
+        />
+      </Stack>
+
       <Text m={4} fontWeight={"bold"}>{address}</Text>
       <Button onClick={onCopy} w={32}>
         {hasCopied ? "Copied!" : "Copy"}
