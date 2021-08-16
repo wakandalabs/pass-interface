@@ -66,22 +66,22 @@ export function Pass() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <SalePass/>
+              <SalePass address={address}/>
             </TabPanel>
             <TabPanel>
-              <OwnedPass/>
+              <OwnedPass address={address}/>
             </TabPanel>
             <TabPanel>
-              <CreatedPass/>
+              <CreatedPass address={address}/>
             </TabPanel>
             <TabPanel>
-              <HiddenPass/>
+              <HiddenPass address={address}/>
             </TabPanel>
             <TabPanel>
-              <LikedPass/>
+              <LikedPass address={address}/>
             </TabPanel>
             <TabPanel>
-              <About/>
+              <About address={address}/>
             </TabPanel>
           </TabPanels>
         </Tabs>
