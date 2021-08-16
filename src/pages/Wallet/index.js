@@ -20,22 +20,13 @@ import {BeatLoader} from "react-spinners";
 import {RepeatIcon} from "@chakra-ui/icons";
 
 export function Wallet() {
-  const [cu, loggedIn, {logIn}] = useCurrentUser()
+  const [cu, loggedIn] = useCurrentUser()
   const wkdt = useWkdtBalance(cu.addr)
   const flow = useFlowBalance(cu.addr)
 
   if (!loggedIn) {
     return (
-      <Center>
-        <Stack pl={4} pr={4} spacing={3} w={650}>
-          <Heading>My wallet</Heading>
-          <Heading fontSize={"md"}>Welcome to the world of wakanda!</Heading>
-          <Heading fontSize={"md"}>Wakanda Token</Heading>
-          <Box>
-            <Button onClick={logIn}>Log In</Button>
-          </Box>
-        </Stack>
-      </Center>
+      <WalletSkeleton/>
     )
   }
 
@@ -155,107 +146,111 @@ export function Wallet() {
   );
 }
 
-export default function WrappedWallet() {
+export function WalletSkeleton() {
   return (
-    <Suspense fallback={
-      <Center>
-        <Stack pl={4} pr={4} spacing={3} w={650}>
-          <Heading>My wallet</Heading>
-          <Divider/>
-          <StatGroup>
-            <Stat>
-              <Stack direction={"row"} align={"center"}>
-                <StatLabel>Wakanda Token</StatLabel>
-                <IconButton aria-label={"refresh"} icon={<RepeatIcon/>} size={"xs"}
-                            isLoading/>
-              </Stack>
-              <Stack h={20}>
-                <Skeleton w={"140px"} h={"30px"} mt={2}/>
-              </Stack>
-              <StatHelpText mt={4}>
-                <TransferToken/>
-              </StatHelpText>
-            </Stat>
-            <Stat>
-              <Stack direction={"row"} align={"center"}>
-                <StatLabel>Flow</StatLabel>
-                <IconButton aria-label={"refresh"} icon={<RepeatIcon/>} size={"xs"}
-                            isLoading/>
-              </Stack>
+    <Center>
+      <Stack pl={4} pr={4} spacing={3} w={650}>
+        <Heading>My wallet</Heading>
+        <Divider/>
+        <StatGroup>
+          <Stat>
+            <Stack direction={"row"} align={"center"}>
+              <StatLabel>Wakanda Token</StatLabel>
+              <IconButton aria-label={"refresh"} icon={<RepeatIcon/>} size={"xs"}
+                          isLoading/>
+            </Stack>
+            <Stack h={20}>
               <Skeleton w={"140px"} h={"30px"} mt={2}/>
-            </Stat>
-          </StatGroup>
-          <Divider/>
+            </Stack>
+            <StatHelpText mt={4}>
+              <TransferToken/>
+            </StatHelpText>
+          </Stat>
+          <Stat>
+            <Stack direction={"row"} align={"center"}>
+              <StatLabel>Flow</StatLabel>
+              <IconButton aria-label={"refresh"} icon={<RepeatIcon/>} size={"xs"}
+                          isLoading/>
+            </Stack>
+            <Skeleton w={"140px"} h={"30px"} mt={2}/>
+          </Stat>
+        </StatGroup>
+        <Divider/>
+        <Stack direction={"row"} align={"center"}>
+          <Heading fontSize={"sm"}>Automatically restake rewards</Heading>
+          <Switch size={"sm"}/>
+        </Stack>
+        <Box spacing={0}>
+          <Text fontSize={"sm"} color={"gray.500"}>Current stake amount</Text>
           <Stack direction={"row"} align={"center"}>
-            <Heading fontSize={"sm"}>Automatically restake rewards</Heading>
-            <Switch size={"sm"}/>
-          </Stack>
-          <Box spacing={0}>
-            <Text fontSize={"sm"} color={"gray.500"}>Current stake amount</Text>
-            <Stack direction={"row"} align={"center"}>
-              <Skeleton w={"60px"} h={"20px"}/>
-              <Spacer/>
-              <Button size={"sm"} isLoading loadingText={"Unstake"}/>
-            </Stack>
-          </Box>
-          <Stack spacing={1}>
-            <Text fontSize={"sm"} color={"gray.500"}>Add stake token</Text>
-            <Stack direction={"row"} align={"center"}>
-              <Skeleton w={"60px"} h={"20px"}/>
-              <Spacer/>
-              <Button size={"sm"} isLoading loadingText={"Stake"}/>
-            </Stack>
-          </Stack>
-          <Stack spacing={1}>
-            <Text fontSize={"sm"} color={"gray.500"}>Request for cancellation of stake amount</Text>
-            <Stack direction={"row"} align={"center"}>
-              <Skeleton w={"60px"} h={"20px"}/>
-              <Spacer/>
-              <Button size={"sm"} isLoading loadingText={"Restake"}/>
-            </Stack>
-          </Stack>
-          <Stack spacing={3}>
-            <Text fontSize={"sm"} color={"gray.500"}>Second epoch of stake amount</Text>
             <Skeleton w={"60px"} h={"20px"}/>
+            <Spacer/>
+            <Button size={"sm"} isLoading loadingText={"Unstake"}/>
           </Stack>
-          <Stack spacing={3}>
-            <Text fontSize={"sm"} color={"gray.500"}>Second epoch start time</Text>
-            <Skeleton w={"120px"} h={"20px"}/>
-          </Stack>
-          <Divider/>
-
-          <Stack spacing={3}>
-            <Text fontSize={"sm"} color={"gray.500"}>Calculated rewards for this epoch</Text>
+        </Box>
+        <Stack spacing={1}>
+          <Text fontSize={"sm"} color={"gray.500"}>Add stake token</Text>
+          <Stack direction={"row"} align={"center"}>
             <Skeleton w={"60px"} h={"20px"}/>
-          </Stack>
-
-          <Stack spacing={1}>
-            <Text fontSize={"sm"} color={"gray.500"}>Rewards already distributed</Text>
-            <Stack direction={"row"} align={"center"}>
-              <Skeleton w={"60px"} h={"20px"}/>
-              <Spacer/>
-              <Button size={"sm"} isLoading loadingText={"Receive"}/>
-            </Stack>
-          </Stack>
-
-          <Divider/>
-
-          <Stack spacing={3}>
-            <Text fontSize={"sm"} color={"gray.500"}>Unstaking token</Text>
-            <Skeleton w={"60px"} h={"20px"}/>
-          </Stack>
-
-          <Stack spacing={1}>
-            <Text fontSize={"sm"} color={"gray.500"}>Unstaked token</Text>
-            <Stack direction={"row"} align={"center"}>
-              <Skeleton w={"60px"} h={"20px"}/>
-              <Spacer/>
-              <Button size={"sm"} isLoading loadingText={"Receive"}/>
-            </Stack>
+            <Spacer/>
+            <Button size={"sm"} isLoading loadingText={"Stake"}/>
           </Stack>
         </Stack>
-      </Center>
-    }>
+        <Stack spacing={1}>
+          <Text fontSize={"sm"} color={"gray.500"}>Request for cancellation of stake amount</Text>
+          <Stack direction={"row"} align={"center"}>
+            <Skeleton w={"60px"} h={"20px"}/>
+            <Spacer/>
+            <Button size={"sm"} isLoading loadingText={"Restake"}/>
+          </Stack>
+        </Stack>
+        <Stack spacing={3}>
+          <Text fontSize={"sm"} color={"gray.500"}>Second epoch of stake amount</Text>
+          <Skeleton w={"60px"} h={"20px"}/>
+        </Stack>
+        <Stack spacing={3}>
+          <Text fontSize={"sm"} color={"gray.500"}>Second epoch start time</Text>
+          <Skeleton w={"120px"} h={"20px"}/>
+        </Stack>
+        <Divider/>
+
+        <Stack spacing={3}>
+          <Text fontSize={"sm"} color={"gray.500"}>Calculated rewards for this epoch</Text>
+          <Skeleton w={"60px"} h={"20px"}/>
+        </Stack>
+
+        <Stack spacing={1}>
+          <Text fontSize={"sm"} color={"gray.500"}>Rewards already distributed</Text>
+          <Stack direction={"row"} align={"center"}>
+            <Skeleton w={"60px"} h={"20px"}/>
+            <Spacer/>
+            <Button size={"sm"} isLoading loadingText={"Receive"}/>
+          </Stack>
+        </Stack>
+
+        <Divider/>
+
+        <Stack spacing={3}>
+          <Text fontSize={"sm"} color={"gray.500"}>Unstaking token</Text>
+          <Skeleton w={"60px"} h={"20px"}/>
+        </Stack>
+
+        <Stack spacing={1}>
+          <Text fontSize={"sm"} color={"gray.500"}>Unstaked token</Text>
+          <Stack direction={"row"} align={"center"}>
+            <Skeleton w={"60px"} h={"20px"}/>
+            <Spacer/>
+            <Button size={"sm"} isLoading loadingText={"Receive"}/>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Center>
+  )
+}
+
+export default function WrappedWallet() {
+  return (
+    <Suspense fallback={<WalletSkeleton/>}>
       <Wallet/>
     </Suspense>
   )
