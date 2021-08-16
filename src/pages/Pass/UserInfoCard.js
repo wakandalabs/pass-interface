@@ -40,19 +40,22 @@ export function UserInfoCard({address}) {
 }
 
 export default function WrappedUserInfoCard(props) {
+  const history = useHistory()
+
   return (
     <Suspense fallback={
       <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
         <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
         <Stack direction={"row"} align={"center"} spacing={4}>
-          <Skeleton w={24} h={30}/>
-          <Stack>
-            <Skeleton w={40} h={30} colorScheme={"gray"} color={"gray"}/>
-          </Stack>
+          <Skeleton w={"100px"} h={"30px"}/>
+          <Skeleton w={"200px"} h={"30px"}/>
         </Stack>
-        <Skeleton h={30}/>
+        <Skeleton h={"20px"}/>
+        <Skeleton h={"20px"}/>
+        <Skeleton h={"20px"} w={"200px"}/>
         <Spacer/>
         <Stack direction={"row"} spacing={3}>
+          <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
           <Button>Follow</Button>
         </Stack>
       </Stack>
