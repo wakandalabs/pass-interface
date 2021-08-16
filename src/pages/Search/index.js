@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import {
   Box,
   Center, Heading,
@@ -6,7 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Select, Stack
+  Select, Spinner, Stack
 } from "@chakra-ui/react";
 import {Search2Icon} from "@chakra-ui/icons";
 
@@ -39,8 +39,18 @@ export function Search() {
   );
 }
 
+export function SearchSkeleton() {
+  return (
+    <Center h={"40vh"}>
+      <Spinner />
+    </Center>
+  )
+}
+
 export default function WrappedSearch() {
   return (
-    <Search/>
+    <Suspense fallback={<SearchSkeleton />}>
+      <Search/>
+    </Suspense>
   )
 }
