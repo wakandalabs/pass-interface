@@ -14,12 +14,10 @@ import {TransferTokenReceive} from "./TransferTokenReceive";
 import {TransferTokenSend} from "./TransferTokenSend";
 import {useCurrentUser} from "../../hooks/use-current-user";
 
-
 export function TransferToken() {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const [tabIndex, setTabIndex] = React.useState(0)
-  const [user] = useCurrentUser()
-  const address = user.addr
+  const [cu] = useCurrentUser()
 
   function handleTransfer(index) {
     onOpen()
@@ -43,10 +41,10 @@ export function TransferToken() {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <TransferTokenSend address={address}/>
+                  <TransferTokenSend address={cu.addr}/>
                 </TabPanel>
                 <TabPanel>
-                  <TransferTokenReceive address={address}/>
+                  <TransferTokenReceive address={cu.addr}/>
                 </TabPanel>
               </TabPanels>
             </Tabs>

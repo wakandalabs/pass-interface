@@ -1,29 +1,33 @@
 import {Box, Button, HStack, Input, NumberInput, NumberInputField, Spacer, Spinner, Text} from "@chakra-ui/react";
 import {BeatLoader} from "react-spinners";
 import React from "react";
+import {useWkdtBalance} from "../../hooks/use-wkdt-balance";
+import {fmtWkdt} from "../../util/fmt-wkdt";
+import {IDLE} from "../../global/constants";
 
 export function TransferTokenSend({address}) {
-  // const parse = (val) => val.replace(/^\$/, "")
-  // const [amount, setAmount] = React.useState(0)
+  const parse = (val) => val.replace(/^\$/, "")
+  const [amount, setAmount] = React.useState(0)
   const [to, setTo] = React.useState("")
+  const wkdt = useWkdtBalance(address)
 
   return (
     <Box>
       <HStack>
         <Text fontSize={"xs"} fontWeight={"bold"}>My balance:</Text>
         <Spacer/>
-        {/*{vibranium.status === IDLE ? (*/}
-        {/*  <Text fontSize={"xs"} fontWeight={"bold"}> {fmtVibranium(vibranium.balance)}</Text>*/}
-        {/*) : (*/}
-        <Spinner size="xs"/>
-        {/*)}*/}
+        {wkdt.status === IDLE ? (
+          <Text fontSize={"xs"} fontWeight={"bold"}> {fmtWkdt(wkdt.balance)}</Text>
+        ) : (
+          <Spinner size="xs"/>
+        )}
         <Text fontSize={"xs"} fontWeight={"bold"}>WKDT</Text>
       </HStack>
       <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
-        // max={wkdt.balance}
+                   max={wkdt.balance}
                    errorBorderColor="red.200" mb={4}
-        // onChange={(valueString) => setAmount(parse(valueString))}
-        // value={amount}
+                   onChange={(valueString) => setAmount(parse(valueString))}
+                   value={amount}
       >
         <NumberInputField/>
       </NumberInput>
@@ -34,16 +38,13 @@ export function TransferTokenSend({address}) {
         <Input placeholder="Receiving address"
                value={to} onChange={(event) => setTo(event.target.value)}/>
         <Button
-          // isLoading={vibranium.status !== IDLE}
+          isLoading={wkdt.status !== IDLE}
           spinner={<BeatLoader size={8} color="white"/>}
-          // onClick={() => vibranium.transfer(Number(amount), to)}
+          onClick={() => wkdt.transfer(Number(amount), to)}
         >Send</Button>
       </HStack>
       <Text fontSize="xs" textColor={"gray.500"}>You may not be able to send transactions to exchanges
-        that do
-        not support smart
-        contract
-        transactions. Please confirm that the Flow FT address is correct.</Text>
+        that do not support smart contract transactions. Please confirm that the Flow FT address is correct.</Text>
     </Box>
   )
 }
