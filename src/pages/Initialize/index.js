@@ -1,4 +1,4 @@
-import {Button, Center, Divider, Heading, Spacer, Spinner, Stack} from "@chakra-ui/react";
+import {Button, Center, Divider, Heading, Spacer, Stack} from "@chakra-ui/react";
 import {useInitialized} from "../../hooks/use-initialized";
 import {useCurrentUser} from "../../hooks/use-current-user";
 import {IDLE, PROCESSING} from "../../global/constants";
@@ -20,10 +20,9 @@ export function Initialize() {
         <Divider/>
         <Stack direction={"row"}>
           <Spacer/>
-          <Button disabled={init.status !== IDLE || (init.WakandaToken && init.WakandaPass && init.WakandaProfile)} onClick={init.initialize} w={40} colorScheme={"blue"}>
-            {(init.status === PROCESSING) && (
-              <Spinner/>
-            )}
+          <Button disabled={init.status !== IDLE || (init.WakandaToken && init.WakandaPass && init.WakandaProfile)}
+                  isLoading={init.status === PROCESSING}
+                  onClick={init.initialize} w={40} colorScheme={"blue"}>
             {(init.WakandaToken && init.WakandaPass && init.WakandaProfile) ? "Done" : "Initialize"}
           </Button>
         </Stack>
