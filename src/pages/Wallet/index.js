@@ -7,7 +7,7 @@ import {
   StatHelpText,
   StatLabel,
   StatNumber,
-  Button, Text, Switch, Center, Spacer, Box, Divider
+  Button, Text, Switch, Center, Spacer, Box, Divider, IconButton
 } from "@chakra-ui/react";
 import {TransferToken} from "./TransferToken";
 import {fmtWkdt} from "../../util/fmt-wkdt";
@@ -17,6 +17,7 @@ import {useWkdtBalance} from "../../hooks/use-wkdt-balance";
 import {useCurrentUser} from "../../hooks/use-current-user";
 import {IDLE, PROCESSING} from "../../global/constants";
 import {BeatLoader} from "react-spinners";
+import {RepeatIcon} from "@chakra-ui/icons";
 
 export function Wallet() {
   const [cu] = useCurrentUser()
@@ -33,8 +34,11 @@ export function Wallet() {
         <Divider/>
         <StatGroup>
           <Stat>
-            <StatLabel>Wakanda Token</StatLabel>
-            <Stack direction={"row"} align={"baseline"}>
+            <Stack direction={"row"} align={"center"}>
+              <StatLabel>Wakanda Token</StatLabel>
+              <IconButton aria-label={"refresh"} icon={<RepeatIcon />} size={"xs"} onClick={wkdt.refresh} isLoading={wkdt.status === PROCESSING}/>
+            </Stack>
+            <Stack direction={"row"} align={"baseline"} h={20}>
               {(wkdt.status === PROCESSING) && (
                 <BeatLoader size={4}/>
               )}
@@ -48,8 +52,11 @@ export function Wallet() {
             </StatHelpText>
           </Stat>
           <Stat>
-            <StatLabel>Flow</StatLabel>
-            <Stack direction={"row"} align={"baseline"}>
+            <Stack direction={"row"} align={"center"}>
+              <StatLabel>Flow</StatLabel>
+              <IconButton aria-label={"refresh"} icon={<RepeatIcon />} size={"xs"} onClick={flow.refresh} isLoading={flow.status === PROCESSING}/>
+            </Stack>
+            <Stack direction={"row"} align={"baseline"} h={20}>
               {(flow.status === PROCESSING) && (
                 <BeatLoader size={4}/>
               )}
