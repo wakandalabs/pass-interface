@@ -1,5 +1,4 @@
 import {
-  Box,
   Button, Center, FormControl, FormLabel, Heading, Input, Stack,
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
@@ -7,7 +6,7 @@ import {useWakandaProfile} from "../../hooks/use-wakanda-profile";
 import {useCurrentUser} from "../../hooks/use-current-user";
 
 export function Setting() {
-  const [cu, loggedIn, {logIn}] = useCurrentUser()
+  const [cu, loggedIn] = useCurrentUser()
   const profile = useWakandaProfile(cu.addr)
   const [name, setName] = React.useState(profile.profile.name)
   const [avatar, setAvatar] = React.useState(profile.profile.avatar)
@@ -18,16 +17,7 @@ export function Setting() {
 
   if (!loggedIn) {
     return (
-      <Center>
-        <Stack pl={4} pr={4} spacing={3} w={650}>
-          <Heading>Edit profile</Heading>
-          <Heading fontSize={"md"}>Welcome to the world of wakanda!</Heading>
-          <Heading fontSize={"md"}>You can set preferred display name and manage other personal settings</Heading>
-          <Box>
-            <Button onClick={logIn}>Log In</Button>
-          </Box>
-        </Stack>
-      </Center>
+      <SettingSkeleton />
     )
   }
 
@@ -72,38 +62,42 @@ export function Setting() {
   )
 }
 
+export function SettingSkeleton() {
+  return (
+    <Center>
+      <Stack pl={4} pr={4} spacing={6} w={650}>
+        <Heading>Edit profile</Heading>
+        <Heading fontSize={"xl"} color={"gray"}>You can set preferred display name and manage other personal settings
+        </Heading>
+        <FormControl id="avatar">
+          <FormLabel>Avatar</FormLabel>
+          <Input placeholder="" size="md" disabled/>
+        </FormControl>
+        <FormControl id="name">
+          <FormLabel>Display name</FormLabel>
+          <Input placeholder="Enter your display name" size="md" disabled/>
+        </FormControl>
+        <FormControl id="bio">
+          <FormLabel>Bio</FormLabel>
+          <Input placeholder="Tell about yourself in a few words" size="md" disabled/>
+        </FormControl>
+        <FormControl id="website">
+          <FormLabel>Website</FormLabel>
+          <Input placeholder="https://" size="md" disabled/>
+        </FormControl>
+        <FormControl id="email">
+          <FormLabel>Email</FormLabel>
+          <Input placeholder="Enter your email" size="md" disabled/>
+        </FormControl>
+        <Button isLoading loadingText={"Loading profile"}/>
+      </Stack>
+    </Center>
+  )
+}
+
 export default function WrappedSetting() {
   return (
-    <Suspense fallback={
-      <Center>
-        <Stack pl={4} pr={4} spacing={6} w={650}>
-          <Heading>Edit profile</Heading>
-          <Heading fontSize={"xl"} color={"gray"}>You can set preferred display name and manage other personal settings
-          </Heading>
-          <FormControl id="avatar">
-            <FormLabel>Avatar</FormLabel>
-            <Input placeholder="" size="md" disabled/>
-          </FormControl>
-          <FormControl id="name">
-            <FormLabel>Display name</FormLabel>
-            <Input placeholder="Enter your display name" size="md" disabled/>
-          </FormControl>
-          <FormControl id="bio">
-            <FormLabel>Bio</FormLabel>
-            <Input placeholder="Tell about yourself in a few words" size="md" disabled/>
-          </FormControl>
-          <FormControl id="website">
-            <FormLabel>Website</FormLabel>
-            <Input placeholder="https://" size="md" disabled/>
-          </FormControl>
-          <FormControl id="email">
-            <FormLabel>Email</FormLabel>
-            <Input placeholder="Enter your email" size="md" disabled/>
-          </FormControl>
-          <Button isLoading loadingText={"Loading profile"}/>
-        </Stack>
-      </Center>
-    }>
+    <Suspense fallback={<SettingSkeleton/>}>
       <Setting/>
     </Suspense>
   )
