@@ -1,5 +1,5 @@
-import React from 'react';
-import {Box, Center, Heading, SimpleGrid, Stack} from "@chakra-ui/react";
+import React, {Suspense} from 'react';
+import {Box, Center, Heading, SimpleGrid, Skeleton, Stack} from "@chakra-ui/react";
 
 export function Wkdt() {
   return (
@@ -29,8 +29,22 @@ export function Wkdt() {
   );
 }
 
+export function WkdtSkeleton() {
+  return (
+    <Center>
+      <Stack pl={4} pr={4} spacing={8} textAlign={"center"} maxW={"650"} w={"100%"}>
+        <Skeleton h={"30px"} />
+        <Skeleton h={"30px"} />
+        <Skeleton h={"90px"} />
+      </Stack>
+    </Center>
+  )
+}
+
 export default function WrappedWkdt() {
   return (
-    <Wkdt/>
+    <Suspense fallback={<WkdtSkeleton />}>
+      <Wkdt />
+    </Suspense>
   )
 }
