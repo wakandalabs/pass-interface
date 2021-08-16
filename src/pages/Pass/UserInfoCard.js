@@ -43,7 +43,7 @@ export default function WrappedUserInfoCard(props) {
   return (
     <Suspense fallback={
       <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
-        <SkeletonCircle size="12"/>
+        <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
         <Stack direction={"row"} align={"center"} spacing={4}>
           <Skeleton w={24} h={30}/>
           <Stack>
