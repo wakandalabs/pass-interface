@@ -18,18 +18,18 @@ import {TheHeader} from "./parts/TheHeader";
 
 ReactDOM.render(
   <Providers>
-      <TheHeader/>
-      <Switch>
-        <Route exact path="/" component={Explore}/>
-        <Route exact path="/following" component={Following}/>
-        <Route exact path="/search" component={Search}/>
-        <Route exact path="/pass" component={Pass}/>
-        <Route exact path="/wkdt" component={Wkdt}/>
-        <Route exact path="/wallet" component={Wallet}/>
-        <Route exact path="/initialize" component={Initialize}/>
-        <Route exact path="/setting" component={Setting}/>
-        <Route component={NotFound}/>
-      </Switch>
+    <TheHeader/>
+    <Switch>
+      <Route exact path="/" component={Explore}/>
+      <Route exact path="/following" component={Following}/>
+      <Route exact path="/search" component={Search}/>
+      <Route exact path="/pass" component={Pass}/>
+      <Route exact path="/wkdt" component={Wkdt}/>
+      <Route exact path="/wallet" component={Wallet}/>
+      <Route exact path="/initialize" component={Initialize}/>
+      <Route exact path="/setting" component={Setting}/>
+      <Route component={NotFound}/>
+    </Switch>
   </Providers>,
   document.getElementById('root')
 );
