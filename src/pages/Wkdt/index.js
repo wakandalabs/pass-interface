@@ -3,7 +3,7 @@ import {Box, Center, Heading, SimpleGrid, Skeleton, Stack} from "@chakra-ui/reac
 
 export function Wkdt() {
   return (
-    <Center>
+    <Center minH={"40vh"}>
       <Stack pl={4} pr={4} spacing={8} textAlign={"center"} maxW={"650"}>
         <Heading>Meet WKDT - Wakanda<br/>Governance Token</Heading>
         <Heading fontSize={"md"}>WKDT</Heading>
@@ -32,7 +32,7 @@ export function Wkdt() {
 export function WkdtSkeleton() {
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={8} textAlign={"center"} maxW={"650"} w={"100%"}>
+      <Stack pl={4} pr={4} spacing={8} textAlign={"center"} maxW={"650"} w={"100%"} minH={"60vh"}>
         <Skeleton h={"30px"} />
         <Skeleton h={"30px"} />
         <Skeleton h={"90px"} />

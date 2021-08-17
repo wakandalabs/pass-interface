@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import {
   Box,
   Heading,
@@ -58,7 +58,7 @@ export function Pass() {
   }
 
   return (
-    <Box pl={4} pr={4}>
+    <Box pl={4} pr={4} minH={"60vh"}>
       <Stack height={500} direction={"row"} mb={4}>
         <UserInfoCard address={address}/>
         <UserAvatar/>
@@ -98,6 +98,8 @@ export function Pass() {
 
 export default function WrappedPass() {
   return (
-    <Pass/>
+    <Suspense fallback={<UserInfoCardSkeleton />}>
+      <Pass/>
+    </Suspense>
   )
 }

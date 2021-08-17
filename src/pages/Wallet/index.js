@@ -32,7 +32,7 @@ export function Wallet() {
 
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={3} w={650}>
+      <Stack pl={4} pr={4} spacing={3} w={650} minH={"60vh"}>
         <Heading>My wallet</Heading>
         <Divider/>
         <StatGroup>
@@ -149,7 +149,7 @@ export function Wallet() {
 export function WalletSkeleton() {
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={3} w={650}>
+      <Stack pl={4} pr={4} spacing={3} w={650} minH={"60vh"}>
         <Heading>My wallet</Heading>
         <Divider/>
         <StatGroup>

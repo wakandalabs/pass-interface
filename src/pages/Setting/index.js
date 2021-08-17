@@ -23,7 +23,7 @@ export function Setting() {
 
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={6} w={650}>
+      <Stack pl={4} pr={4} spacing={6} w={650} minH={"60vh"}>
         <Heading>Edit profile</Heading>
         <Heading fontSize={"xl"} color={"gray"}>You can set preferred display name and manage other personal settings
         </Heading>
@@ -65,7 +65,7 @@ export function Setting() {
 export function SettingSkeleton() {
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={6} w={650}>
+      <Stack pl={4} pr={4} spacing={6} w={650} minH={"60vh"}>
         <Heading>Edit profile</Heading>
         <Heading fontSize={"xl"} color={"gray"}>You can set preferred display name and manage other personal settings
         </Heading>

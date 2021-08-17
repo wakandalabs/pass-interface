@@ -1,10 +1,10 @@
-import {Stack} from "@chakra-ui/react";
+import {Heading, Stack} from "@chakra-ui/react";
 import React, {Suspense} from "react";
 
 export function TheFooter() {
   return (
-    <Stack>
-
+    <Stack p={4} bg={"gray"}>
+      <Heading>The footer</Heading>
     </Stack>
   )
 }

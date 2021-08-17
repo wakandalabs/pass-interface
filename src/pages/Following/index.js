@@ -12,7 +12,7 @@ export function Following() {
   }
 
   return (
-    <Box pl={4} pr={4}>
+    <Box pl={4} pr={4} minH={"60vh"}>
       Following
     </Box>
   );
@@ -20,7 +20,7 @@ export function Following() {
 
 export function FollowingSkeleton() {
   return (
-    <Center h={"40vh"}>
+    <Center minH={"60vh"}>
       <Spinner />
     </Center>
   )

@@ -3,7 +3,7 @@ import {Box, Center, Spinner} from "@chakra-ui/react";
 
 export function Explore() {
   return (
-    <Box pl={4} pr={4}>
+    <Box pl={4} pr={4} minH={"60vh"}>
       Explore
     </Box>
   );
@@ -11,7 +11,7 @@ export function Explore() {
 
 export function ExploreSkeleton() {
   return (
-    <Center h={"40vh"}>
+    <Center minH={"60vh"}>
       <Spinner />
     </Center>
   )

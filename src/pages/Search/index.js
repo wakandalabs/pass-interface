@@ -12,7 +12,7 @@ import {Search2Icon} from "@chakra-ui/icons";
 
 export function Search() {
   return (
-    <Box pl={4} pr={4}>
+    <Box pl={4} pr={4} minH={"60vh"}>
       <Center height={300}>
         <Stack align={"center"} spacing={3}>
           <Heading size={"2xl"}>Search World</Heading>
@@ -41,7 +41,7 @@ export function Search() {
 
 export function SearchSkeleton() {
   return (
-    <Center h={"40vh"}>
+    <Center minH={"60vh"}>
       <Spinner />
     </Center>
   )
