@@ -15,10 +15,12 @@ import Setting from './pages/Setting/index';
 import * as serviceWorker from './serviceWorker';
 import Providers from "./global/providers.comp";
 import {TheHeader} from "./parts/TheHeader";
+import InitializeAlert from "./parts/InitializeAlert";
 
 ReactDOM.render(
   <Providers>
     <TheHeader/>
+    <InitializeAlert />
     <Switch>
       <Route exact path="/" component={Explore}/>
       <Route exact path="/following" component={Following}/>
