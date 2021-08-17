@@ -9,17 +9,26 @@ import {PROCESSING} from "../../global/constants";
 export function Setting() {
   const [cu, loggedIn] = useCurrentUser()
   const profile = useWakandaProfile(cu.addr)
-  const [name, setName] = React.useState(profile.profile.name)
-  const [avatar, setAvatar] = React.useState(profile.profile.avatar)
-  const [color, setColor] = React.useState(profile.profile.color)
-  const [bio, setBio] = React.useState(profile.profile.bio)
-  const [website, setWebsite] = React.useState(profile.profile.website)
-  const [email, setEmail] = React.useState(profile.profile.email)
+  const [name, setName] = React.useState("")
+  const [avatar, setAvatar] = React.useState("")
+  const [color, setColor] = React.useState("")
+  const [bio, setBio] = React.useState("")
+  const [website, setWebsite] = React.useState("")
+  const [email, setEmail] = React.useState("")
 
   if (!loggedIn || profile.profile === null) {
     return (
-      <SettingSkeleton />
+      <SettingSkeleton/>
     )
+  }
+
+  function getProfile() {
+    setName(profile.profile.name)
+    setAvatar(profile.profile.avatar)
+    setColor(profile.profile.color)
+    setBio(profile.profile.bio)
+    setWebsite(profile.profile.website)
+    setEmail(profile.profile.email)
   }
 
   return (
@@ -28,6 +37,9 @@ export function Setting() {
         <Heading>Edit profile</Heading>
         <Heading fontSize={"xl"} color={"gray"}>You can set preferred display name and manage other personal settings
         </Heading>
+        <Button onClick={() => getProfile()} variant={"outline"}>
+          Edit from current profile
+        </Button>
         <FormControl id="avatar">
           <FormLabel>Avatar</FormLabel>
           <Input placeholder="" size="md"
