@@ -4,32 +4,22 @@ import {
 import React, {Suspense} from "react";
 import {useWakandaProfile} from "../../hooks/use-wakanda-profile";
 import {useCurrentUser} from "../../hooks/use-current-user";
-import {IDLE} from "../../global/constants";
+import {PROCESSING} from "../../global/constants";
 
 export function Setting() {
   const [cu, loggedIn] = useCurrentUser()
   const profile = useWakandaProfile(cu.addr)
-  const [name, setName] = React.useState("")
-  const [avatar, setAvatar] = React.useState("")
-  const [color, setColor] = React.useState("")
-  const [bio, setBio] = React.useState("")
-  const [website, setWebsite] = React.useState("")
-  const [email, setEmail] = React.useState("")
-
+  const [name, setName] = React.useState(profile.profile.name)
+  const [avatar, setAvatar] = React.useState(profile.profile.avatar)
+  const [color, setColor] = React.useState(profile.profile.color)
+  const [bio, setBio] = React.useState(profile.profile.bio)
+  const [website, setWebsite] = React.useState(profile.profile.website)
+  const [email, setEmail] = React.useState(profile.profile.email)
 
   if (!loggedIn || profile.profile === null) {
     return (
       <SettingSkeleton />
     )
-  }
-
-  if (loggedIn && profile.profile != null && profile.status === IDLE){
-    setName(profile.profile.name)
-    setAvatar(profile.profile.avatar)
-    setColor(profile.profile.color)
-    setBio(profile.profile.bio)
-    setWebsite(profile.profile.website)
-    setEmail(profile.profile.email)
   }
 
   return (
@@ -40,12 +30,15 @@ export function Setting() {
         </Heading>
         <FormControl id="avatar">
           <FormLabel>Avatar</FormLabel>
-          <Input placeholder="" size="md" value={avatar} onChange={(event) => setAvatar(event.target.value)}/>
+          <Input placeholder="" size="md"
+                 disabled={profile.status === PROCESSING}
+                 value={avatar} onChange={(event) => setAvatar(event.target.value)}/>
         </FormControl>
         <FormControl id="name">
           <FormLabel>Display name</FormLabel>
           <Input placeholder="Enter your display name" size="md" isInvalid={name.length > 15 || name.length <= 0}
                  isRequired={true}
+                 disabled={profile.status === PROCESSING}
                  value={name} onChange={(event) => setName(event.target.value)}/>
         </FormControl>
         <FormControl id="bio">
@@ -53,20 +46,24 @@ export function Setting() {
           <Input placeholder="Tell about yourself in a few words" size="md"
                  isInvalid={bio.length > 280 || bio.length <= 0}
                  isRequired={true}
+                 disabled={profile.status === PROCESSING}
                  value={bio} onChange={(event) => setBio(event.target.value)}/>
         </FormControl>
         <FormControl id="website">
           <FormLabel>Website</FormLabel>
           <Input placeholder="https://" size="md" isInvalid={website.length > 40}
+                 disabled={profile.status === PROCESSING}
                  value={website} onChange={(event) => setWebsite(event.target.value)}/>
         </FormControl>
         <FormControl id="email">
           <FormLabel>Email</FormLabel>
           <Input placeholder="Enter your email" size="md" isInvalid={email.length > 40}
+                 disabled={profile.status === PROCESSING}
                  value={email} onChange={(event) => setEmail(event.target.value)}/>
         </FormControl>
         <Button
           disabled={(name.length > 15 || name.length <= 0) || (bio.length > 280 || bio.length <= 0) || (website.length > 40) || (email.length > 40)}
+          isLoading={profile.status === PROCESSING} loadingText={"Updating"}
           onClick={() => profile.update(name, avatar, color, bio, website, email)}>Update profile</Button>
       </Stack>
     </Center>
