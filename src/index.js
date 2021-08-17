@@ -14,8 +14,9 @@ import reportWebVitals from './reportWebVitals';
 import Setting from './pages/Setting/index';
 import * as serviceWorker from './serviceWorker';
 import Providers from "./global/providers.comp";
-import {TheHeader} from "./parts/TheHeader";
+import TheHeader from "./parts/TheHeader";
 import InitializeAlert from "./parts/InitializeAlert";
+import TheFooter from "./parts/TheFooter";
 
 ReactDOM.render(
   <Providers>
@@ -32,6 +33,7 @@ ReactDOM.render(
       <Route exact path="/setting" component={Setting}/>
       <Route component={NotFound}/>
     </Switch>
+    <TheFooter/>
   </Providers>,
   document.getElementById('root')
 );
