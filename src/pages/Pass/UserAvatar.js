@@ -11,16 +11,19 @@ export function UserAvatar({address}) {
 
 export function UserAvatarSkeleton() {
   return (
-    <Center h={"40%"}>
-      <Spinner />
-    </Center>
+    <Stack height={"100%"} width={"50%"} p={16} spacing={3}>
+      <Center>
+        <Spinner/>
+      </Center>
+    </Stack>
   )
 }
 
 export default function WrappedUserAvatar(props) {
   return (
-    <Suspense fallback={<UserAvatarSkeleton />}>
-      <UserAvatar {...props}/>
+    <Suspense fallback={<UserAvatarSkeleton/>}>
+      {/*<UserAvatar {...props}/>*/}
+      <UserAvatarSkeleton/>
     </Suspense>
   )
 }

@@ -11,7 +11,7 @@ export function OwnedPass({address}) {
 
 export function OwnedPassSkeleton() {
   return (
-    <Center h={"40%"}>
+    <Center h={"50vh"}>
       <Spinner/>
     </Center>
   )
@@ -20,7 +20,8 @@ export function OwnedPassSkeleton() {
 export default function WrappedOwnedPass(props) {
   return (
     <Suspense fallback={<OwnedPassSkeleton/>}>
-      <OwnedPass {...props}/>
+      {/*<OwnedPass {...props}/>*/}
+      <OwnedPassSkeleton/>
     </Suspense>
   )
 }

@@ -11,7 +11,7 @@ export function HiddenPass({address}) {
 
 export function HiddenPassSkeleton() {
   return (
-    <Center h={"40%"}>
+    <Center h={"50vh"}>
       <Spinner />
     </Center>
   )
@@ -20,8 +20,9 @@ export function HiddenPassSkeleton() {
 
 export default function WrappedHiddenPass(props) {
   return (
-    <Suspense fallback={<HiddenPassSkeleton />}>
-      <HiddenPass {...props}/>
+    <Suspense fallback={<HiddenPassSkeleton/>}>
+      {/*<HiddenPass {...props}/>*/}
+      <HiddenPassSkeleton/>
     </Suspense>
   )
 }

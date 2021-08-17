@@ -11,7 +11,7 @@ export function About() {
 
 export function AboutSkeleton() {
   return (
-    <Center h={"40%"}>
+    <Center h={"50vh"}>
       <Spinner />
     </Center>
   )
@@ -19,8 +19,9 @@ export function AboutSkeleton() {
 
 export default function WrappedAbout() {
   return (
-    <Suspense fallback={<AboutSkeleton />}>
-      <About />
+    <Suspense fallback={<AboutSkeleton/>}>
+      {/*<About />*/}
+      <AboutSkeleton/>
     </Suspense>
   )
 }

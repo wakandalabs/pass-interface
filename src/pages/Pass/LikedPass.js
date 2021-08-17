@@ -11,7 +11,7 @@ export function LikedPass({address}) {
 
 export function LikedPassSkeleton() {
   return (
-    <Center h={"40%"}>
+    <Center h={"50vh"}>
       <Spinner />
     </Center>
   )
@@ -20,7 +20,8 @@ export function LikedPassSkeleton() {
 export default function WrappedLikedPass(props) {
   return (
     <Suspense fallback={<LikedPassSkeleton/>}>
-      <LikedPass {...props}/>
+      {/*<LikedPass {...props}/>*/}
+      <LikedPassSkeleton/>
     </Suspense>
   )
 }

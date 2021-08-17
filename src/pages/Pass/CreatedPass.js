@@ -11,7 +11,7 @@ export function CreatedPass({address}) {
 
 export function CreatePassSkeleton() {
   return (
-    <Center h={"40%"}>
+    <Center h={"50vh"}>
       <Spinner />
     </Center>
   )
@@ -19,8 +19,9 @@ export function CreatePassSkeleton() {
 
 export default function WrappedCreatedPass(props) {
   return (
-    <Suspense fallback={<CreatePassSkeleton />}>
-      <CreatedPass {...props}/>
+    <Suspense fallback={<CreatePassSkeleton/>}>
+      {/*<CreatedPass {...props}/>*/}
+      <CreatePassSkeleton/>
     </Suspense>
   )
 }

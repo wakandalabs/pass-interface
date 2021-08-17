@@ -11,7 +11,7 @@ export function SalePass({address}) {
 
 export function SalePassSkeleton() {
   return (
-    <Center h={"40%"}>
+    <Center h={"50vh"}>
       <Spinner />
     </Center>
   )
@@ -19,8 +19,9 @@ export function SalePassSkeleton() {
 
 export default function WrappedSalePass(props) {
   return (
-    <Suspense fallback={<SalePassSkeleton />}>
-      <SalePass {...props}/>
+    <Suspense fallback={<SalePassSkeleton/>}>
+      {/*<SalePass {...props}/>*/}
+      <SalePassSkeleton/>
     </Suspense>
   )
 }
