@@ -4,21 +4,32 @@ import {
 import React, {Suspense} from "react";
 import {useWakandaProfile} from "../../hooks/use-wakanda-profile";
 import {useCurrentUser} from "../../hooks/use-current-user";
+import {IDLE} from "../../global/constants";
 
 export function Setting() {
   const [cu, loggedIn] = useCurrentUser()
   const profile = useWakandaProfile(cu.addr)
-  const [name, setName] = React.useState(profile.profile.name)
-  const [avatar, setAvatar] = React.useState(profile.profile.avatar)
-  const [color, setColor] = React.useState(profile.profile.color)
-  const [bio, setBio] = React.useState(profile.profile.bio)
-  const [website, setWebsite] = React.useState(profile.profile.website)
-  const [email, setEmail] = React.useState(profile.profile.email)
+  const [name, setName] = React.useState("")
+  const [avatar, setAvatar] = React.useState("")
+  const [color, setColor] = React.useState("")
+  const [bio, setBio] = React.useState("")
+  const [website, setWebsite] = React.useState("")
+  const [email, setEmail] = React.useState("")
 
-  if (!loggedIn) {
+
+  if (!loggedIn || profile.profile === null) {
     return (
       <SettingSkeleton />
     )
+  }
+
+  if (loggedIn && profile.profile != null && profile.status === IDLE){
+    setName(profile.profile.name)
+    setAvatar(profile.profile.avatar)
+    setColor(profile.profile.color)
+    setBio(profile.profile.bio)
+    setWebsite(profile.profile.website)
+    setEmail(profile.profile.email)
   }
 
   return (

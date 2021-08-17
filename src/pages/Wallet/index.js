@@ -24,7 +24,7 @@ export function Wallet() {
   const wkdt = useWkdtBalance(cu.addr)
   const flow = useFlowBalance(cu.addr)
 
-  if (!loggedIn) {
+  if (!loggedIn || wkdt.balance === null) {
     return (
       <WalletSkeleton/>
     )
@@ -51,10 +51,17 @@ export function Wallet() {
               )}
               <Heading fontSize={"md"}>WKDT</Heading>
             </Stack>
+            {(wkdt.status === IDLE) && (wkdt.balance != null) && (
+              <StatHelpText mt={4}>
+                <TransferToken/>
+              </StatHelpText>
+            )}
+          </Stat>
+          {(wkdt.status === IDLE) && (wkdt.balance != null) && (
             <StatHelpText mt={4}>
               <TransferToken/>
             </StatHelpText>
-          </Stat>
+          )}
           <Stat>
             <Stack direction={"row"} align={"center"}>
               <StatLabel>Flow</StatLabel>
@@ -110,12 +117,10 @@ export function Wallet() {
           <Heading fontSize={"sm"}>2021年8月17日</Heading>
         </Stack>
         <Divider/>
-
         <Stack spacing={3}>
           <Text fontSize={"sm"} color={"gray.500"}>Calculated rewards for this epoch</Text>
           <Heading fontSize={"sm"}>0 WKDT</Heading>
         </Stack>
-
         <Stack spacing={1}>
           <Text fontSize={"sm"} color={"gray.500"}>Rewards already distributed</Text>
           <Stack direction={"row"} align={"center"}>
@@ -124,14 +129,11 @@ export function Wallet() {
             <Button size={"sm"}>Receive</Button>
           </Stack>
         </Stack>
-
         <Divider/>
-
         <Stack spacing={3}>
           <Text fontSize={"sm"} color={"gray.500"}>Unstaking token</Text>
           <Heading fontSize={"sm"}>0 WKDT</Heading>
         </Stack>
-
         <Stack spacing={1}>
           <Text fontSize={"sm"} color={"gray.500"}>Unstaked token</Text>
           <Stack direction={"row"} align={"center"}>
