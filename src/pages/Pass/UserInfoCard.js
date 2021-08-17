@@ -12,13 +12,14 @@ import {EditIcon} from "@chakra-ui/icons";
 import React, {Suspense} from "react";
 import {useWakandaProfile} from "../../hooks/use-wakanda-profile";
 import {useHistory} from "react-router-dom";
+import {PROCESSING} from "../../global/constants";
 
 export function UserInfoCard({address}) {
   const {hasCopied, onCopy} = useClipboard(address)
   const profile = useWakandaProfile(address)
   const history = useHistory()
 
-  if (profile.profile === false) {
+  if (profile.profile === false || profile.profile === null || profile.status === PROCESSING) {
     return <UserInfoCardSkeleton />
   }
 
