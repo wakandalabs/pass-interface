@@ -57,11 +57,6 @@ export function Wallet() {
               </StatHelpText>
             )}
           </Stat>
-          {(wkdt.status === IDLE) && (wkdt.balance != null) && (
-            <StatHelpText mt={4}>
-              <TransferToken/>
-            </StatHelpText>
-          )}
           <Stat>
             <Stack direction={"row"} align={"center"}>
               <StatLabel>Flow</StatLabel>
