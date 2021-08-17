@@ -30,7 +30,7 @@ export function TheHeader() {
       <Stack direction={"row"} spacing={3}>
         {loggedIn ? (
           <>
-            <Button colorScheme="blue">Create</Button>
+            <Button colorScheme="cyan" onClick={() => history.push("/create")}>Create</Button>
             <TheHeaderUserInfo/>
           </>
         ) : (
