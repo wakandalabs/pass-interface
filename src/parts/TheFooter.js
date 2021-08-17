@@ -5,9 +5,9 @@ import {AiOutlineGithub, AiOutlineTaobao, AiOutlineTwitter} from "react-icons/al
 export function TheFooter() {
   return (
     <Stack p={4} bgColor={"transparent"} backdropFilter={"blur(8px)"}>
+      <Divider/>
       <Grid templateColumns="repeat(4, 1fr)" gap={3} mb={3}>
-        <Stack>
-
+        <Stack minH={"260px"}>
         </Stack>
         <Stack w="100%" spacing={3}>
           <Heading fontSize={"3xl"}>World of Wakanda</Heading>
@@ -20,6 +20,7 @@ export function TheFooter() {
           <Heading fontSize={"xl"}>
             <Link href={"/following"}>Following</Link>
           </Heading>
+
         </Stack>
         <Stack w="100%" spacing={3}>
           <Heading fontSize={"3xl"}>Community</Heading>

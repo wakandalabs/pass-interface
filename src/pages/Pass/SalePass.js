@@ -3,7 +3,7 @@ import React, {Suspense} from "react";
 
 export function SalePass({address}) {
   return (
-    <Box h={500}>
+    <Box>
     Sale, {address}
     </Box>
   )
