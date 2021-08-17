@@ -34,7 +34,7 @@ export function TheFooter() {
           <Heading fontSize={"3xl"}>Language</Heading>
           <Select variant="filled">
             <option value="english">English</option>
-            <option value="chinese">中文</option>
+            {/*<option value="chinese">中文</option>*/}
           </Select>
         </Stack>
       </Grid>
