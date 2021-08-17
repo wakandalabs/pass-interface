@@ -1,4 +1,4 @@
-import {Divider, Grid, Heading, Link, Spacer, Stack} from "@chakra-ui/react";
+import {Divider, Grid, Heading, Link, Select, Spacer, Stack} from "@chakra-ui/react";
 import React, {Suspense} from "react";
 import {AiOutlineGithub, AiOutlineTaobao, AiOutlineTwitter} from "react-icons/all";
 
@@ -32,6 +32,10 @@ export function TheFooter() {
         </Stack>
         <Stack w="100%" spacing={3}>
           <Heading fontSize={"3xl"}>Language</Heading>
+          <Select variant="filled">
+            <option value="english">English</option>
+            <option value="chinese">中文</option>
+          </Select>
         </Stack>
       </Grid>
       <Divider />
