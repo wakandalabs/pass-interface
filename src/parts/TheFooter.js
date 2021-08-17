@@ -4,11 +4,10 @@ import {AiOutlineGithub, AiOutlineTaobao, AiOutlineTwitter} from "react-icons/al
 
 export function TheFooter() {
   return (
-    <Stack p={4} bgColor={"transparent"} backdropFilter={"blur(8px)"}>
+    <Stack p={4} mt={20} bgColor={"transparent"} backdropFilter={"blur(8px)"}>
       <Divider/>
-      <Grid templateColumns="repeat(4, 1fr)" gap={3} mb={3}>
-        <Stack minH={"260px"}>
-        </Stack>
+      <Grid templateColumns="repeat(4, 1fr)" gap={3} pb={20} pt={20}>
+        Wakanda Labs
         <Stack w="100%" spacing={3}>
           <Heading fontSize={"3xl"}>World of Wakanda</Heading>
           <Heading fontSize={"xl"}>
@@ -38,7 +37,7 @@ export function TheFooter() {
           </Select>
         </Stack>
       </Grid>
-      <Divider />
+      <Divider/>
       <Stack direction={"row"} align={"center"} spacing={4}>
         <Heading fontSize={"md"}>© Wakanda Labs. All rights reserved.</Heading>
         <Spacer/>
@@ -53,7 +52,6 @@ export function TheFooter() {
 export function TheFooterSkeleton() {
   return null
 }
-
 
 
 export default function WrappedTheFooter() {
