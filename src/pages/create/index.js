@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Button,
   Center,
@@ -8,11 +9,12 @@ import {
   Heading,
   Input, Spacer,
   Spinner,
-  Stack, Switch, Text
+  Stack, Text
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
+import ScheduleEditList from "./ScheduleEditList";
 
-export function Create(){
+export function Create() {
   const [showAdvanced, setShowAdvanced] = React.useState(false)
   const [showLockup, setShowLockup] = React.useState(false)
 
@@ -43,21 +45,22 @@ export function Create(){
           <Stack direction={"row"} align={"center"}>
             <FormLabel fontWeight={"bold"}>Lockup WKDT and set schedule</FormLabel>
             <Spacer/>
-            <Switch id={"lockupSwitch"} value={showLockup} onChange={() => setShowLockup(!showLockup)}/>
+            <Badge variant="subtle" colorScheme="cyan">Coming soon</Badge>
+            {/*<Switch id={"lockupSwitch"} value={showLockup} onChange={() => setShowLockup(!showLockup)}/>*/}
           </Stack>
           <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
         </FormControl>
         {showLockup && (
           <FormControl id="lockupAmount">
-            <FormLabel fontWeight={"bold"}>Lockup amount (Option)</FormLabel>
+            <FormLabel fontWeight={"bold"}>Lockup amount</FormLabel>
             <Input placeholder="Amount of WKDT" size="md" variant={"flushed"}/>
             <FormHelperText>Total amount that's subject to lockup schedule</FormHelperText>
           </FormControl>
         )}
         {showLockup && (
           <FormControl id="lockupSchedule">
-            <FormLabel fontWeight={"bold"}>Lock up schedule (Option)</FormLabel>
-            <Input placeholder="" size="md" variant={"flushed"}/>
+            <FormLabel fontWeight={"bold"}>Lockup schedule</FormLabel>
+            <ScheduleEditList />
             <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
           </FormControl>
         )}
@@ -86,16 +89,16 @@ export function Create(){
   )
 }
 
-export function CreateSkeleton(){
+export function CreateSkeleton() {
   return (
     <Center minH={"60vh"}>
-      <Spinner />
+      <Spinner/>
     </Center>
   )
 }
 
-export default function WrappedCreate(){
-  return(
+export default function WrappedCreate() {
+  return (
     <Suspense fallback={<CreateSkeleton/>}>
       <Create/>
     </Suspense>
