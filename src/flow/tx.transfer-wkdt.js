@@ -1,9 +1,9 @@
-import * as fcl from "@onflow/fcl";
+import {transaction, limit, proposer, payer, authorizations, authz, cdc, args, arg} from "@onflow/fcl";
 import * as t from "@onflow/types";
 import {tx} from "./util/tx";
 import {invariant} from "@onflow/util-invariant";
 
-const CODE = fcl.cdc`
+const CODE = cdc`
 import FungibleToken from 0xFungibleToken
 import WakandaToken from 0xWakandaToken
 
@@ -30,14 +30,14 @@ export function txTransferWkdt({amount, to}, opts = {}) {
   invariant(to != null, "transferWakandaToken({amount, to}) -- to required")
 
   return tx([
-    fcl.transaction(CODE),
-    fcl.args([
-      fcl.arg(amount.toFixed(8).toString(), t.UFix64),
-      fcl.arg(to, t.Address),
+    transaction(CODE),
+    args([
+      arg(amount.toFixed(8).toString(), t.UFix64),
+      arg(to, t.Address),
     ]),
-    fcl.proposer(fcl.authz),
-    fcl.payer(fcl.authz),
-    fcl.authorizations([fcl.authz]),
-    fcl.limit(1000),
+    proposer(authz),
+    payer(authz),
+    authorizations([authz]),
+    limit(1000),
   ], opts)
 }

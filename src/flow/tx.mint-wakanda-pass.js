@@ -1,4 +1,4 @@
-import {transaction, limit, proposer, payer, authorizations, authz, cdc} from "@onflow/fcl";
+import {transaction, limit, proposer, payer, authorizations, authz, cdc, args, arg} from "@onflow/fcl";
 import {invariant} from "@onflow/util-invariant";
 import {tx} from "./util/tx";
 import * as fcl from "@onflow/fcl";
@@ -32,9 +32,9 @@ export async function txMintWakandaPass({receiver, metadata}, opts = {}) {
   return tx(
     [
       transaction(CODE),
-      fcl.args([
-        fcl.arg(receiver, t.Address),
-        fcl.arg(metadata, t.Dictionary({key: t.String, value: t.String})),
+      args([
+        arg(receiver, t.Address),
+        arg(metadata, t.Dictionary({key: t.String, value: t.String})),
       ]),
       proposer(fcl.authz),
       payer(fcl.authz),

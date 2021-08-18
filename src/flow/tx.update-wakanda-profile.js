@@ -1,9 +1,9 @@
-import * as fcl from "@onflow/fcl";
+import {transaction, limit, proposer, payer, authorizations, authz, cdc, args, arg} from "@onflow/fcl";
 import * as t from "@onflow/types";
 import {tx} from "./util/tx";
 import {invariant} from "@onflow/util-invariant";
 
-const CODE = fcl.cdc`
+const CODE = cdc`
 import WakandaProfile from 0xWakandaProfile
 
 transaction(name: String, avatar: String, color: String, bio: String, website: String, email: String) {
@@ -40,18 +40,18 @@ export function txUpdateWakandaProfile({profile}, opts = {}) {
   invariant(profile.email != null, "txUpdateWakandaProfile() -- email required")
 
   return tx([
-    fcl.transaction(CODE),
-    fcl.args([
-      fcl.arg(profile.name, t.String),
-      fcl.arg(profile.avatar, t.String),
-      fcl.arg(profile.color, t.String),
-      fcl.arg(profile.bio, t.String),
-      fcl.arg(profile.website, t.String),
-      fcl.arg(profile.email, t.String)
+    transaction(CODE),
+    args([
+      arg(profile.name, t.String),
+      arg(profile.avatar, t.String),
+      arg(profile.color, t.String),
+      arg(profile.bio, t.String),
+      arg(profile.website, t.String),
+      arg(profile.email, t.String)
     ]),
-    fcl.proposer(fcl.authz),
-    fcl.payer(fcl.authz),
-    fcl.authorizations([fcl.authz]),
-    fcl.limit(1000),
+    proposer(authz),
+    payer(authz),
+    authorizations([authz]),
+    limit(1000),
   ], opts)
 }
