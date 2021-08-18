@@ -13,6 +13,8 @@ import {
 import React, {Suspense} from "react";
 
 export function Create(){
+  const [showAdvanced, setShowAdvanced] = React.useState(false)
+
   return (
     <Center>
       <Stack pl={4} pr={4} spacing={12} w={650} minH={"60vh"}>
@@ -41,19 +43,25 @@ export function Create(){
           <Input placeholder="" size="md" variant={"flushed"}/>
           <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
         </FormControl>
-        <Button variant={"outline"} size={"lg"}>Show advanced settings</Button>
-        <FormControl id="properties">
-          <FormLabel fontWeight={"bold"}>Properties (Option)</FormLabel>
-          <Stack direction={"row"}>
-            <Input placeholder="e.g. Size" size="md" variant={"flushed"}/>
-            <Input placeholder="e.g. M" size="md" variant={"flushed"}/>
-          </Stack>
-        </FormControl>
-        <FormControl id="alternativeText">
-          <FormLabel fontWeight={"bold"}>Alternative text for NFT (Option)</FormLabel>
-          <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
-          <FormHelperText>Text that will be used in VoiceOver for people with disabilities</FormHelperText>
-        </FormControl>
+        <Button variant={"outline"} size={"lg"} onClick={() => setShowAdvanced(!showAdvanced)}>
+          {showAdvanced ? "Hide" : "Show"} advanced settings
+        </Button>
+        {showAdvanced && (
+          <FormControl id="properties">
+            <FormLabel fontWeight={"bold"}>Properties (Option)</FormLabel>
+            <Stack direction={"row"}>
+              <Input placeholder="e.g. Size" size="md" variant={"flushed"}/>
+              <Input placeholder="e.g. M" size="md" variant={"flushed"}/>
+            </Stack>
+          </FormControl>
+        )}
+        {showAdvanced && (
+          <FormControl id="alternativeText">
+            <FormLabel fontWeight={"bold"}>Alternative text for NFT (Option)</FormLabel>
+            <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
+            <FormHelperText>Text that will be used in VoiceOver for people with disabilities</FormHelperText>
+          </FormControl>
+        )}
         <Button size={"lg"} colorScheme={"cyan"}>Create item</Button>
       </Stack>
     </Center>
