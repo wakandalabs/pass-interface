@@ -31,8 +31,8 @@ export function useWakandaProfile(address) {
     profile,
     status,
     refresh,
-    async update(name, avatar, color, bio, website, email) {
-      await updateWakandaProfile({name, avatar, color, bio, website, email}, {
+    async update(profile) {
+      await updateWakandaProfile({profile}, {
         onStart() {
           setStatus(PROCESSING)
         },

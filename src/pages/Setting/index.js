@@ -10,12 +10,7 @@ import {PROCESSING} from "../../global/constants";
 export function Setting() {
   const [cu, loggedIn] = useCurrentUser()
   const profile = useWakandaProfile(cu.addr)
-  const [name, setName] = React.useState("")
-  const [avatar, setAvatar] = React.useState("")
-  const [color, setColor] = React.useState("")
-  const [bio, setBio] = React.useState("")
-  const [website, setWebsite] = React.useState("")
-  const [email, setEmail] = React.useState("")
+  const [post, setPost] = React.useState({"name": "", "avatar": "", "color": "", "bio": "", "website": "", "email": ""})
 
   if (!loggedIn || profile.profile === null) {
     return (
@@ -24,13 +19,17 @@ export function Setting() {
   }
 
   function getProfile() {
-    setName(profile.profile.name)
-    setAvatar(profile.profile.avatar)
-    setColor(profile.profile.color)
-    setBio(profile.profile.bio)
-    setWebsite(profile.profile.website)
-    setEmail(profile.profile.email)
+    setPost({
+      "name": profile.profile.name,
+      "avatar": profile.profile.avatar,
+      "color": profile.profile.color,
+      "bio": profile.profile.bio,
+      "website": profile.profile.website,
+      "email": profile.profile.email
+    })
   }
+
+  console.log(profile.status)
 
   return (
     <Center>
@@ -44,40 +43,40 @@ export function Setting() {
         <FormControl id="avatar">
           <FormLabel fontWeight={"bold"}>Avatar</FormLabel>
           <Input placeholder="" size="md" variant={"flushed"}
-                 disabled={profile.status === PROCESSING}
-                 value={avatar} onChange={(event) => setAvatar(event.target.value)}/>
+                 disabled={profile.status === PROCESSING} value={post.avatar}
+                 onChange={(e) => setPost({...post, avatar: e.target.value})}/>
         </FormControl>
         <FormControl id="name">
           <FormLabel fontWeight={"bold"}>Display name</FormLabel>
-          <Input placeholder="Enter your display name" size="md" isInvalid={name.length > 15 || name.length <= 0}
-                 isRequired={true} variant={"flushed"}
+          <Input placeholder="Enter your display name" size="md" isInvalid={post.name.length > 15 || post.name.length <= 0}
+                 isRequired={true} variant={"flushed"} value={post.name}
                  disabled={profile.status === PROCESSING}
-                 value={name} onChange={(event) => setName(event.target.value)}/>
+                 onChange={(e) => setPost({...post, name: e.target.value})}/>
         </FormControl>
         <FormControl id="bio">
           <FormLabel fontWeight={"bold"}>Bio</FormLabel>
           <Input placeholder="Tell about yourself in a few words" size="md"
-                 isInvalid={bio.length > 280 || bio.length <= 0}
-                 isRequired={true} variant={"flushed"}
+                 isInvalid={post.bio.length > 280 || post.bio.length <= 0}
+                 isRequired={true} variant={"flushed"} value={post.bio}
                  disabled={profile.status === PROCESSING}
-                 value={bio} onChange={(event) => setBio(event.target.value)}/>
+                 onChange={(e) => setPost({...post, bio: e.target.value})}/>
         </FormControl>
         <FormControl id="website">
           <FormLabel fontWeight={"bold"}>Website</FormLabel>
-          <Input placeholder="https://" size="md" isInvalid={website.length > 40}
-                 disabled={profile.status === PROCESSING} variant={"flushed"}
-                 value={website} onChange={(event) => setWebsite(event.target.value)}/>
+          <Input placeholder="https://" size="md" isInvalid={post.website.length > 40}
+                 disabled={profile.status === PROCESSING} variant={"flushed"} value={post.website}
+                 onChange={(e) => setPost({...post, website: e.target.value})}/>
         </FormControl>
         <FormControl id="email">
           <FormLabel fontWeight={"bold"}>Email</FormLabel>
-          <Input placeholder="Enter your email" size="md" isInvalid={email.length > 40}
-                 disabled={profile.status === PROCESSING} variant={"flushed"}
-                 value={email} onChange={(event) => setEmail(event.target.value)}/>
+          <Input placeholder="Enter your email" size="md" isInvalid={post.email.length > 40}
+                 disabled={profile.status === PROCESSING} variant={"flushed"} value={post.email}
+                 onChange={(e) => setPost({...post, email: e.target.value})}/>
         </FormControl>
         <Button
-          disabled={(name.length > 15 || name.length <= 0) || (bio.length > 280 || bio.length <= 0) || (website.length > 40) || (email.length > 40)}
+          disabled={(post.name.length > 15 || post.name.length <= 0) || (post.bio.length > 280 || post.bio.length <= 0) || (post.website.length > 40) || (post.email.length > 40)}
           isLoading={profile.status === PROCESSING} loadingText={"Updating"} fontWeight={"bold"} size={"lg"} colorScheme={"cyan"}
-          onClick={() => profile.update(name, avatar, color, bio, website, email)}>Update profile</Button>
+          onClick={() => profile.update(post)}>Update profile</Button>
       </Stack>
     </Center>
   )

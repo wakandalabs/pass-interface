@@ -31,23 +31,23 @@ transaction(name: String, avatar: String, color: String, bio: String, website: S
 `
 
 // prettier-ignore
-export function updateWakandaProfile({name, avatar, color, bio, website, email}, opts = {}) {
-  invariant(name != null, "updateWakandaProfile() -- name required")
-  invariant(avatar != null, "updateWakandaProfile() -- avatar required")
-  invariant(color != null, "updateWakandaProfile() -- color required")
-  invariant(bio != null, "updateWakandaProfile() -- bio required")
-  invariant(website != null, "updateWakandaProfile() -- website required")
-  invariant(email != null, "updateWakandaProfile() -- email required")
+export function updateWakandaProfile({profile}, opts = {}) {
+  invariant(profile.name != null, "updateWakandaProfile() -- name required")
+  invariant(profile.avatar != null, "updateWakandaProfile() -- avatar required")
+  invariant(profile.color != null, "updateWakandaProfile() -- color required")
+  invariant(profile.bio != null, "updateWakandaProfile() -- bio required")
+  invariant(profile.website != null, "updateWakandaProfile() -- website required")
+  invariant(profile.email != null, "updateWakandaProfile() -- email required")
 
   return tx([
     fcl.transaction(CODE),
     fcl.args([
-      fcl.arg(name, t.String),
-      fcl.arg(avatar, t.String),
-      fcl.arg(color, t.String),
-      fcl.arg(bio, t.String),
-      fcl.arg(website, t.String),
-      fcl.arg(email, t.String)
+      fcl.arg(profile.name, t.String),
+      fcl.arg(profile.avatar, t.String),
+      fcl.arg(profile.color, t.String),
+      fcl.arg(profile.bio, t.String),
+      fcl.arg(profile.website, t.String),
+      fcl.arg(profile.email, t.String)
     ]),
     fcl.proposer(fcl.authz),
     fcl.payer(fcl.authz),
