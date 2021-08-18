@@ -26,8 +26,8 @@ export function TransferToken() {
 
   return (
     <Stack direction={"row"}>
-      <Button size={"sm"} onClick={() => handleTransfer(0)}>Send</Button>
-      <Button size={"sm"} onClick={() => handleTransfer(1)}>Receive</Button>
+      <Button size={"sm"} onClick={() => handleTransfer(0)} fontWeight={"bold"}>Send</Button>
+      <Button size={"sm"} onClick={() => handleTransfer(1)} fontWeight={"bold"}>Receive</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay/>
         <ModalContent>

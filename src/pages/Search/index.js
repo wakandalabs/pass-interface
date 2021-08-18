@@ -28,7 +28,7 @@ export function Search() {
           />
           <Input placeholder="Search..." size="lg" h={"100%"} variant={"filled"}/>
           <InputRightElement children={
-            <Select variant="filled">
+            <Select variant="outline">
               <option value="Index">Pass</option>
               <option value="User">User</option>
             </Select>

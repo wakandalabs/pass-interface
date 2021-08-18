@@ -8,7 +8,7 @@ export function TheFooter() {
       <Divider/>
       <Grid templateColumns="repeat(4, 1fr)" gap={3} pb={20} pt={20}>
         Wakanda Labs
-        <Stack w="100%" spacing={3}>
+        <Stack w="100%" spacing={6}>
           <Heading fontSize={"3xl"}>World of Wakanda</Heading>
           <Heading fontSize={"xl"}>
             <Link href={"/"}>Explore</Link>
@@ -21,7 +21,7 @@ export function TheFooter() {
           </Heading>
 
         </Stack>
-        <Stack w="100%" spacing={3}>
+        <Stack w="100%" spacing={6}>
           <Heading fontSize={"3xl"}>Community</Heading>
           <Heading fontSize={"xl"}>
             <Link href={"/wkdt"}>WKDT Token</Link>

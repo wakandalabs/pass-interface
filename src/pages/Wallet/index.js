@@ -32,13 +32,14 @@ export function Wallet() {
 
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={3} w={650} minH={"60vh"}>
-        <Heading>My wallet</Heading>
-        <Divider/>
+      <Stack pl={4} pr={4} spacing={12} w={650} minH={"60vh"}>
+        <Box mb={8}>
+          <Heading>My wallet</Heading>
+        </Box>
         <StatGroup>
           <Stat>
             <Stack direction={"row"} align={"center"}>
-              <StatLabel>Wakanda Token</StatLabel>
+              <StatLabel fontWeight={"bold"}>Wakanda Token</StatLabel>
               <IconButton aria-label={"refresh"} icon={<RepeatIcon/>} size={"xs"} onClick={wkdt.refresh}
                           isLoading={wkdt.status === PROCESSING}/>
             </Stack>
@@ -59,7 +60,7 @@ export function Wallet() {
           </Stat>
           <Stat>
             <Stack direction={"row"} align={"center"}>
-              <StatLabel>Flow</StatLabel>
+              <StatLabel fontWeight={"bold"}>Flow</StatLabel>
               <IconButton aria-label={"refresh"} icon={<RepeatIcon/>} size={"xs"} onClick={flow.refresh}
                           isLoading={flow.status === PROCESSING}/>
             </Stack>
@@ -84,7 +85,7 @@ export function Wallet() {
           <Stack direction={"row"} align={"center"}>
             <Heading fontSize={"sm"}>0 WKDT</Heading>
             <Spacer/>
-            <Button size={"sm"}>Unstake</Button>
+            <Button size={"sm"} fontWeight={"bold"}>Unstake</Button>
           </Stack>
         </Box>
         <Stack spacing={1}>
@@ -92,7 +93,7 @@ export function Wallet() {
           <Stack direction={"row"} align={"center"}>
             <Heading fontSize={"sm"}>0 WKDT</Heading>
             <Spacer/>
-            <Button size={"sm"}>Stake</Button>
+            <Button size={"sm"} fontWeight={"bold"}>Stake</Button>
           </Stack>
         </Stack>
         <Stack spacing={1}>
@@ -100,7 +101,7 @@ export function Wallet() {
           <Stack direction={"row"} align={"center"}>
             <Heading fontSize={"sm"}>0 WKDT</Heading>
             <Spacer/>
-            <Button size={"sm"}>Restake</Button>
+            <Button size={"sm"} fontWeight={"bold"}>Restake</Button>
           </Stack>
         </Stack>
         <Stack spacing={3}>
@@ -121,7 +122,7 @@ export function Wallet() {
           <Stack direction={"row"} align={"center"}>
             <Heading fontSize={"sm"}>0 WKDT</Heading>
             <Spacer/>
-            <Button size={"sm"}>Receive</Button>
+            <Button size={"sm"} fontWeight={"bold"}>Receive</Button>
           </Stack>
         </Stack>
         <Divider/>
@@ -134,7 +135,7 @@ export function Wallet() {
           <Stack direction={"row"} align={"center"}>
             <Heading fontSize={"sm"}>0 WKDT</Heading>
             <Spacer/>
-            <Button size={"sm"}>Receive</Button>
+            <Button size={"sm"} fontWeight={"bold"}>Receive</Button>
           </Stack>
         </Stack>
         <Stack h={20}/>
@@ -146,13 +147,14 @@ export function Wallet() {
 export function WalletSkeleton() {
   return (
     <Center>
-      <Stack pl={4} pr={4} spacing={3} w={650} minH={"60vh"}>
-        <Heading>My wallet</Heading>
-        <Divider/>
+      <Stack pl={4} pr={4} spacing={12} w={650} minH={"60vh"}>
+        <Box mb={8}>
+          <Heading>My wallet</Heading>
+        </Box>
         <StatGroup>
           <Stat>
             <Stack direction={"row"} align={"center"}>
-              <StatLabel>Wakanda Token</StatLabel>
+              <StatLabel fontWeight={"bold"}>Wakanda Token</StatLabel>
               <IconButton aria-label={"refresh"} icon={<RepeatIcon/>} size={"xs"}
                           isLoading/>
             </Stack>
@@ -165,7 +167,7 @@ export function WalletSkeleton() {
           </Stat>
           <Stat>
             <Stack direction={"row"} align={"center"}>
-              <StatLabel>Flow</StatLabel>
+              <StatLabel fontWeight={"bold"}>Flow</StatLabel>
               <IconButton aria-label={"refresh"} icon={<RepeatIcon/>} size={"xs"}
                           isLoading/>
             </Stack>

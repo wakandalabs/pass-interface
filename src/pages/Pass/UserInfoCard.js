@@ -24,7 +24,7 @@ export function UserInfoCard({address}) {
   }
 
   return (
-    <Stack height={"100%"} width={"50%"} p={16} spacing={3} minH={"60vh"}>
+    <Stack height={"100%"} width={"50%"} p={16} spacing={6} minH={"60vh"}>
       <Avatar bg="teal.500"/>
       <Stack direction={"row"} align={"center"} spacing={4}>
         <Heading fontSize="xl">{profile.profile.name}</Heading>
@@ -37,7 +37,7 @@ export function UserInfoCard({address}) {
       <Text>{profile.profile.bio}</Text>
 
       <Spacer/>
-      <Stack direction={"row"} spacing={3}>
+      <Stack direction={"row"} spacing={6}>
         <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
         <Button>Follow</Button>
       </Stack>
@@ -48,7 +48,7 @@ export function UserInfoCard({address}) {
 export function UserInfoCardSkeleton() {
   const history = useHistory()
   return (
-    <Stack height={"100%"} width={"50%"} p={16} spacing={3} minH={"60vh"}>
+    <Stack height={"100%"} width={"50%"} p={16} spacing={6} minH={"60vh"}>
       <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
       <Stack direction={"row"} align={"center"} spacing={4}>
         <Skeleton w={"100px"} h={"30px"}/>
@@ -58,7 +58,7 @@ export function UserInfoCardSkeleton() {
       <Skeleton h={"20px"}/>
       <Skeleton h={"20px"} w={"200px"}/>
       <Spacer/>
-      <Stack direction={"row"} spacing={3}>
+      <Stack direction={"row"} spacing={6}>
         <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
         <Button>Follow</Button>
       </Stack>
