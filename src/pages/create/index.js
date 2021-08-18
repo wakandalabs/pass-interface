@@ -21,6 +21,7 @@ export function Create() {
   const [cu] = useCurrentUser()
   const [showAdvanced, setShowAdvanced] = React.useState(false)
   const [showLockup, setShowLockup] = React.useState(false)
+  const [schedule, setSchedult] = React.useState({})
   const [post, setPost] = React.useState({})
   const [receiver, setReceiver] = React.useState(cu.addr)
   const wakandapass = useWakandaPass(cu.addr)
