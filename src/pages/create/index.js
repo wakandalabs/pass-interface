@@ -17,6 +17,9 @@ import ScheduleEditList from "./ScheduleEditList";
 export function Create() {
   const [showAdvanced, setShowAdvanced] = React.useState(false)
   const [showLockup, setShowLockup] = React.useState(false)
+  const [post, setPost] = React.useState({})
+
+  console.log(post)
 
   return (
     <Center>
@@ -33,13 +36,15 @@ export function Create() {
             </Box>
           </Stack>
         </FormControl>
-        <FormControl id="name">
-          <FormLabel fontWeight={"bold"}>Name</FormLabel>
-          <Input placeholder="e.g. Wakanda item" size="md" variant={"flushed"}/>
+        <FormControl id="title">
+          <FormLabel fontWeight={"bold"}>Title</FormLabel>
+          <Input placeholder="e.g. Wakanda item" size="md" variant={"flushed"}
+                 onChange={e => setPost({ ...post, title: e.target.value })}/>
         </FormControl>
         <FormControl id="description">
           <FormLabel fontWeight={"bold"}>Description</FormLabel>
-          <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
+          <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}
+                 onChange={e => setPost({ ...post, description: e.target.value })}/>
         </FormControl>
         <FormControl id="isLockup">
           <Stack direction={"row"} align={"center"}>
@@ -64,7 +69,7 @@ export function Create() {
             <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
           </FormControl>
         )}
-        <Button variant={"outline"} size={"lg"} onClick={() => setShowAdvanced(!showAdvanced)}>
+        <Button variant={"outline"} size={"lg"} onClick={() => setShowAdvanced(!showAdvanced)} disabled>
           {showAdvanced ? "Hide" : "Show"} advanced settings
         </Button>
         {showAdvanced && (
