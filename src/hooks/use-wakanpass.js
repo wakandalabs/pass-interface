@@ -8,7 +8,7 @@ export const valueAtom = atomFamily({
   key: "wakandapass::state",
   default: selectorFamily({
     key: "wakandapass::default",
-    get: address => async () => console.log(address),
+    get: address => async () => fetchWakandaPass(address),
   }),
 })
 
@@ -23,14 +23,14 @@ export function useWakandaPass(address) {
 
   async function refresh() {
     setStatus(PROCESSING)
-    // await fetchWakandaPass(address).then(setPass)
+    await fetchWakandaPass(address).then(setPass)
     setStatus(IDLE)
   }
 
   return {
-    // pass,
+    pass,
     status,
-    // refresh,
+    refresh,
     async mint(receiver, metadata) {
       await mintWakandaPass({receiver, metadata}, {
         onStart() {

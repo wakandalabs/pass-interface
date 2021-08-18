@@ -1,15 +1,19 @@
 import {Box, Center, Spinner} from "@chakra-ui/react";
 import React, {Suspense} from "react";
+import {useWakandaPass} from "../../hooks/use-wakanpass";
 
 export function CreatedPass({address}) {
+  const wakandapass = useWakandaPass(address)
+  console.log(wakandapass)
+
   return (
     <Box>
-      Created
+      Created, {address}
     </Box>
   )
 }
 
-export function CreatePassSkeleton() {
+export function CreatedPassSkeleton() {
   return (
     <Center h={"50vh"}>
       <Spinner />
@@ -19,9 +23,9 @@ export function CreatePassSkeleton() {
 
 export default function WrappedCreatedPass(props) {
   return (
-    <Suspense fallback={<CreatePassSkeleton/>}>
+    <Suspense fallback={<CreatedPassSkeleton/>}>
       {/*<CreatedPass {...props}/>*/}
-      <CreatePassSkeleton/>
+      <CreatedPass {...props}/>
     </Suspense>
   )
 }
