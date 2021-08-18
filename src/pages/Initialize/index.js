@@ -1,4 +1,4 @@
-import {Box, Button, Center, Heading, Spacer, Stack} from "@chakra-ui/react";
+import {Box, Button, Center, Heading, Stack} from "@chakra-ui/react";
 import {useInitialized} from "../../hooks/use-initialized";
 import {useCurrentUser} from "../../hooks/use-current-user";
 import {IDLE, PROCESSING} from "../../global/constants";
@@ -11,7 +11,7 @@ export function Initialize() {
 
   if (!loggedIn) {
     return (
-      <InitializeSkeleton />
+      <InitializeSkeleton/>
     )
   }
 
@@ -24,21 +24,18 @@ export function Initialize() {
         <StatusItem status={init.status} name={"WakandaToken"} item={init.WakandaToken}/>
         <StatusItem status={init.status} name={"WakandaPass"} item={init.WakandaPass}/>
         <StatusItem status={init.status} name={"WakandaProfile"} item={init.WakandaProfile}/>
-        <Stack direction={"row"}>
-          <Spacer/>
-          <Button disabled={init.status !== IDLE || (init.WakandaToken && init.WakandaPass && init.WakandaProfile)}
-                  isLoading={init.status === PROCESSING} fontWeight={"bold"}
-                  onClick={init.initialize} w={40} colorScheme={"blue"}>
-            {(init.WakandaToken && init.WakandaPass && init.WakandaProfile) ? "Done" : "Initialize"}
-          </Button>
-        </Stack>
+        <Button disabled={init.status !== IDLE || (init.WakandaToken && init.WakandaPass && init.WakandaProfile)}
+                isLoading={init.status === PROCESSING} fontWeight={"bold"} size={"lg"}
+                onClick={init.initialize} colorScheme={"cyan"}>
+          {(init.WakandaToken && init.WakandaPass && init.WakandaProfile) ? "Done" : "Initialize"}
+        </Button>
       </Stack>
     </Center>
   )
 }
 
 export function InitializeSkeleton() {
-  return(
+  return (
     <Center>
       <Stack pl={4} pr={4} spacing={12} w={650} minH={"60vh"}>
         <Box mb={8}>
@@ -47,10 +44,7 @@ export function InitializeSkeleton() {
         <StatusItem status={PROCESSING} name={"WakandaToken"} item={false}/>
         <StatusItem status={PROCESSING} name={"WakandaPass"} item={false}/>
         <StatusItem status={PROCESSING} name={"WakandaProfile"} item={false}/>
-        <Stack direction={"row"}>
-          <Spacer/>
-          <Button isLoading w={40} loadingText="Checking"/>
-        </Stack>
+        <Button isLoading loadingText="Checking" size={"lg"} colorScheme={"cyan"}/>
       </Stack>
     </Center>
   )
@@ -58,7 +52,7 @@ export function InitializeSkeleton() {
 
 export default function WrappedInitialize() {
   return (
-    <Suspense fallback={<InitializeSkeleton />}>
+    <Suspense fallback={<InitializeSkeleton/>}>
       <Initialize/>
     </Suspense>
   )

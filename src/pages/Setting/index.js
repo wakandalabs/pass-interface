@@ -76,7 +76,7 @@ export function Setting() {
         </FormControl>
         <Button
           disabled={(name.length > 15 || name.length <= 0) || (bio.length > 280 || bio.length <= 0) || (website.length > 40) || (email.length > 40)}
-          isLoading={profile.status === PROCESSING} loadingText={"Updating"} fontWeight={"bold"} size={"lg"}
+          isLoading={profile.status === PROCESSING} loadingText={"Updating"} fontWeight={"bold"} size={"lg"} colorScheme={"cyan"}
           onClick={() => profile.update(name, avatar, color, bio, website, email)}>Update profile</Button>
       </Stack>
     </Center>
@@ -110,7 +110,7 @@ export function SettingSkeleton() {
           <FormLabel>Email</FormLabel>
           <Input placeholder="Enter your email" size="md" disabled/>
         </FormControl>
-        <Button isLoading loadingText={"Loading profile"} size={"lg"}/>
+        <Button isLoading loadingText={"Loading profile"} size={"lg"} colorScheme={"cyan"}/>
       </Stack>
     </Center>
   )

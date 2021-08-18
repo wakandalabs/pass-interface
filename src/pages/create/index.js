@@ -54,7 +54,7 @@ export function Create(){
           <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
           <FormHelperText>Text that will be used in VoiceOver for people with disabilities</FormHelperText>
         </FormControl>
-        <Button size={"lg"}>Create item</Button>
+        <Button size={"lg"} colorScheme={"cyan"}>Create item</Button>
       </Stack>
     </Center>
   )
