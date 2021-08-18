@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {config} from "@onflow/fcl";
 
-export function useConfig(key, fallback) {
+export function useConfigHook(key, fallback) {
   const [value, setValue] = useState(null)
 
   useEffect(() => {

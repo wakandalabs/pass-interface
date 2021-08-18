@@ -1,5 +1,5 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {fetchFlowBalance} from "../flow/scripts/get-flow-balance";
+import {fetchFlowBalance} from "../flow/script.get-flow-balance";
 import {IDLE, PROCESSING} from "../global/constants";
 
 export const valueAtom = atomFamily({
@@ -15,7 +15,7 @@ export const statusAtom = atomFamily({
   default: IDLE,
 })
 
-export function useFlowBalance(address) {
+export function useFlowBalanceHook(address) {
   const [balance, setBalance] = useRecoilState(valueAtom(address))
   const [status, setStatus] = useRecoilState(statusAtom(address))
 

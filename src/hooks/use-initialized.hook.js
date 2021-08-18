@@ -14,10 +14,10 @@ import {
 } from "../global/constants";
 
 import {sleep} from "../util/sleep";
-import {useFlowBalance} from "./use-flow-balance";
-import {useWkdtBalance} from "./use-wkdt-balance";
-import {isAccountInitialized} from "../flow/scripts/is-account-initialized";
-import {initializeAccount} from "../flow/transactions/initialize-account";
+import {useFlowBalanceHook} from "./use-flow-balance.hook";
+import {useWkdtBalanceHook} from "./use-wkdt-balance.hook";
+import {scriptIsAccountInitialized} from "../flow/script.is-account-initialized";
+import {txInitializeAccount} from "../flow/tx.initialize-account";
 
 export const $status = atomFamily({
   key: "init::status",
@@ -28,7 +28,7 @@ export const $init = atomFamily({
   key: "init::state",
   default: selectorFamily({
     key: "init::default",
-    get: address => () => isAccountInitialized(address),
+    get: address => () => scriptIsAccountInitialized(address),
   }),
 })
 
@@ -43,15 +43,15 @@ export const $computedInit = selectorFamily({
       },
 })
 
-export function useInitialized(address) {
+export function useInitializedHook(address) {
   const [init, setInit] = useRecoilState($init(address))
   const isInitialized = useRecoilValue($computedInit(address))
   const [status, setStatus] = useRecoilState($status(address))
-  const flow = useFlowBalance(address)
-  const wkdt = useWkdtBalance(address)
+  const flow = useFlowBalanceHook(address)
+  const wkdt = useWkdtBalanceHook(address)
 
   function recheck() {
-    isAccountInitialized(address).then(setInit)
+    scriptIsAccountInitialized(address).then(setInit)
   }
 
   return {
@@ -60,7 +60,7 @@ export function useInitialized(address) {
     status: isInitialized == null ? LOADING : status,
     recheck,
     async initialize() {
-      await initializeAccount(address, {
+      await txInitializeAccount(address, {
         onStart() {
           setStatus(PROCESSING)
         },

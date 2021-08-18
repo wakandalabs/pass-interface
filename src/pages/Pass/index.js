@@ -19,7 +19,7 @@ import About from "./About";
 import {useHistory} from "react-router-dom";
 import qs from "qs";
 import HiddenPass from "./HiddenPass";
-import {useCurrentUser} from "../../hooks/use-current-user";
+import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 
 export function Pass() {
   const tabs = [
@@ -34,7 +34,7 @@ export function Pass() {
   const history = useHistory();
   const {tab} = qs.parse(history.location.search.replace(/^\?/, ''))
   const [tabIndex, setTabIndex] = React.useState(getTabIndex(tab))
-  const [user, loggedIn] = useCurrentUser()
+  const [user, loggedIn] = useCurrentUserHook()
   const address = user.addr
 
   function getTabIndex(tab) {

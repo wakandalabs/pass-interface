@@ -1,7 +1,7 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {fetchWkdtBalance} from "../flow/scripts/get-wkdt-balance";
+import {fetchWkdtBalance} from "../flow/script.get-wkdt-balance";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
-import {transferWkdt} from "../flow/transactions/transfer-wkdt";
+import {txTransferWkdt} from "../flow/tx.transfer-wkdt";
 import {sleep} from "../util/sleep";
 
 export const valueAtom = atomFamily({
@@ -17,7 +17,7 @@ export const statusAtom = atomFamily({
   default: IDLE,
 })
 
-export function useWkdtBalance(address) {
+export function useWkdtBalanceHook(address) {
   const [balance, setBalance] = useRecoilState(valueAtom(address))
   const [status, setStatus] = useRecoilState(statusAtom(address))
 
@@ -32,7 +32,7 @@ export function useWkdtBalance(address) {
     status,
     refresh,
     async transfer(amount, to) {
-      await transferWkdt(
+      await txTransferWkdt(
         {amount: amount, to: to},
         {
           onStart() {

@@ -1,6 +1,6 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {mintWakandaPass} from "../flow/transactions/mint-wakanda-pass";
-import {fetchWakandaPass} from "../flow/scripts/get-wakanda-pass";
+import {txMintWakandaPass} from "../flow/tx.mint-wakanda-pass";
+import {fetchWakandaPass} from "../flow/script.get-wakanda-pass";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {sleep} from "../util/sleep";
 
@@ -33,7 +33,7 @@ export function useWakandaPass(address) {
     refresh,
     async mint(receiver, metadata) {
       console.log(metadata)
-      await mintWakandaPass({receiver, metadata}, {
+      await txMintWakandaPass({receiver, metadata}, {
         onStart() {
           setStatus(PROCESSING)
         },

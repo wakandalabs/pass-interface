@@ -1,6 +1,6 @@
 import {transaction, limit, proposer, payer, authorizations, authz, cdc} from "@onflow/fcl";
 import {invariant} from "@onflow/util-invariant";
-import {tx} from "../util/tx";
+import {tx} from "./util/tx";
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
 
@@ -24,7 +24,7 @@ transaction(address: Address, metadata: {String: String}) {
 }
 `
 
-export async function mintWakandaPass({receiver, metadata}, opts = {}) {
+export async function txMintWakandaPass({receiver, metadata}, opts = {}) {
   // prettier-ignore
   invariant(receiver != null, "Tried to initialize an wakandapass but no address")
   invariant(metadata != null, "Tried to initialize an wakandapass but no metadata")

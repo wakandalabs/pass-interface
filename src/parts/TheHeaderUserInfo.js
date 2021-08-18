@@ -8,11 +8,11 @@ import {
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
 import {useHistory} from "react-router-dom";
-import {useCurrentUser} from "../hooks/use-current-user";
+import {useCurrentUserHook} from "../hooks/use-current-user.hook";
 
 export function TheHeaderUserInfo() {
   const history = useHistory();
-  const [user, loggedIn, {logOut}] = useCurrentUser()
+  const [user, loggedIn, {logOut}] = useCurrentUserHook()
 
   return (
     <Stack>
@@ -38,7 +38,7 @@ export function TheHeaderUserInfo() {
 }
 
 export default function WrappedTheHeaderUserInfo() {
-  const [user] = useCurrentUser()
+  const [user] = useCurrentUserHook()
 
   return (
     <Suspense fallback={

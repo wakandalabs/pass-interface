@@ -1,11 +1,11 @@
 import {Alert, AlertDescription, AlertIcon, AlertTitle, CloseButton, Link, Stack} from "@chakra-ui/react";
 import React, {Suspense} from "react";
-import {useInitialized} from "../hooks/use-initialized";
-import {useCurrentUser} from "../hooks/use-current-user";
+import {useInitializedHook} from "../hooks/use-initialized.hook";
+import {useCurrentUserHook} from "../hooks/use-current-user.hook";
 
 export function InitializeAlert() {
-  const [cu, loggedIn] = useCurrentUser()
-  const init = useInitialized(cu.addr)
+  const [cu, loggedIn] = useCurrentUserHook()
+  const init = useInitializedHook(cu.addr)
 
   if ((!loggedIn) || (loggedIn && init.WakandaToken && init.WakandaPass && init.WakandaProfile)) {
     return <InitializeAlertSkeleton/>

@@ -12,17 +12,17 @@ import {
 import {TransferToken} from "./TransferToken";
 import {fmtWkdt} from "../../util/fmt-wkdt";
 import {fmtFlow} from "../../util/fmt-flow";
-import {useFlowBalance} from "../../hooks/use-flow-balance";
-import {useWkdtBalance} from "../../hooks/use-wkdt-balance";
-import {useCurrentUser} from "../../hooks/use-current-user";
+import {useFlowBalanceHook} from "../../hooks/use-flow-balance.hook";
+import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
+import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {IDLE, PROCESSING} from "../../global/constants";
 import {BeatLoader} from "react-spinners";
 import {RepeatIcon} from "@chakra-ui/icons";
 
 export function Wallet() {
-  const [cu, loggedIn] = useCurrentUser()
-  const wkdt = useWkdtBalance(cu.addr)
-  const flow = useFlowBalance(cu.addr)
+  const [cu, loggedIn] = useCurrentUserHook()
+  const wkdt = useWkdtBalanceHook(cu.addr)
+  const flow = useFlowBalanceHook(cu.addr)
 
   if (!loggedIn || wkdt.balance === null) {
     return (

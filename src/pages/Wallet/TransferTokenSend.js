@@ -1,7 +1,7 @@
 import {Box, Button, HStack, Input, NumberInput, NumberInputField, Spacer, Spinner, Text} from "@chakra-ui/react";
 import {BeatLoader} from "react-spinners";
 import React from "react";
-import {useWkdtBalance} from "../../hooks/use-wkdt-balance";
+import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
 import {fmtWkdt} from "../../util/fmt-wkdt";
 import {IDLE} from "../../global/constants";
 
@@ -9,7 +9,7 @@ export function TransferTokenSend({address}) {
   const parse = (val) => val.replace(/^\$/, "")
   const [amount, setAmount] = React.useState(0)
   const [to, setTo] = React.useState("")
-  const wkdt = useWkdtBalance(address)
+  const wkdt = useWkdtBalanceHook(address)
 
   return (
     <Box>

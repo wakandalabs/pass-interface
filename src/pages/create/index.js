@@ -13,12 +13,12 @@ import {
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
 import ScheduleEditList from "./ScheduleEditList";
-import {useCurrentUser} from "../../hooks/use-current-user";
-import {useWakandaPass} from "../../hooks/use-wakanpass";
+import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
+import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
 import {PROCESSING} from "../../global/constants";
 
 export function Create() {
-  const [cu] = useCurrentUser()
+  const [cu] = useCurrentUserHook()
   const [showAdvanced, setShowAdvanced] = React.useState(false)
   const [showLockup, setShowLockup] = React.useState(false)
   const [schedule, setSchedult] = React.useState({})

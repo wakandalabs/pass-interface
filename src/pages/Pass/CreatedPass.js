@@ -1,6 +1,6 @@
 import {Box, Center, Spinner} from "@chakra-ui/react";
 import React, {Suspense} from "react";
-import {useWakandaPass} from "../../hooks/use-wakanpass";
+import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
 
 export function CreatedPass({address}) {
   const wakandapass = useWakandaPass(address)

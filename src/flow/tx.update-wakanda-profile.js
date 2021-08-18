@@ -1,6 +1,6 @@
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
-import {tx} from "../util/tx";
+import {tx} from "./util/tx";
 import {invariant} from "@onflow/util-invariant";
 
 const CODE = fcl.cdc`
@@ -31,13 +31,13 @@ transaction(name: String, avatar: String, color: String, bio: String, website: S
 `
 
 // prettier-ignore
-export function updateWakandaProfile({profile}, opts = {}) {
-  invariant(profile.name != null, "updateWakandaProfile() -- name required")
-  invariant(profile.avatar != null, "updateWakandaProfile() -- avatar required")
-  invariant(profile.color != null, "updateWakandaProfile() -- color required")
-  invariant(profile.bio != null, "updateWakandaProfile() -- bio required")
-  invariant(profile.website != null, "updateWakandaProfile() -- website required")
-  invariant(profile.email != null, "updateWakandaProfile() -- email required")
+export function txUpdateWakandaProfile({profile}, opts = {}) {
+  invariant(profile.name != null, "txUpdateWakandaProfile() -- name required")
+  invariant(profile.avatar != null, "txUpdateWakandaProfile() -- avatar required")
+  invariant(profile.color != null, "txUpdateWakandaProfile() -- color required")
+  invariant(profile.bio != null, "txUpdateWakandaProfile() -- bio required")
+  invariant(profile.website != null, "txUpdateWakandaProfile() -- website required")
+  invariant(profile.email != null, "txUpdateWakandaProfile() -- email required")
 
   return tx([
     fcl.transaction(CODE),

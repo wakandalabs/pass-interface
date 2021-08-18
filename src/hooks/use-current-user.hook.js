@@ -14,7 +14,7 @@ const tools = {
   changeUser: fcl.reauthenticate,
 }
 
-export function useCurrentUser() {
+export function useCurrentUserHook() {
   const [user, setUser] = useRecoilState(currentUser)
   useEffect(() => fcl.currentUser().subscribe(setUser), [setUser])
   return [user, user.addr != null, tools]

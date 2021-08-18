@@ -1,6 +1,6 @@
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
-import {tx} from "../util/tx";
+import {tx} from "./util/tx";
 import {invariant} from "@onflow/util-invariant";
 
 const CODE = fcl.cdc`
@@ -25,7 +25,7 @@ transaction(amount: UFix64, to: Address) {
 `
 
 // prettier-ignore
-export function transferWkdt({amount, to}, opts = {}) {
+export function txTransferWkdt({amount, to}, opts = {}) {
   invariant(amount != null, "transferWakandaToken({amount, to}) -- amount required")
   invariant(to != null, "transferWakandaToken({amount, to}) -- to required")
 

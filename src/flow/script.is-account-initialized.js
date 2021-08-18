@@ -15,7 +15,7 @@ pub fun main(address: Address): {String: Bool} {
 }
 `
 
-export function isAccountInitialized(address) {
+export function scriptIsAccountInitialized(address) {
   if (address == null) return Promise.resolve(false)
 
   // prettier-ignore

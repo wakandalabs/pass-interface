@@ -12,12 +12,12 @@ import {
 } from "@chakra-ui/react";
 import {TransferTokenReceive} from "./TransferTokenReceive";
 import {TransferTokenSend} from "./TransferTokenSend";
-import {useCurrentUser} from "../../hooks/use-current-user";
+import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 
 export function TransferToken() {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const [tabIndex, setTabIndex] = React.useState(0)
-  const [cu] = useCurrentUser()
+  const [cu] = useCurrentUserHook()
 
   function handleTransfer(index) {
     onOpen()

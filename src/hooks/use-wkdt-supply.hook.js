@@ -1,4 +1,4 @@
-import {fetchWkdtSupply} from "../flow/scripts/get-wkdt-supply";
+import {fetchWkdtSupply} from "../flow/script.get-wkdt-supply";
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {IDLE, PROCESSING} from "../global/constants";
 
@@ -15,7 +15,7 @@ export const statusAtom = atomFamily({
   default: IDLE,
 })
 
-export function useWkdtSupply() {
+export function useWkdtSupplyHook() {
   const [supply, setSupply] = useRecoilState(supplyAtom())
   const [status, setStatus] = useRecoilState(statusAtom())
 

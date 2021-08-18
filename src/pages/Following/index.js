@@ -1,9 +1,9 @@
 import React, {Suspense} from 'react';
 import {Box, Center, Spinner} from "@chakra-ui/react";
-import {useCurrentUser} from "../../hooks/use-current-user";
+import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 
 export function Following() {
-  const [cu, loggedIn] = useCurrentUser()
+  const [cu, loggedIn] = useCurrentUserHook()
 
   if (!loggedIn) {
     return (

@@ -1,13 +1,13 @@
 import {Box, Button, Center, Heading, Stack} from "@chakra-ui/react";
-import {useInitialized} from "../../hooks/use-initialized";
-import {useCurrentUser} from "../../hooks/use-current-user";
+import {useInitializedHook} from "../../hooks/use-initialized.hook";
+import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {IDLE, PROCESSING} from "../../global/constants";
 import React, {Suspense} from "react";
 import StatusItem from "./StatusItem";
 
 export function Initialize() {
-  const [cu, loggedIn] = useCurrentUser()
-  const init = useInitialized(cu.addr)
+  const [cu, loggedIn] = useCurrentUserHook()
+  const init = useInitializedHook(cu.addr)
 
   if (!loggedIn) {
     return (
