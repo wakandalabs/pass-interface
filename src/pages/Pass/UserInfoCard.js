@@ -27,7 +27,7 @@ export function UserInfoCard({address}) {
     <Stack height={"100%"} width={"50%"} p={16} spacing={6} minH={"60vh"}>
       <Avatar bg="teal.500"/>
       <Stack direction={"row"} align={"center"} spacing={4}>
-        <Heading fontSize="xl">{profile.profile.name}</Heading>
+        <Heading fontSize="xl" bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">{profile.profile.name}</Heading>
         <Stack>
           <Button size={"xs"} onClick={onCopy} width={36} colorScheme={"gray"} color={"gray"}>
             {hasCopied ? "Copied!" : address}
