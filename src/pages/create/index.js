@@ -48,7 +48,7 @@ export function Create() {
         </FormControl>
         <FormControl id="isLockup">
           <Stack direction={"row"} align={"center"}>
-            <FormLabel fontWeight={"bold"}>Lockup WKDT and set schedule</FormLabel>
+            <FormLabel fontWeight={"bold"} bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">Lockup WKDT and set schedule</FormLabel>
             <Spacer/>
             <Badge variant="subtle" colorScheme="cyan">Coming soon</Badge>
             {/*<Switch id={"lockupSwitch"} value={showLockup} onChange={() => setShowLockup(!showLockup)}/>*/}
