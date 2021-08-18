@@ -7,19 +7,20 @@ import {
   FormHelperText,
   FormLabel,
   Heading,
-  Input, Spacer,
+  Input, InputGroup, InputRightElement, Spacer,
   Spinner,
   Stack, Text
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
 import ScheduleEditList from "./ScheduleEditList";
+import {useCurrentUser} from "../../hooks/use-current-user";
 
 export function Create() {
+  const [cu] = useCurrentUser()
   const [showAdvanced, setShowAdvanced] = React.useState(false)
   const [showLockup, setShowLockup] = React.useState(false)
   const [post, setPost] = React.useState({})
-
-  console.log(post)
+  const [receiver, setReceiver] = React.useState(cu.addr)
 
   return (
     <Center>
@@ -39,16 +40,17 @@ export function Create() {
         <FormControl id="title">
           <FormLabel fontWeight={"bold"}>Title</FormLabel>
           <Input placeholder="e.g. Wakanda item" size="md" variant={"flushed"}
-                 onChange={e => setPost({ ...post, title: e.target.value })}/>
+                 onChange={e => setPost({...post, title: e.target.value})}/>
         </FormControl>
         <FormControl id="description">
           <FormLabel fontWeight={"bold"}>Description</FormLabel>
           <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}
-                 onChange={e => setPost({ ...post, description: e.target.value })}/>
+                 onChange={e => setPost({...post, description: e.target.value})}/>
         </FormControl>
         <FormControl id="isLockup">
           <Stack direction={"row"} align={"center"}>
-            <FormLabel fontWeight={"bold"} bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">Lockup WKDT and set schedule</FormLabel>
+            <FormLabel fontWeight={"bold"} bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">Lockup WKDT and set
+              schedule</FormLabel>
             <Spacer/>
             <Badge variant="subtle" colorScheme="cyan">Coming soon</Badge>
             {/*<Switch id={"lockupSwitch"} value={showLockup} onChange={() => setShowLockup(!showLockup)}/>*/}
@@ -65,7 +67,7 @@ export function Create() {
         {showLockup && (
           <FormControl id="lockupSchedule">
             <FormLabel fontWeight={"bold"}>Lockup schedule</FormLabel>
-            <ScheduleEditList />
+            <ScheduleEditList/>
             <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
           </FormControl>
         )}
@@ -88,6 +90,16 @@ export function Create() {
             <FormHelperText>Text that will be used in VoiceOver for people with disabilities</FormHelperText>
           </FormControl>
         )}
+        <FormControl id="receiver">
+          <FormLabel fontWeight={"bold"}>Receiver</FormLabel>
+          <InputGroup>
+            <Input placeholder="Flow account" size="md" variant={"flushed"}
+                   value={receiver} onChange={e => setReceiver(e.target.value)}/>
+            <InputRightElement children={<Button size="sm" onClick={() => setReceiver(cu.addr)}>myself</Button>}
+                               width={"auto"}/>
+          </InputGroup>
+          <FormHelperText>You can create WakandaPass for others</FormHelperText>
+        </FormControl>
         <Button size={"lg"} colorScheme={"cyan"}>Create item</Button>
       </Stack>
     </Center>
