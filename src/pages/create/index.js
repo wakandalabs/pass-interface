@@ -8,7 +8,7 @@ import {
   Heading,
   Input,
   Spinner,
-  Stack
+  Stack, Text
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
 
@@ -21,10 +21,12 @@ export function Create(){
         <Box mb={8}>
           <Heading>Create WakandaPass</Heading>
         </Box>
-        <FormControl id="media">
-          <FormLabel fontWeight={"bold"}>Media</FormLabel>
-          <Input placeholder="" size="md" variant={"flushed"}/>
-        </FormControl>
+        <Stack textAlign={"center"} p={12} spacing={12} borderWidth="1px" borderRadius={"lg"} border={"gary"}>
+          <Text>PNG, GIF, WEBP, MP4 or MP3. Max 100mb.</Text>
+          <Box>
+            <Button>Choose file</Button>
+          </Box>
+        </Stack>
         <FormControl id="name">
           <FormLabel fontWeight={"bold"}>Name</FormLabel>
           <Input placeholder="e.g. Wakanda item" size="md" variant={"flushed"}/>
