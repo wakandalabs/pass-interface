@@ -6,14 +6,15 @@ import {
   FormHelperText,
   FormLabel,
   Heading,
-  Input,
+  Input, Spacer,
   Spinner,
-  Stack, Text
+  Stack, Switch, Text
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
 
 export function Create(){
   const [showAdvanced, setShowAdvanced] = React.useState(false)
+  const [showLockup, setShowLockup] = React.useState(false)
 
   return (
     <Center>
@@ -21,12 +22,15 @@ export function Create(){
         <Box mb={8}>
           <Heading>Create WakandaPass</Heading>
         </Box>
-        <Stack textAlign={"center"} p={12} spacing={12} borderWidth="1px" borderRadius={"lg"} border={"gary"}>
-          <Text>PNG, GIF, WEBP, MP4 or MP3. Max 100mb.</Text>
-          <Box>
-            <Button>Choose file</Button>
-          </Box>
-        </Stack>
+        <FormControl id="media">
+          <FormLabel fontWeight={"bold"}>Upload media</FormLabel>
+          <Stack textAlign={"center"} p={12} spacing={12} borderWidth="1px" borderRadius={"lg"} border={"gary"}>
+            <Text color={"gray"}>PNG, GIF, WEBP, MP4 or MP3. Max 100mb.</Text>
+            <Box>
+              <Button>Choose file</Button>
+            </Box>
+          </Stack>
+        </FormControl>
         <FormControl id="name">
           <FormLabel fontWeight={"bold"}>Name</FormLabel>
           <Input placeholder="e.g. Wakanda item" size="md" variant={"flushed"}/>
@@ -35,16 +39,28 @@ export function Create(){
           <FormLabel fontWeight={"bold"}>Description</FormLabel>
           <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
         </FormControl>
-        <FormControl id="lockupAmount">
-          <FormLabel fontWeight={"bold"}>Lockup amount (Option)</FormLabel>
-          <Input placeholder="Amount of WKDT" size="md" variant={"flushed"}/>
-          <FormHelperText>Total amount that's subject to lockup schedule</FormHelperText>
+        <FormControl id="isLockup">
+          <Stack direction={"row"} align={"center"}>
+            <FormLabel fontWeight={"bold"}>Lockup WKDT and set schedule</FormLabel>
+            <Spacer/>
+            <Switch id={"lockupSwitch"} value={showLockup} onChange={() => setShowLockup(!showLockup)}/>
+          </Stack>
+          <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
         </FormControl>
-        <FormControl id="lockupSchedule">
-          <FormLabel fontWeight={"bold"}>Lockup schedule (Option)</FormLabel>
-          <Input placeholder="" size="md" variant={"flushed"}/>
-          <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
-        </FormControl>
+        {showLockup && (
+          <FormControl id="lockupAmount">
+            <FormLabel fontWeight={"bold"}>Lockup amount (Option)</FormLabel>
+            <Input placeholder="Amount of WKDT" size="md" variant={"flushed"}/>
+            <FormHelperText>Total amount that's subject to lockup schedule</FormHelperText>
+          </FormControl>
+        )}
+        {showLockup && (
+          <FormControl id="lockupSchedule">
+            <FormLabel fontWeight={"bold"}>Lock up schedule (Option)</FormLabel>
+            <Input placeholder="" size="md" variant={"flushed"}/>
+            <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
+          </FormControl>
+        )}
         <Button variant={"outline"} size={"lg"} onClick={() => setShowAdvanced(!showAdvanced)}>
           {showAdvanced ? "Hide" : "Show"} advanced settings
         </Button>
