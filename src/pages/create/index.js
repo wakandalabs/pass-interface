@@ -14,6 +14,8 @@ import {
 import React, {Suspense} from "react";
 import ScheduleEditList from "./ScheduleEditList";
 import {useCurrentUser} from "../../hooks/use-current-user";
+import {useWakandaPass} from "../../hooks/use-wakanpass";
+import {PROCESSING} from "../../global/constants";
 
 export function Create() {
   const [cu] = useCurrentUser()
@@ -21,6 +23,7 @@ export function Create() {
   const [showLockup, setShowLockup] = React.useState(false)
   const [post, setPost] = React.useState({})
   const [receiver, setReceiver] = React.useState(cu.addr)
+  const wakandapass = useWakandaPass(cu.addr)
 
   return (
     <Center>
@@ -39,12 +42,13 @@ export function Create() {
         </FormControl>
         <FormControl id="title">
           <FormLabel fontWeight={"bold"}>Title</FormLabel>
-          <Input placeholder="e.g. Wakanda item" size="md" variant={"flushed"}
+          <Input placeholder="e.g. Wakanda item" size="md" disabled={wakandapass.status === PROCESSING} variant={"flushed"}
                  onChange={e => setPost({...post, title: e.target.value})}/>
         </FormControl>
         <FormControl id="description">
           <FormLabel fontWeight={"bold"}>Description</FormLabel>
-          <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}
+          <Input placeholder="e.g. An amazing thing" size="md" disabled={wakandapass.status === PROCESSING}
+                 variant={"flushed"}
                  onChange={e => setPost({...post, description: e.target.value})}/>
         </FormControl>
         <FormControl id="isLockup">
@@ -60,7 +64,7 @@ export function Create() {
         {showLockup && (
           <FormControl id="lockupAmount">
             <FormLabel fontWeight={"bold"}>Lockup amount</FormLabel>
-            <Input placeholder="Amount of WKDT" size="md" variant={"flushed"}/>
+            <Input placeholder="Amount of WKDT" disabled={wakandapass.status === PROCESSING} size="md" variant={"flushed"}/>
             <FormHelperText>Total amount that's subject to lockup schedule</FormHelperText>
           </FormControl>
         )}
@@ -78,15 +82,16 @@ export function Create() {
           <FormControl id="properties">
             <FormLabel fontWeight={"bold"}>Properties (Option)</FormLabel>
             <Stack direction={"row"}>
-              <Input placeholder="e.g. Size" size="md" variant={"flushed"}/>
-              <Input placeholder="e.g. M" size="md" variant={"flushed"}/>
+              <Input placeholder="e.g. Size" size="md" disabled={wakandapass.status === PROCESSING} variant={"flushed"}/>
+              <Input placeholder="e.g. M" size="md" disabled={wakandapass.status === PROCESSING} variant={"flushed"}/>
             </Stack>
           </FormControl>
         )}
         {showAdvanced && (
           <FormControl id="alternativeText">
             <FormLabel fontWeight={"bold"}>Alternative text for NFT (Option)</FormLabel>
-            <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
+            <Input placeholder="e.g. An amazing thing" size="md" disabled={wakandapass.status === PROCESSING}
+                   variant={"flushed"}/>
             <FormHelperText>Text that will be used in VoiceOver for people with disabilities</FormHelperText>
           </FormControl>
         )}
@@ -94,13 +99,15 @@ export function Create() {
           <FormLabel fontWeight={"bold"}>Receiver</FormLabel>
           <InputGroup>
             <Input placeholder="Flow account" size="md" variant={"flushed"}
+                   disabled={wakandapass.status === PROCESSING}
                    value={receiver} onChange={e => setReceiver(e.target.value)}/>
             <InputRightElement children={<Button size="sm" onClick={() => setReceiver(cu.addr)}>myself</Button>}
                                width={"auto"}/>
           </InputGroup>
           <FormHelperText>You can create WakandaPass for others</FormHelperText>
         </FormControl>
-        <Button size={"lg"} colorScheme={"cyan"}>Create item</Button>
+        <Button size={"lg"} colorScheme={"cyan"} onClick={() => wakandapass.mint(receiver, post)}
+                isLoading={wakandapass.status === PROCESSING} loadingText={"Creating"}>Create item</Button>
       </Stack>
     </Center>
   )
