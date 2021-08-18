@@ -25,6 +25,10 @@ export function Create() {
   const [receiver, setReceiver] = React.useState(cu.addr)
   const wakandapass = useWakandaPass(cu.addr)
 
+  const metadata = Object.entries(post).map(([key, value]) => ({
+    key, value
+  }))
+
   return (
     <Center>
       <Stack pl={4} pr={4} spacing={12} w={650} minH={"60vh"}>
@@ -106,7 +110,7 @@ export function Create() {
           </InputGroup>
           <FormHelperText>You can create WakandaPass for others</FormHelperText>
         </FormControl>
-        <Button size={"lg"} colorScheme={"cyan"} onClick={() => wakandapass.mint(receiver, post)}
+        <Button size={"lg"} colorScheme={"cyan"} onClick={() => wakandapass.mint(receiver, metadata)}
                 isLoading={wakandapass.status === PROCESSING} loadingText={"Creating"}>Create item</Button>
       </Stack>
     </Center>

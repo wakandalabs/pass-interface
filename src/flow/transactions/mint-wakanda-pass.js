@@ -8,7 +8,7 @@ const CODE = cdc`
 import NonFungibleToken from 0xNonFungibleToken
 import WakandaPass from 0xWakandaPass
 
-transaction(address: Address, title: String, description: String) {
+transaction(address: Address, metadata: {String: String}) {
 
     prepare(signer: AuthAccount) {
         let minter = signer
@@ -19,10 +19,6 @@ transaction(address: Address, title: String, description: String) {
             .borrow<&{NonFungibleToken.CollectionPublic}>()
             ?? panic("Could not borrow WakandaPass collection public reference")
         
-        let metadata = {
-          "title": title,
-          "description": description
-        }
         minter.mintNFT(recipient: nftCollectionRef, metadata: metadata)
     }
 }
@@ -33,15 +29,12 @@ export async function mintWakandaPass({receiver, metadata}, opts = {}) {
   invariant(receiver != null, "Tried to initialize an wakandapass but no address")
   invariant(metadata != null, "Tried to initialize an wakandapass but no metadata")
 
-  console.log(fcl.arg(metadata, t.Dictionary.toMap))
-
   return tx(
     [
       transaction(CODE),
       fcl.args([
         fcl.arg(receiver, t.Address),
-        fcl.arg(metadata.title, t.String),
-        fcl.arg(metadata.description, t.String)
+        fcl.arg(metadata, t.Dictionary({key: t.String, value: t.String})),
       ]),
       proposer(fcl.authz),
       payer(fcl.authz),

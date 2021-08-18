@@ -32,6 +32,7 @@ export function useWakandaPass(address) {
     status,
     refresh,
     async mint(receiver, metadata) {
+      console.log(metadata)
       await mintWakandaPass({receiver, metadata}, {
         onStart() {
           setStatus(PROCESSING)
