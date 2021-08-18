@@ -32,22 +32,25 @@ export function Create(){
           <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
         </FormControl>
         <FormControl id="lockupAmount">
-          <FormLabel fontWeight={"bold"}>Lockup amount</FormLabel>
+          <FormLabel fontWeight={"bold"}>Lockup amount (Option)</FormLabel>
           <Input placeholder="Amount of WKDT" size="md" variant={"flushed"}/>
           <FormHelperText>Total amount that's subject to lockup schedule</FormHelperText>
         </FormControl>
         <FormControl id="lockupSchedule">
-          <FormLabel fontWeight={"bold"}>Lockup schedule</FormLabel>
+          <FormLabel fontWeight={"bold"}>Lockup schedule (Option)</FormLabel>
           <Input placeholder="" size="md" variant={"flushed"}/>
           <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
         </FormControl>
         <Button variant={"outline"} size={"lg"}>Show advanced settings</Button>
         <FormControl id="properties">
-          <FormLabel fontWeight={"bold"}>Properties</FormLabel>
-          <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
+          <FormLabel fontWeight={"bold"}>Properties (Option)</FormLabel>
+          <Stack direction={"row"}>
+            <Input placeholder="e.g. Size" size="md" variant={"flushed"}/>
+            <Input placeholder="e.g. M" size="md" variant={"flushed"}/>
+          </Stack>
         </FormControl>
         <FormControl id="alternativeText">
-          <FormLabel fontWeight={"bold"}>Alternative text for NFT</FormLabel>
+          <FormLabel fontWeight={"bold"}>Alternative text for NFT (Option)</FormLabel>
           <Input placeholder="e.g. An amazing thing" size="md" variant={"flushed"}/>
           <FormHelperText>Text that will be used in VoiceOver for people with disabilities</FormHelperText>
         </FormControl>
