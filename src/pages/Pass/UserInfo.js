@@ -2,7 +2,7 @@ import {
   Avatar,
   Button,
   Heading,
-  IconButton, Skeleton, SkeletonCircle,
+  IconButton, Link, Skeleton, SkeletonCircle,
   Spacer,
   Stack,
   Text,
@@ -35,10 +35,10 @@ export function UserInfo({address}) {
           </Button>
         </Stack>
       </Stack>
-      <Text fontSize={"md"}>{profile.profile.bio}</Text>
+      <Text fontSize={"md"} fontWeight={"bold"}>{profile.profile.bio}</Text>
       <Stack direction={"row"} align={"center"}>
         <AiOutlineGlobal/>
-        <Text fontSize={"sm"}>{profile.profile.website}</Text>
+        <Text fontSize={"sm"}><Link herf={profile.profile.website}>{profile.profile.website}</Link></Text>
       </Stack>
       <Stack direction={"row"} align={"center"}>
         <AiOutlineMail/>
