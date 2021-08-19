@@ -13,6 +13,7 @@ import React, {Suspense} from "react";
 import {useWakandaProfileHook} from "../../hooks/use-wakanda-profile.hook";
 import {useHistory} from "react-router-dom";
 import {PROCESSING} from "../../global/constants";
+import {AiOutlineGlobal, AiOutlineMail} from "react-icons/all";
 
 export function UserInfo({address}) {
   const {hasCopied, onCopy} = useClipboard(address)
@@ -27,14 +28,22 @@ export function UserInfo({address}) {
     <Stack height={"100%"} p={16} spacing={6} minH={"60vh"}>
       <Avatar bg="teal.500"/>
       <Stack direction={"row"} align={"center"} spacing={4}>
-        <Heading fontSize="xl" bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">{profile.profile.name}</Heading>
+        <Heading fontSize="2xl" bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">{profile.profile.name}</Heading>
         <Stack>
           <Button size={"xs"} onClick={onCopy} width={36} colorScheme={"gray"} color={"gray"}>
             {hasCopied ? "Copied!" : address}
           </Button>
         </Stack>
       </Stack>
-      <Text>{profile.profile.bio}</Text>
+      <Text fontSize={"md"}>{profile.profile.bio}</Text>
+      <Stack direction={"row"} align={"center"}>
+        <AiOutlineGlobal/>
+        <Text fontSize={"sm"}>{profile.profile.website}</Text>
+      </Stack>
+      <Stack direction={"row"} align={"center"}>
+        <AiOutlineMail/>
+        <Text fontSize={"sm"}>{profile.profile.email}</Text>
+      </Stack>
 
       <Spacer/>
       <Stack direction={"row"} spacing={6}>
