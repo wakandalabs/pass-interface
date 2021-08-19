@@ -24,7 +24,7 @@ export function UserInfoCard({address}) {
   }
 
   return (
-    <Stack height={"100%"} width={"50%"} p={16} spacing={6} minH={"60vh"}>
+    <Stack height={"100%"} p={16} spacing={6} minH={"60vh"}>
       <Avatar bg="teal.500"/>
       <Stack direction={"row"} align={"center"} spacing={4}>
         <Heading fontSize="xl" bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">{profile.profile.name}</Heading>
@@ -48,7 +48,7 @@ export function UserInfoCard({address}) {
 export function UserInfoCardSkeleton() {
   const history = useHistory()
   return (
-    <Stack height={"100%"} width={"50%"} p={16} spacing={6} minH={"60vh"}>
+    <Stack height={"100%"} p={16} spacing={6} minH={"60vh"}>
       <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
       <Stack direction={"row"} align={"center"} spacing={4}>
         <Skeleton w={"100px"} h={"30px"}/>

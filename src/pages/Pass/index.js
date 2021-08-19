@@ -10,7 +10,6 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import UserInfoCard, {UserInfoCardSkeleton} from "./UserInfoCard";
-import UserAvatar from "./UserAvatar";
 import SalePass from "./SalePass";
 import OwnedPass from "./OwnedPass";
 import CreatedPass from "./CreatedPass";
@@ -61,7 +60,6 @@ export function Pass() {
     <Box pl={4} pr={4} minH={"60vh"}>
       <Stack height={500} direction={"row"} mb={4}>
         <UserInfoCard address={address}/>
-        <UserAvatar/>
       </Stack>
       <Stack>
         <Tabs index={tabIndex} onChange={handleTabsChange}>

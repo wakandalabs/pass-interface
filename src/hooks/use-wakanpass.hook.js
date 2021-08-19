@@ -13,7 +13,7 @@ export const valueAtom = atomFamily({
 })
 
 export const statusAtom = atomFamily({
-  key: "wakanda-pass::status",
+  key: "wakandapass::status",
   default: IDLE,
 })
 
