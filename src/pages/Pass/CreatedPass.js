@@ -24,7 +24,6 @@ export function CreatedPassSkeleton() {
 export default function WrappedCreatedPass(props) {
   return (
     <Suspense fallback={<CreatedPassSkeleton/>}>
-      {/*<CreatedPass {...props}/>*/}
       <CreatedPass {...props}/>
     </Suspense>
   )

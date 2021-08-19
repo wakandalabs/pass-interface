@@ -1,7 +1,11 @@
 import {Box, Center, Spinner} from "@chakra-ui/react";
 import React, {Suspense} from "react";
+import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
 
 export function LikedPass({address}) {
+  const wakandapass = useWakandaPass(address)
+  console.log(wakandapass)
+
   return (
     <Box>
       Liked Pass
@@ -20,8 +24,7 @@ export function LikedPassSkeleton() {
 export default function WrappedLikedPass(props) {
   return (
     <Suspense fallback={<LikedPassSkeleton/>}>
-      {/*<LikedPass {...props}/>*/}
-      <LikedPassSkeleton/>
+      <LikedPass {...props}/>
     </Suspense>
   )
 }
