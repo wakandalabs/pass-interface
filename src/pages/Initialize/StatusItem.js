@@ -1,21 +1,22 @@
-import {Heading, Spacer, Stack} from "@chakra-ui/react";
+import {Button, Heading, Spacer, Stack} from "@chakra-ui/react";
 import {IDLE, PROCESSING} from "../../global/constants";
-import {CheckCircleIcon, WarningTwoIcon} from "@chakra-ui/icons";
 import {BeatLoader} from "react-spinners";
+import {CheckCircleIcon} from "@chakra-ui/icons";
+import React from "react";
 
-export function StatusItem({status, name, item}) {
-  return (
+export function StatusItem({name, init}) {
+  return(
     <Stack direction={"row"} align={"center"} h={8}>
       <Heading fontSize={"md"}>{name}</Heading>
       <Spacer/>
-      {(status === PROCESSING) && (
+      {(init.status === PROCESSING) && (
         <BeatLoader size={6}/>
       )}
-      {(status === IDLE) && item && (
+      {(init.status === IDLE) && init.isInitialized && (
         <CheckCircleIcon size={"sm"}/>
       )}
-      {(status === IDLE) && !item && (
-        <WarningTwoIcon size={"sm"}/>
+      {(init.status === IDLE) && !init.isInitialized && (
+        <Button colorScheme={"red"} onClick={init.initialize}>Init</Button>
       )}
     </Stack>
   )
@@ -26,4 +27,3 @@ export default function WrappedStatusItem(props) {
     <StatusItem {...props}/>
   )
 }
-
