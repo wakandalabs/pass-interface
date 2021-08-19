@@ -4,7 +4,7 @@ import WakandaPassItem from "./WakandaPassItem";
 
 export function WakandaPassList({items}) {
   return (
-    <SimpleGrid minChildWidth="230px" spacing="40px">
+    <SimpleGrid minChildWidth="230px" spacing="40px" mt={12}>
       {items.map(pass => (
         <WakandaPassItem pass={pass}/>
       ))}
