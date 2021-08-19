@@ -1,11 +1,15 @@
 import React, {Suspense} from "react";
-import {Heading, Stack} from "@chakra-ui/react";
+import {AspectRatio, Flex, Heading, IconButton, Spacer, Stack, Text} from "@chakra-ui/react";
+import {InfoOutlineIcon} from "@chakra-ui/icons";
 
 export function WakandaPassItem({pass}) {
   console.log(pass)
   return(
     <Stack>
-      {/*<Heading>{pass}</Heading>*/}
+      <Flex border="1px" borderColor="gray.200" borderRadius={"lg"} height="400px" maxW={"250px"} p={4}
+            direction={"column"}>
+
+      </Flex>
     </Stack>
   )
 }

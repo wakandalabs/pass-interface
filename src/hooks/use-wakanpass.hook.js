@@ -1,6 +1,6 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {txMintWakandaPass} from "../flow/tx.mint-wakanda-pass";
-import {fetchWakandaPass} from "../flow/script.get-wakanda-pass";
+import {fetchWakandaPass} from "../flow/script.get-wakanda-pass-all";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {sleep} from "../util/sleep";
 
