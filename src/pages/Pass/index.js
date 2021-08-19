@@ -9,7 +9,7 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import UserInfoCard, {UserInfoCardSkeleton} from "./UserInfoCard";
+import UserInfo, {UserInfoSkeleton} from "./UserInfo";
 import SalePass from "./SalePass";
 import OwnedPass from "./OwnedPass";
 import CreatedPass from "./CreatedPass";
@@ -52,14 +52,14 @@ export function Pass() {
 
   if (!loggedIn) {
     return (
-      <UserInfoCardSkeleton />
+      <UserInfoSkeleton />
     )
   }
 
   return (
     <Box pl={4} pr={4} minH={"60vh"}>
       <Stack height={500} direction={"row"} mb={4}>
-        <UserInfoCard address={address}/>
+        <UserInfo address={address}/>
       </Stack>
       <Stack>
         <Tabs index={tabIndex} onChange={handleTabsChange}>
@@ -96,7 +96,7 @@ export function Pass() {
 
 export default function WrappedPass() {
   return (
-    <Suspense fallback={<UserInfoCardSkeleton />}>
+    <Suspense fallback={<UserInfoSkeleton />}>
       <Pass/>
     </Suspense>
   )

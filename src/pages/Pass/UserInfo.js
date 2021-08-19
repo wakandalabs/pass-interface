@@ -14,13 +14,13 @@ import {useWakandaProfileHook} from "../../hooks/use-wakanda-profile.hook";
 import {useHistory} from "react-router-dom";
 import {PROCESSING} from "../../global/constants";
 
-export function UserInfoCard({address}) {
+export function UserInfo({address}) {
   const {hasCopied, onCopy} = useClipboard(address)
   const profile = useWakandaProfileHook(address)
   const history = useHistory()
 
   if (profile.profile === false || profile.profile === null || profile.status === PROCESSING) {
-    return <UserInfoCardSkeleton />
+    return <UserInfoSkeleton />
   }
 
   return (
@@ -45,7 +45,7 @@ export function UserInfoCard({address}) {
   )
 }
 
-export function UserInfoCardSkeleton() {
+export function UserInfoSkeleton() {
   const history = useHistory()
   return (
     <Stack height={"100%"} p={16} spacing={6} minH={"60vh"}>
@@ -68,8 +68,8 @@ export function UserInfoCardSkeleton() {
 
 export default function WrappedUserInfoCard(props) {
   return (
-    <Suspense fallback={<UserInfoCardSkeleton/>}>
-      <UserInfoCard {...props}/>
+    <Suspense fallback={<UserInfoSkeleton/>}>
+      <UserInfo {...props}/>
     </Suspense>
   )
 }
