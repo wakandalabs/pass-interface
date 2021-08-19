@@ -2,7 +2,7 @@ import React, {Suspense} from "react";
 import {Heading, Stack} from "@chakra-ui/react";
 
 export function WakandaPassItem({pass}) {
-  console.log(pass.owner)
+  console.log(pass)
   return(
     <Stack>
       {/*<Heading>{pass}</Heading>*/}
