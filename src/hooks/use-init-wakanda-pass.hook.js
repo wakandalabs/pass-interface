@@ -14,40 +14,38 @@ import {
 } from "../global/constants";
 
 import {sleep} from "../util/sleep";
-import {scriptIsAccountInitialized} from "../flow/script.is-account-initialized";
-import {txInitializeAccount} from "../flow/tx.initialize-account";
+import {scriptIsWakandaPassInit} from "../flow/script.is-wakanda-pass-init";
+import {txInitWakandaPass} from "../flow/tx.init-wakanda-pass";
 
 export const $status = atomFamily({
-  key: "init::status",
+  key: "initwakandapass::status",
   default: IDLE,
 })
 
 export const $init = atomFamily({
-  key: "init::state",
+  key: "initwakandapass::state",
   default: selectorFamily({
-    key: "init::default",
-    get: address => () => scriptIsAccountInitialized(address),
+    key: "initwakandapass::default",
+    get: address => () => scriptIsWakandaPassInit(address),
   }),
 })
 
 export const $computedInit = selectorFamily({
-  key: "init::computed",
+  key: "initwakandapass::computed",
   get:
     address =>
       async ({get}) => {
-        const all = get($init(address))
-
-        return all.WakandaToken  && all.WakandaPass && all.WakandaProfile
+        return get($init(address))
       },
 })
 
-export function useInitializedHook(address) {
+export function useInitWakandaPassHook(address) {
   const [init, setInit] = useRecoilState($init(address))
   const isInitialized = useRecoilValue($computedInit(address))
   const [status, setStatus] = useRecoilState($status(address))
 
   function recheck() {
-    scriptIsAccountInitialized(address).then(setInit)
+    scriptIsWakandaPassInit(address).then(setInit)
   }
 
   return {
@@ -56,7 +54,7 @@ export function useInitializedHook(address) {
     status: isInitialized == null ? LOADING : status,
     recheck,
     async initialize() {
-      await txInitializeAccount(address, {
+      await txInitWakandaPass(address, {
         onStart() {
           setStatus(PROCESSING)
         },
