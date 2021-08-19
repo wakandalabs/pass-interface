@@ -1,26 +1,30 @@
 import React, {Suspense} from "react";
-import {Heading, Stack} from "@chakra-ui/react";
+import {Heading, SimpleGrid, Stack} from "@chakra-ui/react";
+import WakandaPassItem from "./WakandaPassItem";
 
-export function WakandaPassList() {
-  return(
-    <Stack>
-      <Heading>Pass</Heading>
-    </Stack>
+export function WakandaPassList({items}) {
+  const passes = items
+  return (
+    <SimpleGrid minChildWidth="230px" spacing="40px">
+      {passes.map(pass => (
+        <WakandaPassItem pass={pass}/>
+      ))}
+    </SimpleGrid>
   )
 }
 
 export function WakandaPassListSkeleton() {
-  return(
+  return (
     <Stack>
       <Heading>Pass</Heading>
     </Stack>
   )
 }
 
-export default function WrappedWakandaPassList() {
-  return(
-    <Suspense fallback={<WakandaPassListSkeleton />}>
-      <WakandaPassList />
+export default function WrappedWakandaPassList(props) {
+  return (
+    <Suspense fallback={<WakandaPassListSkeleton/>}>
+      <WakandaPassList {...props}/>
     </Suspense>
   )
 }

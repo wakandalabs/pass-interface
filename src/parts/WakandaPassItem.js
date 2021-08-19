@@ -1,10 +1,11 @@
 import React, {Suspense} from "react";
 import {Heading, Stack} from "@chakra-ui/react";
 
-export function WakandaPassItem() {
+export function WakandaPassItem({pass}) {
+  console.log(pass.owner)
   return(
     <Stack>
-      <Heading>Pass</Heading>
+      {/*<Heading>{pass}</Heading>*/}
     </Stack>
   )
 }
@@ -17,10 +18,10 @@ export function WakandaPassItemSkeleton() {
   )
 }
 
-export default function WrappedWakandaPassItem() {
+export default function WrappedWakandaPassItem(props) {
   return(
     <Suspense fallback={<WakandaPassItemSkeleton />}>
-      <WakandaPassItem />
+      <WakandaPassItem {...props}/>
     </Suspense>
   )
 }

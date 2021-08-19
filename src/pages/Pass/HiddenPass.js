@@ -1,15 +1,15 @@
-import {Box, Center, Spinner} from "@chakra-ui/react";
+import {Stack, Center, Spinner} from "@chakra-ui/react";
 import React, {Suspense} from "react";
 import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
+import {WakandaPassList} from "../../parts/WakandaPassList";
 
 export function HiddenPass({address}) {
   const wakandapass = useWakandaPass(address)
-  console.log(wakandapass)
 
   return (
-    <Box>
-      Hidden
-    </Box>
+    <Stack>
+      {/*<WakandaPassList/>*/}
+    </Stack>
   )
 }
 
@@ -25,8 +25,7 @@ export function HiddenPassSkeleton() {
 export default function WrappedHiddenPass(props) {
   return (
     <Suspense fallback={<HiddenPassSkeleton/>}>
-      {/*<HiddenPass {...props}/>*/}
-      <HiddenPassSkeleton/>
+      <HiddenPass {...props}/>
     </Suspense>
   )
 }

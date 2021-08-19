@@ -1,15 +1,15 @@
-import {Box, Center, Spinner} from "@chakra-ui/react";
+import {Stack, Center, Spinner} from "@chakra-ui/react";
 import React, {Suspense} from "react";
 import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
+import {WakandaPassList} from "../../parts/WakandaPassList";
 
 export function LikedPass({address}) {
   const wakandapass = useWakandaPass(address)
-  console.log(wakandapass)
 
   return (
-    <Box>
-      Liked Pass
-    </Box>
+    <Stack>
+      {/*<WakandaPassList/>*/}
+    </Stack>
   )
 }
 
