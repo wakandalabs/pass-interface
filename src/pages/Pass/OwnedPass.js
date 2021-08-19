@@ -2,13 +2,22 @@ import {Box, Center, Spinner, Stack} from "@chakra-ui/react";
 import React, {Suspense} from "react";
 import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
 import {WakandaPassList} from "../../parts/WakandaPassList";
+import {CreatedPassSkeleton} from "./CreatedPass";
+import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 
 export function OwnedPass({address}) {
+  const [cu, loggedIn] = useCurrentUserHook()
   const wakandapass = useWakandaPass(address)
+
+  if (!loggedIn || wakandapass.pass === null) {
+    return (
+      <CreatedPassSkeleton />
+    )
+  }
 
   return (
     <Stack>
-      {/*<WakandaPassList/>*/}
+      <WakandaPassList items={wakandapass.pass}/>
     </Stack>
   )
 }

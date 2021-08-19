@@ -8,17 +8,19 @@ import {
   Stack,
   Text
 } from "@chakra-ui/react";
-import {fmtWkdt} from "../util/fmt-wkdt";
+import {useWakandaProfileHook} from "../hooks/use-wakanda-profile.hook";
 
 export function WakandaPassItem({pass}) {
-  console.log(pass)
+  const originOwner = useWakandaProfileHook(pass.originalOwner)
+  const owner = useWakandaProfileHook(pass.owner)
+
   return (
     <Stack spacing={3} border="2px" borderColor="gray.600" borderRadius={"lg"} height="400px" maxW={"250px"} p={4}
            direction={"column"}>
       <Stack direction={"row"} align={"center"}>
         <AvatarGroup size="sm" max={2}>
-          <Avatar name={pass.originalOwner}/>
-          <Avatar name={pass.owner}/>
+          <Avatar name={originOwner.profile.name} src={originOwner.profile.avatar}/>
+          <Avatar name={owner.profile.name} src={originOwner.profile.avatar}/>
         </AvatarGroup>
         <Spacer/>
         <Text fontSize={"xl"} fontWeight={"bold"}>#{pass.id}</Text>

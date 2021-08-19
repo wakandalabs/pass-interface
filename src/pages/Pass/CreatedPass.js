@@ -7,7 +7,8 @@ import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 export function CreatedPass({address}) {
   const [cu, loggedIn] = useCurrentUserHook()
   const wakandapass = useWakandaPass(address)
-  console.log(wakandapass)
+
+  const result = wakandapass.pass.filter(pass => pass.originalOwner === cu.addr )
 
   if (!loggedIn || wakandapass.pass === null) {
     return (
@@ -17,7 +18,7 @@ export function CreatedPass({address}) {
 
   return (
     <Stack>
-      <WakandaPassList items={wakandapass.pass}/>
+      <WakandaPassList items={result}/>
     </Stack>
   )
 }
