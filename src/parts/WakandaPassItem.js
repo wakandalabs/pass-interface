@@ -1,9 +1,8 @@
 import React, {Suspense} from "react";
 import {
-  AspectRatio,
   Avatar,
   AvatarGroup, Button,
-  Heading, Image,
+  Heading,
   Spacer,
   Stack,
   Text
@@ -19,15 +18,15 @@ export function WakandaPassItem({pass}) {
            direction={"column"}>
       <Stack direction={"row"} align={"center"}>
         <AvatarGroup size="sm" max={2}>
-          <Avatar name={originOwner.profile.name} src={originOwner.profile.avatar}/>
+          <Avatar name={originOwner.profile.name} src={originOwner.profile.avatar} colorScheme={"cyan"}/>
           <Avatar name={owner.profile.name} src={originOwner.profile.avatar}/>
         </AvatarGroup>
         <Spacer/>
         <Text fontSize={"xl"} fontWeight={"bold"}>#{pass.id}</Text>
       </Stack>
-      <AspectRatio>
-        <Image src="https://bit.ly/naruto-sage" alt="naruto" objectFit="cover" />
-      </AspectRatio>
+      {/*<AspectRatio>*/}
+      {/*  <Image src="" alt="naruto" objectFit="cover" />*/}
+      {/*</AspectRatio>*/}
       <Spacer/>
       <Stack spacing={0}>
         <Text fontSize={"md"} fontWeight={"bold"}>{pass.metadata.title}</Text>

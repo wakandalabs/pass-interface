@@ -10,7 +10,7 @@ import Wkdt from "./pages/Wkdt";
 import Wallet from "./pages/Wallet";
 import Initialize from "./pages/Initialize";
 import Setting from "./pages/Setting";
-import Create from "./pages/create";
+import Create from "./pages/Create";
 import NotFound from "./pages/not-found";
 import TheFooter from "./parts/TheFooter";
 import React from "react";
