@@ -9,6 +9,7 @@ import {
 import React, {Suspense} from "react";
 import {useHistory} from "react-router-dom";
 import {useCurrentUserHook} from "../hooks/use-current-user.hook";
+import {AiOutlineEdit, AiOutlineLogout, AiOutlineSetting, AiOutlineWallet} from "react-icons/all";
 
 export function TheHeaderUserInfo() {
   const history = useHistory();
@@ -22,15 +23,29 @@ export function TheHeaderUserInfo() {
         </MenuButton>
         <MenuList>
           <MenuItem onClick={() => history.push("/wallet")}>
-            <Heading fontSize="md">My wallet</Heading>
+            <Stack direction={"row"} align={"center"} p={2} spacing={4}>
+              <AiOutlineWallet/>
+              <Heading fontSize="md">My wallet</Heading>
+            </Stack>
           </MenuItem>
           <MenuItem onClick={() => history.push("/initialize")}>
-            <Heading fontSize="md">Initialize</Heading>
+            <Stack direction={"row"} align={"center"} p={2} spacing={4}>
+              <AiOutlineSetting/>
+              <Heading fontSize="md">Initialize account</Heading>
+            </Stack>
           </MenuItem>
           <MenuItem onClick={() => history.push("/setting")}>
-            <Heading fontSize="md">Edit profile</Heading>
+            <Stack direction={"row"} align={"center"} p={2} spacing={4}>
+              <AiOutlineEdit/>
+              <Heading fontSize="md">Edit profile</Heading>
+            </Stack>
           </MenuItem>
-          <MenuItem><Heading fontSize="md" onClick={logOut}>Log out</Heading></MenuItem>
+          <MenuItem>
+            <Stack direction={"row"} align={"center"} p={2} spacing={4}>
+              <AiOutlineLogout/>
+              <Heading fontSize="md" onClick={logOut}>Log out</Heading>
+            </Stack>
+          </MenuItem>
         </MenuList>
       </Menu>
     </Stack>
