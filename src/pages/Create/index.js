@@ -25,6 +25,11 @@ export function Create() {
   const [receiver, setReceiver] = React.useState(cu.addr)
   const wakandapass = useWakandaPass(cu.addr)
 
+  function handleSwitch() {
+    setSchedule([{"key": "", "value": ""}])
+    setShowLockup(!showLockup)
+  }
+
   const callback = (items) => {
     setSchedule(items)
     let check = []
@@ -78,7 +83,7 @@ export function Create() {
               schedule</FormLabel>
             <Spacer/>
             {/*<Badge variant="subtle" colorScheme="cyan">Coming soon</Badge>*/}
-            <Switch id={"lockupSwitch"} value={showLockup} onChange={() => setShowLockup(!showLockup)}/>
+            <Switch id={"lockupSwitch"} value={showLockup} onChange={handleSwitch}/>
           </Stack>
           <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
         </FormControl>
