@@ -5,15 +5,15 @@ import {txTransferWkdt} from "../flow/tx.transfer-wkdt";
 import {sleep} from "../util/sleep";
 
 export const valueAtom = atomFamily({
-  key: "wkdt-balance::state",
+  key: address => address + "-wkdt-balance::state",
   default: selectorFamily({
-    key: "wkdt-balance::default",
+    key: address => address + "-wkdt-balance::default",
     get: address => async () => fetchWkdtBalance(address),
   }),
 })
 
 export const statusAtom = atomFamily({
-  key: "wkdt-balance::status",
+  key: address => address + "-wkdt-balance::status",
   default: IDLE,
 })
 
