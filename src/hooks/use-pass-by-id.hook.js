@@ -6,7 +6,7 @@ export const valueAtom = atomFamily({
   key: "pass-by-id::state",
   default: selectorFamily({
     key: "pass-by-id::default",
-    get: (address, id) => async () => fetchWakandaPassById(address, id),
+    get: ({address, id}) => async () => fetchWakandaPassById(address, id),
   }),
 })
 
@@ -16,7 +16,7 @@ export const statusAtom = atomFamily({
 })
 
 export function useWakandaPassById(address, id) {
-  const [pass, setPass] = useRecoilState(valueAtom(address, id))
+  const [pass, setPass] = useRecoilState(valueAtom({address, id}))
   const [status, setStatus] = useRecoilState(statusAtom(address))
 
   async function refresh() {
