@@ -3,17 +3,17 @@ import {useState} from "react";
 
 export function ScheduleEditItem({index, items, callback}) {
   const [date, setDate] = useState("")
-  const [percent, setPercent] = useState("")
+  const [percent, setPercent] = useState(0)
 
   function handleDate(date) {
     setDate(date)
-    items[index] = {"key": date, "value": percent}
+    items[index] = {"key": Date.parse(date), "value": Number(percent)}
     callback(items)
   }
 
-  function handleValue(p) {
-    setPercent(p)
-    items[index] = {"key": date, "value": p}
+  function handleValue(percent) {
+    setPercent(percent)
+    items[index] = {"key": Date.parse(date), "value": Number(percent)}
     callback(items)
   }
 
@@ -26,7 +26,7 @@ export function ScheduleEditItem({index, items, callback}) {
       </Box>
       <Box w={"50%"}>
         <Input id={"value"} placeholder="0.0 - 1.0" size="md" variant={"flushed"}
-               isInvalid={percent<0 || percent > 1}
+               isInvalid={percent<0 || percent > 1 || isNaN(Number(percent))} defaultValue={0}
                onChange={(e) => handleValue(e.target.value)}/>
         <Text fontSize={"xs"} color={"gray"}>{"(" + Number(percent) + ") wkdt remain locked"}</Text>
       </Box>
