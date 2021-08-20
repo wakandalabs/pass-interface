@@ -101,12 +101,11 @@ export function Create() {
             <FormLabel fontWeight={"bold"} bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">Lockup WKDT and set
               schedule</FormLabel>
             <Spacer/>
-
-            {/*{wkdt.balance > 0 ? (*/}
+            {wkdt.balance > 0 ? (
               <Switch id={"lockupSwitch"} value={showLockup} onChange={handleSwitch}/>
-            {/*): (*/}
-            {/*  <Badge variant="subtle" colorScheme="cyan">Need WKDT</Badge>*/}
-            {/*)}*/}
+            ): (
+              <Badge variant="subtle" colorScheme="cyan">Need WKDT</Badge>
+            )}
           </Stack>
           <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
         </FormControl>
