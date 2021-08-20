@@ -28,6 +28,7 @@ export function Create() {
   const [receiver, setReceiver] = React.useState(cu.addr)
   const wakandapass = useWakandaPass(cu.addr)
   const wkdt = useWkdtBalanceHook(cu.addr)
+  const parse = (val) => val.replace(/^\$/, "")
 
   function handleSwitch() {
     setSchedule([{"key": "", "value": 0}])
@@ -56,10 +57,7 @@ export function Create() {
       wakandapass.mint(receiver, metadata)
     } else if (showLockup === true && wkdt.balance > 0) {
       let fmtSche = schedule.filter(item => (item["key"] !== "" && item["value"] !== "" && !isNaN(item["key"])))
-      wakandapass.mintWithCustom(receiver, metadata, lockAmount, fmtSche)
-    } else {
-      let fmtSche = schedule.filter(item => (item["key"] !== "" && item["value"] !== "" && !isNaN(item["key"])))
-      wakandapass.mintWithCustom(receiver, metadata, lockAmount, fmtSche)
+      wakandapass.mintWithCustom(receiver, metadata, Number(lockAmount), fmtSche)
     }
   }
 
@@ -115,7 +113,7 @@ export function Create() {
             <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
                          max={wkdt.balance} disabled={wakandapass.status === PROCESSING}
                          errorBorderColor="red.200" mb={4} variant={"flushed"} size="md"
-                         onChange={(valueString) => setLockAmount(valueString)}
+                         onChange={(valueString) => setLockAmount(parse(valueString))}
                          value={lockAmount} placeholder="Amount of WKDT"
             >
               <NumberInputField/>
