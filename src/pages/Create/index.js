@@ -78,7 +78,10 @@ export function Create() {
           <Stack textAlign={"center"} p={12} spacing={12} borderWidth="1px" borderRadius={"lg"} border={"gary"}>
             <Text color={"gray"}>PNG, GIF, WEBP, MP4 or MP3. Max 100mb.</Text>
             <Box>
-              <Button>Choose file</Button>
+              <Badge colorScheme={"cyan"}>Comming soon</Badge>
+            </Box>
+            <Box>
+              <Button disabled>Choose file</Button>
             </Box>
           </Stack>
         </FormControl>
