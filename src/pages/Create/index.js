@@ -9,7 +9,7 @@ import {
   Heading,
   Input, InputGroup, InputRightElement, Spacer,
   Spinner,
-  Stack, Text
+  Stack, Switch, Text
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
 import ScheduleEditList from "./ScheduleEditList";
@@ -61,8 +61,8 @@ export function Create() {
             <FormLabel fontWeight={"bold"} bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">Lockup WKDT and set
               schedule</FormLabel>
             <Spacer/>
-            <Badge variant="subtle" colorScheme="cyan">Coming soon</Badge>
-            {/*<Switch id={"lockupSwitch"} value={showLockup} onChange={() => setShowLockup(!showLockup)}/>*/}
+            {/*<Badge variant="subtle" colorScheme="cyan">Coming soon</Badge>*/}
+            <Switch id={"lockupSwitch"} value={showLockup} onChange={() => setShowLockup(!showLockup)}/>
           </Stack>
           <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
         </FormControl>
