@@ -32,7 +32,7 @@ export function txTransferWkdt({amount, to}, opts = {}) {
   return tx([
     transaction(CODE),
     args([
-      arg(amount.toFixed(8).toString(), t.UFix64),
+      arg(amount, t.UFix64),
       arg(to, t.Address),
     ]),
     proposer(authz),

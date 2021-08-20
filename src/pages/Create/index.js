@@ -18,12 +18,13 @@ import {IDLE, PROCESSING} from "../../global/constants";
 import {ScheduleEditItem} from "./ScheduleEditItem";
 import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
 import {fmtWkdt} from "../../util/fmt-wkdt";
+import {toUFix64} from "../../global/common";
 
 export function Create() {
   const [cu] = useCurrentUserHook()
   const [showLockup, setShowLockup] = React.useState(false)
-  const [schedule, setSchedule] = useState([{"key": "", "value": ""}])
-  const [lockAmount, setLockAmount] = useState(0)
+  const [schedule, setSchedule] = useState([{"key": "", "value": "0.0"}])
+  const [lockAmount, setLockAmount] = useState("0.0")
   const [post, setPost] = React.useState({})
   const [receiver, setReceiver] = React.useState(cu.addr)
   const wakandapass = useWakandaPass(cu.addr)
@@ -31,7 +32,7 @@ export function Create() {
   const parse = (val) => val.replace(/^\$/, "")
 
   function handleSwitch() {
-    setSchedule([{"key": "", "value": 0}])
+    setSchedule([{"key": "", "value": "0.0"}])
     setShowLockup(!showLockup)
   }
 
@@ -47,7 +48,7 @@ export function Create() {
     }
     if (check.find(item => !item) === undefined) {
       const r = [...schedule]
-      r.push({"key": "", "value": 0})
+      r.push({"key": "", "value": "0.0"})
       setSchedule(r)
     }
   }
@@ -57,7 +58,7 @@ export function Create() {
       wakandapass.mint(receiver, metadata)
     } else if (showLockup === true && wkdt.balance > 0) {
       let fmtSche = schedule.filter(item => (item["key"] !== "" && item["value"] !== "" && !isNaN(item["key"])))
-      wakandapass.mintWithCustom(receiver, metadata, Number(lockAmount), fmtSche)
+      wakandapass.mintWithCustom(receiver, metadata, toUFix64(Number(lockAmount)), fmtSche)
     }
   }
 

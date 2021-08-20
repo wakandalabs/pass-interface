@@ -49,7 +49,7 @@ export async function txMintWakandaPassCustom({receiver, metadata, lockupAmount,
       args([
         arg(receiver, t.Address),
         arg(metadata, t.Dictionary({key: t.String, value: t.String})),
-        arg(lockupAmount.toFixed(8).toString(), t.UFix64),
+        arg(lockupAmount.toString(), t.UFix64),
         arg(lockupSchedule, t.Dictionary({key: t.UFix64, value: t.UFix64}))
       ]),
       proposer(fcl.authz),
