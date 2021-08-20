@@ -6,12 +6,9 @@ import NonFungibleToken from 0xNonFungibleToken
 import WakandaPass from 0xWakandaPass
 
 pub fun main(address: Address, id: UInt64): {String: String} {
-    let collectionRef = getAccount(address).getCapability(WakandaPass.CollectionPublicPath)
-        .borrow<&{NonFungibleToken.CollectionPublic, WakandaPass.CollectionPublic}>()
-        ?? panic("Could not borrow collection public reference")
-
+    let collectionRef = WakandaPass.fetch(address)
     let ids = collectionRef.getIDs()
-    let wakandaPass = collectionRef.borrowWakandaPassPublic(id: ids[0])
+    let wakandaPass = collectionRef.borrowWakandaPassPublic(id: id)
 
     return wakandaPass.getMetadata()
 }

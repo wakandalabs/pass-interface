@@ -6,11 +6,7 @@ import NonFungibleToken from 0xNonFungibleToken
 import WakandaPass from 0xWakandaPass
 
 pub fun main(address: Address): [UInt64] {
-    let collectionRef = getAccount(address).getCapability(WakandaPass.CollectionPublicPath)
-        .borrow<&{NonFungibleToken.CollectionPublic, WakandaPass.CollectionPublic}>()
-        ?? panic("Could not borrow collection public reference")
-
-    return collectionRef.getIDs()
+    return WakandaPass.fetch(address).getIDs()
 }
 `
 
