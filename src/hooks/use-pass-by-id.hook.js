@@ -3,15 +3,15 @@ import {IDLE, PROCESSING} from "../global/constants";
 import {fetchWakandaPassById} from "../flow/script.fetch-pass-by-id";
 
 export const valueAtom = atomFamily({
-  key: "pass-by-id::state",
+  key: id => "pass-id-" + id  + "::state",
   default: selectorFamily({
-    key: "pass-by-id::default",
+    key: id => "pass-id-" + id  +"::default",
     get: ({address, id}) => async () => fetchWakandaPassById(address, id),
   }),
 })
 
 export const statusAtom = atomFamily({
-  key: "pass-by-id::status",
+  key: id => "pass-id-" + id  +"::status",
   default: IDLE,
 })
 
