@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import {
   Avatar,
-  AvatarGroup, Button,
+  AvatarGroup,
   Heading,
   Spacer,
   Stack,
@@ -32,9 +32,6 @@ export function WakandaPassItem({pass}) {
         <Text fontSize={"md"} fontWeight={"bold"}>{pass.metadata.title}</Text>
         <Text fontSize={"sm"}>{pass.metadata.description}</Text>
       </Stack>
-
-      <Button size={"sm"}>Stake</Button>
-
     </Stack>
   )
 }
