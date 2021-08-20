@@ -8,13 +8,13 @@ export function ScheduleEditItem({index, items, callback}) {
 
   function handleDate(date) {
     setDate(date)
-    items[index] = {"key": toUFix64(Date.parse(date)).toString(), "value": toUFix64(Number(percent)).toString()}
+    items[index] = {"key": toUFix64(Date.parse(date)/1000).toString(), "value": toUFix64(Number(percent)).toString()}
     callback(items)
   }
 
   function handleValue(percent) {
     setPercent(percent)
-    items[index] = {"key": toUFix64(Date.parse(date)).toString(), "value": toUFix64(Number(percent)).toString()}
+    items[index] = {"key": toUFix64(Date.parse(date)/1000).toString(), "value": toUFix64(Number(percent)).toString()}
     callback(items)
   }
 
@@ -23,7 +23,7 @@ export function ScheduleEditItem({index, items, callback}) {
       <Box w={"50%"}>
         <Input id={"key"} placeholder="e.g. 2022.12.31 0:0:0" size="md" variant={"flushed"}
                onChange={(e) => handleDate(e.target.value)}/>
-        <Text fontSize={"xs"} color={"gray"}>{"time (" + Date.parse(date) + ")"}</Text>
+        <Text fontSize={"xs"} color={"gray"}>{"time (" + Date.parse(date)/1000 + ")"}</Text>
       </Box>
       <Box w={"50%"}>
         <Input id={"value"} placeholder="0.0 - 1.0" size="md" variant={"flushed"}
