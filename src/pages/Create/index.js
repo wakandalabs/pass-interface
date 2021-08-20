@@ -18,7 +18,6 @@ import {ScheduleEditItem} from "./ScheduleEditItem";
 
 export function Create() {
   const [cu] = useCurrentUserHook()
-  const [showAdvanced, setShowAdvanced] = React.useState(false)
   const [showLockup, setShowLockup] = React.useState(false)
   const [schedule, setSchedule] = useState([{"key": "", "value": ""}])
   const [post, setPost] = React.useState({})
@@ -103,26 +102,6 @@ export function Create() {
               ))}
             </Stack>
             <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
-          </FormControl>
-        )}
-        <Button variant={"outline"} size={"lg"} onClick={() => setShowAdvanced(!showAdvanced)} disabled>
-          {showAdvanced ? "Hide" : "Show"} advanced settings
-        </Button>
-        {showAdvanced && (
-          <FormControl id="properties">
-            <FormLabel fontWeight={"bold"}>Properties (Option)</FormLabel>
-            <Stack direction={"row"}>
-              <Input placeholder="e.g. Size" size="md" disabled={wakandapass.status === PROCESSING} variant={"flushed"}/>
-              <Input placeholder="e.g. M" size="md" disabled={wakandapass.status === PROCESSING} variant={"flushed"}/>
-            </Stack>
-          </FormControl>
-        )}
-        {showAdvanced && (
-          <FormControl id="alternativeText">
-            <FormLabel fontWeight={"bold"}>Alternative text for NFT (Option)</FormLabel>
-            <Input placeholder="e.g. An amazing thing" size="md" disabled={wakandapass.status === PROCESSING}
-                   variant={"flushed"}/>
-            <FormHelperText>Text that will be used in VoiceOver for people with disabilities</FormHelperText>
           </FormControl>
         )}
         <FormControl id="receiver">
