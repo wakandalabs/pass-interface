@@ -1,6 +1,5 @@
 import {Box, Input, Stack, Text} from "@chakra-ui/react";
 import {useState} from "react";
-import {parse} from "qs";
 
 export function ScheduleEditItem({index, items, callback}) {
   const [date, setDate] = useState("")
