@@ -2,15 +2,10 @@ import {send, decode, script, args, arg, cdc} from "@onflow/fcl";
 import {Address, UInt64} from "@onflow/types";
 
 const CODE = cdc`
-import NonFungibleToken from 0xNonFungibleToken
 import WakandaPass from 0xWakandaPass
 
 pub fun main(address: Address, id: UInt64): {String: String} {
-    let collectionRef = WakandaPass.fetch(address)
-    let ids = collectionRef.getIDs()
-    let wakandaPass = collectionRef.borrowWakandaPassPublic(id: id)
-
-    return wakandaPass.getMetadata()
+    return WakandaPass.read(address, id)
 }
 `
 
