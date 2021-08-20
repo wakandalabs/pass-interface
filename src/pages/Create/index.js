@@ -1,5 +1,4 @@
 import {
-  Badge,
   Box,
   Button,
   Center,
@@ -11,20 +10,37 @@ import {
   Spinner,
   Stack, Switch, Text
 } from "@chakra-ui/react";
-import React, {Suspense} from "react";
-import ScheduleEditList from "./ScheduleEditList";
+import React, {Suspense, useState} from "react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
 import {PROCESSING} from "../../global/constants";
+import {ScheduleEditItem} from "./ScheduleEditItem";
 
 export function Create() {
   const [cu] = useCurrentUserHook()
   const [showAdvanced, setShowAdvanced] = React.useState(false)
   const [showLockup, setShowLockup] = React.useState(false)
-  const [schedule, setSchedult] = React.useState({})
+  const [schedule, setSchedule] = useState([{"key": "", "value": ""}])
   const [post, setPost] = React.useState({})
   const [receiver, setReceiver] = React.useState(cu.addr)
   const wakandapass = useWakandaPass(cu.addr)
+
+  const callback = (items) => {
+    setSchedule(items)
+    let check = []
+    for (const item of schedule) {
+      if (item["key"] === "" || item["value"] === "") {
+        check.push(false)
+      }else{
+        check.push(true)
+      }
+    }
+    if (check.find(item => !item) === undefined) {
+      const r = [...schedule]
+      r.push({"key": "", "value": ""})
+      setSchedule(r)
+    }
+  }
 
   const metadata = Object.entries(post).map(([key, value]) => ({
     key, value
@@ -76,7 +92,11 @@ export function Create() {
         {showLockup && (
           <FormControl id="lockupSchedule">
             <FormLabel fontWeight={"bold"}>Lockup schedule</FormLabel>
-            <ScheduleEditList/>
+            <Stack>
+              {schedule.map((item, index) => (
+                <ScheduleEditItem key={index} index={index} items={schedule} callback={callback}/>
+              ))}
+            </Stack>
             <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
           </FormControl>
         )}
