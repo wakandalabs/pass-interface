@@ -10,7 +10,7 @@ pub fun main(address: Address): [WakandaPass.ReadOnly] {
 }
 `
 
-export function fetchWakandaPass(address) {
+export function fetchWakandaPassAllDetail(address) {
   if (address == null) return Promise.resolve(false)
 
   // prettier-ignore
