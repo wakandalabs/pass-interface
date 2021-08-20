@@ -2,12 +2,12 @@ import {Heading, Spacer, Stack} from "@chakra-ui/react";
 import {BeatLoader} from "react-spinners";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import React, {Suspense} from "react";
-import {useInitWakandaProfileHook} from "../../hooks/use-init-wakanda-profile.hook";
+import {useInitProfileHook} from "../../hooks/use-init-profile.hook";
 import {StatusItem} from "./StatusItem";
 
 export function WakandaProfileStatus() {
   const [cu] = useCurrentUserHook()
-  const init = useInitWakandaProfileHook(cu.addr)
+  const init = useInitProfileHook(cu.addr)
 
   return (
     <StatusItem name={"WakandaProfile"} init={init} />

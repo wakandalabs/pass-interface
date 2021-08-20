@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import React, {Suspense, useState} from "react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
-import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
+import {useWakandaPass} from "../../hooks/use-pass.hook";
 import {IDLE, PROCESSING} from "../../global/constants";
 import {ScheduleEditItem} from "./ScheduleEditItem";
 import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";

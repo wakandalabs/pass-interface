@@ -36,7 +36,7 @@ transaction(receiver: Address, metadata: {String: String}, lockupAmount: UFix64,
 }
 `
 
-export async function txMintWakandaPassCustom({receiver, metadata, lockupAmount, lockupSchedule}, opts = {}) {
+export async function txMintPassCustom({receiver, metadata, lockupAmount, lockupSchedule}, opts = {}) {
   // prettier-ignore
   invariant(receiver != null, "Tried to initialize an wakandapass but no receiver")
   invariant(metadata != null, "Tried to initialize an wakandapass but no metadata")

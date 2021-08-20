@@ -1,5 +1,5 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {fetchWkdtBalance} from "../flow/script.get-wkdt-balance";
+import {fetchWkdtBalance} from "../flow/script.fetch-wkdt-balance";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {txTransferWkdt} from "../flow/tx.transfer-wkdt";
 import {sleep} from "../util/sleep";

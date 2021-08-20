@@ -25,7 +25,7 @@ transaction {
 }
 `
 
-export async function txInitWakandaToken(address, opts = {}) {
+export async function txInitWkdt(address, opts = {}) {
   // prettier-ignore
   invariant(address != null, "Tried to initialize an account but no address was supplied")
 

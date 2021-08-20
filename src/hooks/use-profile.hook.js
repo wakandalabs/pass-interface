@@ -1,6 +1,6 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {fetchWakandaProfile} from "../flow/script.get-wakanda-profile";
-import {txUpdateWakandaProfile} from "../flow/tx.update-wakanda-profile";
+import {fetchWakandaProfile} from "../flow/script.fetch-profile";
+import {txUpdateProfile} from "../flow/tx.update-profile";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {sleep} from "../util/sleep";
 
@@ -17,7 +17,7 @@ export const statusAtom = atomFamily({
   default: IDLE,
 })
 
-export function useWakandaProfileHook(address) {
+export function useProfileHook(address) {
   const [profile, setProfile] = useRecoilState(valueAtom(address))
   const [status, setStatus] = useRecoilState(statusAtom(address))
 
@@ -32,7 +32,7 @@ export function useWakandaProfileHook(address) {
     status,
     refresh,
     async update(profile) {
-      await txUpdateWakandaProfile({profile}, {
+      await txUpdateProfile({profile}, {
         onStart() {
           setStatus(PROCESSING)
         },

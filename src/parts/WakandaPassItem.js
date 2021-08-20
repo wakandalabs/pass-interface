@@ -7,11 +7,11 @@ import {
   Stack,
   Text
 } from "@chakra-ui/react";
-import {useWakandaProfileHook} from "../hooks/use-wakanda-profile.hook";
+import {useProfileHook} from "../hooks/use-profile.hook";
 
 export function WakandaPassItem({pass}) {
-  const originOwner = useWakandaProfileHook(pass.originalOwner)
-  const owner = useWakandaProfileHook(pass.owner)
+  const originOwner = useProfileHook(pass.originalOwner)
+  const owner = useProfileHook(pass.owner)
 
   return (
     <Stack spacing={3} border="2px" borderColor="gray.600" borderRadius={"lg"} height="400px" maxW={"250px"} p={4}

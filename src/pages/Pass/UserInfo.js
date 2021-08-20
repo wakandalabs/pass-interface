@@ -10,14 +10,14 @@ import {
 } from "@chakra-ui/react";
 import {EditIcon} from "@chakra-ui/icons";
 import React, {Suspense} from "react";
-import {useWakandaProfileHook} from "../../hooks/use-wakanda-profile.hook";
+import {useProfileHook} from "../../hooks/use-profile.hook";
 import {useHistory} from "react-router-dom";
 import {PROCESSING} from "../../global/constants";
 import {AiOutlineGlobal, AiOutlineMail} from "react-icons/all";
 
 export function UserInfo({address}) {
   const {hasCopied, onCopy} = useClipboard(address)
-  const profile = useWakandaProfileHook(address)
+  const profile = useProfileHook(address)
   const history = useHistory()
 
   if (profile.profile === false || profile.profile === null || profile.status === PROCESSING) {

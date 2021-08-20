@@ -28,7 +28,7 @@ transaction {
 }
 `
 
-export async function txInitWakandaPass(address, opts = {}) {
+export async function txInitPass(address, opts = {}) {
   // prettier-ignore
   invariant(address != null, "Tried to initialize an account but no address was supplied")
 

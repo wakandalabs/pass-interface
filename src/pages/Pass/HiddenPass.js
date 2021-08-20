@@ -1,7 +1,6 @@
 import {Stack, Center, Spinner} from "@chakra-ui/react";
 import React, {Suspense} from "react";
-import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
-import {WakandaPassList} from "../../parts/WakandaPassList";
+import {useWakandaPass} from "../../hooks/use-pass.hook";
 
 export function HiddenPass({address}) {
   const wakandapass = useWakandaPass(address)

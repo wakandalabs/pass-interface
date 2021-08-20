@@ -31,13 +31,13 @@ transaction(name: String, avatar: String, color: String, bio: String, website: S
 `
 
 // prettier-ignore
-export function txUpdateWakandaProfile({profile}, opts = {}) {
-  invariant(profile.name != null, "txUpdateWakandaProfile() -- name required")
-  invariant(profile.avatar != null, "txUpdateWakandaProfile() -- avatar required")
-  invariant(profile.color != null, "txUpdateWakandaProfile() -- color required")
-  invariant(profile.bio != null, "txUpdateWakandaProfile() -- bio required")
-  invariant(profile.website != null, "txUpdateWakandaProfile() -- website required")
-  invariant(profile.email != null, "txUpdateWakandaProfile() -- email required")
+export function txUpdateProfile({profile}, opts = {}) {
+  invariant(profile.name != null, "txUpdateProfile() -- name required")
+  invariant(profile.avatar != null, "txUpdateProfile() -- avatar required")
+  invariant(profile.color != null, "txUpdateProfile() -- color required")
+  invariant(profile.bio != null, "txUpdateProfile() -- bio required")
+  invariant(profile.website != null, "txUpdateProfile() -- website required")
+  invariant(profile.email != null, "txUpdateProfile() -- email required")
 
   return tx([
     transaction(CODE),

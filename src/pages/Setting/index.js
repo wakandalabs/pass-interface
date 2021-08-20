@@ -3,13 +3,13 @@ import {
   Button, Center, FormControl, FormLabel, Heading, Input, Stack,
 } from "@chakra-ui/react";
 import React, {Suspense} from "react";
-import {useWakandaProfileHook} from "../../hooks/use-wakanda-profile.hook";
+import {useProfileHook} from "../../hooks/use-profile.hook";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {PROCESSING} from "../../global/constants";
 
 export function Setting() {
   const [cu, loggedIn] = useCurrentUserHook()
-  const profile = useWakandaProfileHook(cu.addr)
+  const profile = useProfileHook(cu.addr)
   const [post, setPost] = React.useState({"name": "", "avatar": "", "color": "", "bio": "", "website": "", "email": ""})
 
   if (!loggedIn || profile.profile === null) {

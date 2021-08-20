@@ -24,7 +24,7 @@ transaction(address: Address, metadata: {String: String}) {
 }
 `
 
-export async function txMintWakandaPass({receiver, metadata}, opts = {}) {
+export async function txMintPass({receiver, metadata}, opts = {}) {
   // prettier-ignore
   invariant(receiver != null, "Tried to initialize an wakandapass but no address")
   invariant(metadata != null, "Tried to initialize an wakandapass but no metadata")

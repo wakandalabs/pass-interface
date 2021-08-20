@@ -6,7 +6,7 @@ export function WakandaPassList({items}) {
   return (
     <SimpleGrid minChildWidth="230px" spacing="40px" mt={12}>
       {items.map(pass => (
-        <WakandaPassItem pass={pass}/>
+        <WakandaPassItem pass={pass} key={pass.id}/>
       ))}
     </SimpleGrid>
   )

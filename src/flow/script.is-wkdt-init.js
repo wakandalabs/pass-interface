@@ -9,7 +9,7 @@ pub fun main(address: Address): Bool {
 }
 `
 
-export function scriptIsWakandaTokenInit(address) {
+export function scriptIsWkdtInit(address) {
   if (address == null) return Promise.resolve(false)
 
   // prettier-ignore

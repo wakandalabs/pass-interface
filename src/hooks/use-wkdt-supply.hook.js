@@ -1,4 +1,4 @@
-import {fetchWkdtSupply} from "../flow/script.get-wkdt-supply";
+import {fetchWkdtSupply} from "../flow/script.fetch-wkdt-supply";
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {IDLE, PROCESSING} from "../global/constants";
 

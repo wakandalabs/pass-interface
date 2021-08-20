@@ -1,9 +1,9 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {txMintWakandaPass} from "../flow/tx.mint-wakanda-pass";
-import {fetchWakandaPassAllDetail} from "../flow/script.get-wakanda-pass-all";
+import {txMintPass} from "../flow/tx.mint-pass";
+import {fetchWakandaPassAllDetail} from "../flow/script.fetch-pass-all-detail";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {sleep} from "../util/sleep";
-import {txMintWakandaPassCustom} from "../flow/tx.mint-wakanda-pass-custom";
+import {txMintPassCustom} from "../flow/tx.mint-pass-custom";
 
 export const valueAtom = atomFamily({
   key: "wakandapass::state",
@@ -33,7 +33,7 @@ export function useWakandaPass(address) {
     status,
     refresh,
     async mint(receiver, metadata) {
-      await txMintWakandaPass({receiver, metadata}, {
+      await txMintPass({receiver, metadata}, {
         onStart() {
           setStatus(PROCESSING)
         },
@@ -51,7 +51,7 @@ export function useWakandaPass(address) {
       })
     },
     async mintWithCustom(receiver, metadata, lockupAmount, lockupSchedule) {
-      await txMintWakandaPassCustom({receiver, metadata, lockupAmount, lockupSchedule},{
+      await txMintPassCustom({receiver, metadata, lockupAmount, lockupSchedule},{
         onStart() {
           setStatus(PROCESSING)
         },

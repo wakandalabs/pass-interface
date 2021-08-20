@@ -1,13 +1,13 @@
 import {Heading, Spacer, Stack} from "@chakra-ui/react";
 import {BeatLoader} from "react-spinners";
-import {useInitWakandaPassHook} from "../../hooks/use-init-wakanda-pass.hook";
+import {useInitPassHook} from "../../hooks/use-init-pass.hook";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import React, {Suspense} from "react";
 import {StatusItem} from "./StatusItem";
 
 export function WakandaPassStatus() {
   const [cu] = useCurrentUserHook()
-  const init = useInitWakandaPassHook(cu.addr)
+  const init = useInitPassHook(cu.addr)
 
   return (
     <StatusItem name={"WakandaPass"} init={init} />
