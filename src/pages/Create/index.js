@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Button,
   Center,
@@ -6,23 +7,27 @@ import {
   FormHelperText,
   FormLabel,
   Heading,
-  Input, InputGroup, InputRightElement, Spacer,
+  Input, InputGroup, InputRightElement, NumberInput, NumberInputField, Spacer,
   Spinner,
   Stack, Switch, Text
 } from "@chakra-ui/react";
 import React, {Suspense, useState} from "react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {useWakandaPass} from "../../hooks/use-wakanpass.hook";
-import {PROCESSING} from "../../global/constants";
+import {IDLE, PROCESSING} from "../../global/constants";
 import {ScheduleEditItem} from "./ScheduleEditItem";
+import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
+import {fmtWkdt} from "../../util/fmt-wkdt";
 
 export function Create() {
   const [cu] = useCurrentUserHook()
   const [showLockup, setShowLockup] = React.useState(false)
   const [schedule, setSchedule] = useState([{"key": "", "value": ""}])
+  const [lockAmount, setLockAmount] = useState(0)
   const [post, setPost] = React.useState({})
   const [receiver, setReceiver] = React.useState(cu.addr)
   const wakandapass = useWakandaPass(cu.addr)
+  const wkdt = useWkdtBalanceHook(cu.addr)
 
   function handleSwitch() {
     setSchedule([{"key": "", "value": ""}])
@@ -81,16 +86,33 @@ export function Create() {
             <FormLabel fontWeight={"bold"} bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">Lockup WKDT and set
               schedule</FormLabel>
             <Spacer/>
-            {/*<Badge variant="subtle" colorScheme="cyan">Coming soon</Badge>*/}
-            <Switch id={"lockupSwitch"} value={showLockup} onChange={handleSwitch}/>
+
+            {wkdt.balance > 0 ? (
+              <Switch id={"lockupSwitch"} value={showLockup} onChange={handleSwitch}/>
+            ): (
+              <Badge variant="subtle" colorScheme="cyan">Need WKDT</Badge>
+            )}
           </Stack>
           <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
         </FormControl>
         {showLockup && (
           <FormControl id="lockupAmount">
             <FormLabel fontWeight={"bold"}>Lockup amount</FormLabel>
-            <Input placeholder="Amount of WKDT" disabled={wakandapass.status === PROCESSING} size="md" variant={"flushed"}/>
-            <FormHelperText>Total amount that's subject to lockup schedule</FormHelperText>
+            <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
+                         max={wkdt.balance} disabled={wakandapass.status === PROCESSING}
+                         errorBorderColor="red.200" mb={4} variant={"flushed"} size="md"
+                         onChange={(valueString) => setLockAmount(Number(valueString))}
+                         value={lockAmount} placeholder="Amount of WKDT"
+            >
+              <NumberInputField/>
+            </NumberInput>
+            <FormHelperText>Total amount that's subject to lockup schedule. Your balance:
+              {wkdt.status !== IDLE ? (
+                fmtWkdt(wkdt.balance)
+              ) : (
+                <Spinner size={"sm"}/>
+              ) }
+            </FormHelperText>
           </FormControl>
         )}
         {showLockup && (
