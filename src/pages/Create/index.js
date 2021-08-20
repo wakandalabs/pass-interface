@@ -30,7 +30,7 @@ export function Create() {
   const wkdt = useWkdtBalanceHook(cu.addr)
 
   function handleSwitch() {
-    setSchedule([{"key": "", "value": ""}])
+    setSchedule([{"key": "", "value": 0}])
     setShowLockup(!showLockup)
   }
 
@@ -38,7 +38,7 @@ export function Create() {
     setSchedule(items)
     let check = []
     for (const item of schedule) {
-      if (item["key"] === "" || item["value"] === "") {
+      if (item["key"] === "" || isNaN(item["key"])) {
         check.push(false)
       }else{
         check.push(true)
@@ -46,8 +46,20 @@ export function Create() {
     }
     if (check.find(item => !item) === undefined) {
       const r = [...schedule]
-      r.push({"key": "", "value": ""})
+      r.push({"key": "", "value": 0})
       setSchedule(r)
+    }
+  }
+
+  function handleMintPass() {
+    if (showLockup === false || wkdt.balance === 0){
+      wakandapass.mint(receiver, metadata)
+    } else if (showLockup === true && wkdt.balance > 0) {
+      let fmtSche = schedule.filter(item => (item["key"] !== "" && item["value"] !== "" && !isNaN(item["key"])))
+      wakandapass.mintWithCustom(receiver, metadata, lockAmount, fmtSche)
+    } else {
+      let fmtSche = schedule.filter(item => (item["key"] !== "" && item["value"] !== "" && !isNaN(item["key"])))
+      wakandapass.mintWithCustom(receiver, metadata, lockAmount, fmtSche)
     }
   }
 
@@ -87,11 +99,11 @@ export function Create() {
               schedule</FormLabel>
             <Spacer/>
 
-            {wkdt.balance > 0 ? (
+            {/*{wkdt.balance > 0 ? (*/}
               <Switch id={"lockupSwitch"} value={showLockup} onChange={handleSwitch}/>
-            ): (
-              <Badge variant="subtle" colorScheme="cyan">Need WKDT</Badge>
-            )}
+            {/*): (*/}
+            {/*  <Badge variant="subtle" colorScheme="cyan">Need WKDT</Badge>*/}
+            {/*)}*/}
           </Stack>
           <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
         </FormControl>
@@ -101,13 +113,13 @@ export function Create() {
             <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
                          max={wkdt.balance} disabled={wakandapass.status === PROCESSING}
                          errorBorderColor="red.200" mb={4} variant={"flushed"} size="md"
-                         onChange={(valueString) => setLockAmount(Number(valueString))}
+                         onChange={(valueString) => setLockAmount(valueString)}
                          value={lockAmount} placeholder="Amount of WKDT"
             >
               <NumberInputField/>
             </NumberInput>
             <FormHelperText>Total amount that's subject to lockup schedule. Your balance:
-              {wkdt.status !== IDLE ? (
+              {wkdt.status === IDLE ? (
                 fmtWkdt(wkdt.balance)
               ) : (
                 <Spinner size={"sm"}/>
@@ -137,7 +149,7 @@ export function Create() {
           </InputGroup>
           <FormHelperText>You can create WakandaPass for others</FormHelperText>
         </FormControl>
-        <Button size={"lg"} colorScheme={"cyan"} onClick={() => wakandapass.mint(receiver, metadata)}
+        <Button size={"lg"} colorScheme={"cyan"} onClick={handleMintPass}
                 isLoading={wakandapass.status === PROCESSING} loadingText={"Creating"}>Create item</Button>
       </Stack>
     </Center>
