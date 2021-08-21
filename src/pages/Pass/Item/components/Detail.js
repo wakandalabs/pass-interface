@@ -1,28 +1,17 @@
-import React, {Suspense, useState} from "react";
+import React, {Suspense} from "react";
 import {
-  Button, HStack,
-  Modal, ModalBody,
-  ModalCloseButton,
-  ModalContent, ModalFooter, ModalHeader,
-  ModalOverlay, NumberInput, NumberInputField,
-  Spacer, Spinner,
+  Button,
   Stack,
   Text,
-  useDisclosure
 } from "@chakra-ui/react";
 import {fmtWkdt} from "../../../../util/fmt-wkdt";
-import {IDLE, PROCESSING} from "../../../../global/constants";
-import {useWkdtBalanceHook} from "../../../../hooks/use-wkdt-balance.hook";
-import {useCurrentUserHook} from "../../../../hooks/use-current-user.hook";
-import {parseUFix64} from "../../../../global/common";
+import TransferWkdtToPass from "./TransferWkdtToPass";
+import {PROCESSING} from "../../../../global/constants";
+import SellPass from "./SellPass";
+import {TransferPass} from "./TransferPass";
+import {BurnPass} from "./BurnPass";
 
 export function Detail({pass}) {
-  const parse = (val) => val.replace(/^\$/, "")
-  const [cu] = useCurrentUserHook()
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const wkdt = useWkdtBalanceHook(cu.addr)
-  const [amount ,setAmount] = useState(0)
-
   return (
     <Stack mt={4}>
       <Text fontWeight={"bold"} fontSize={"sm"}>Owner: {pass.pass.owner}</Text>
@@ -30,46 +19,16 @@ export function Detail({pass}) {
       <Text fontWeight={"bold"} fontSize={"sm"}>Lockup amount: {fmtWkdt(pass.pass.lockupAmount, true)}</Text>
       <Text fontWeight={"bold"} fontSize={"sm"}>Total balance: {fmtWkdt(pass.pass.totalBalance, true)}</Text>
       <Stack direction={"row"}>
-        <Button size={"sm"} onClick={onOpen} disabled>Deposit</Button>
+        <TransferWkdtToPass pass={pass}/>
         <Button size={"sm"} onClick={pass.withdraw}
-                       disabled={Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Withdraw</Button>
+                disabled={pass.status === PROCESSING || Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Withdraw</Button>
         <Button size={"sm"}
-                disabled={Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Stake</Button>
+                disabled={pass.status === PROCESSING || Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Stake</Button>
+        <SellPass pass={pass}/>
+        <TransferPass pass={pass}/>
+        <BurnPass pass={pass} />
       </Stack>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Transfer WKDT to WakandaPass</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <HStack>
-              <Text fontSize={"xs"} fontWeight={"bold"}>My balance:</Text>
-              <Spacer/>
-              {wkdt.status === IDLE ? (
-                <Text fontSize={"xs"} fontWeight={"bold"}> {fmtWkdt(wkdt.balance)}</Text>
-              ) : (
-                <Spinner size="xs"/>
-              )}
-              <Text fontSize={"xs"} fontWeight={"bold"}>WKDT</Text>
-            </HStack>
-            <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
-                         max={wkdt.balance}
-                         errorBorderColor="red.200" mb={4}
-                         onChange={(valueString) => setAmount(parse(valueString))}
-                         value={amount}
-            >
-              <NumberInputField/>
-            </NumberInput>
-          </ModalBody>
-          <ModalFooter>
-            <Button variant={"ghost"} mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button colorScheme={"cyan"} isLoading={pass.status === PROCESSING}
-                    onClick={() => pass.deposit(parseUFix64(Number(amount)).toString())}>Deposit</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+
     </Stack>
   )
 }

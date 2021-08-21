@@ -13,7 +13,6 @@ export function Lockup({pass}){
           <Tr>
             <Th>Time</Th>
             <Th isNumeric>lockup</Th>
-            <Th isNumeric>WKDT</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -23,7 +22,6 @@ export function Lockup({pass}){
                 <Text>{parseDate(Number(item[0] * 1000))}</Text>
               </Td>
               <Td isNumeric>{Number(item[1])*100} %</Td>
-              <Td isNumeric>{Number(item[1]) * pass.pass.totalBalance}</Td>
             </Tr>
           ))}
         </Tbody>
