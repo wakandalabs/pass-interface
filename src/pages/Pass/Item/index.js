@@ -9,7 +9,7 @@ import {
   TabList,
   Tab,
   TabPanels,
-  TabPanel, Button, Spacer, Divider, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Skeleton,
+  TabPanel, Button, Spacer, Divider, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Skeleton, Badge,
 } from "@chakra-ui/react";
 import {useCurrentUserHook} from "../../../hooks/use-current-user.hook";
 import {useWakandaPassDetail} from "../../../hooks/use-pass-detail.hook";
@@ -27,6 +27,7 @@ export function PassItem() {
   }
 
   const schedule = Object.entries(pass.pass.lockupSchedule)
+  console.log(pass.pass.stakingInfo)
 
   return (
     <Stack pl={4} pr={4} minH={"60vh"} direction={"row"} spacing={8}>
@@ -41,10 +42,7 @@ export function PassItem() {
 
         <Text fontWeight={"bold"}>{pass.pass.metadata.description}</Text>
 
-        <Stack>
-          <Text fontWeight={"bold"} fontSize={"sm"}>Original owner</Text>
-          <Text fontWeight={"bold"}>{pass.pass.originalOwner}</Text>
-        </Stack>
+        <Text fontWeight={"bold"} fontSize={"sm"}>Original owner: {pass.pass.originalOwner}</Text>
 
         <Tabs>
           <TabList>
@@ -56,8 +54,7 @@ export function PassItem() {
           <TabPanels>
             <TabPanel>
               <Stack mt={4}>
-                <Text fontWeight={"bold"} fontSize={"sm"}>Owner</Text>
-                <Text fontWeight={"bold"}>{pass.pass.owner}</Text>
+                <Text fontWeight={"bold"} fontSize={"sm"}>Owner: {pass.pass.owner}</Text>
               </Stack>
             </TabPanel>
             <TabPanel>
@@ -95,12 +92,41 @@ export function PassItem() {
               </Stack>
             </TabPanel>
             <TabPanel>
-              <p>Stake</p>
-              <Text fontWeight={"bold"}>VIP: {pass.pass.vipTier}</Text>
-              {/*<Text>{pass.pass.stakingInfo}</Text>*/}
+              <Stack spacing={6} mt={4}>
+                <Stack direction={"row"} align={"center"}>
+                  <Text fontWeight={"bold"} fontSize={"sm"}>ID: {pass.pass.stakingInfo.id}</Text>
+                  <Badge>VIP: {pass.pass.vipTier}</Badge>
+                </Stack>
+                <Stack direction={"row"} align={"center"}>
+                  <Text fontWeight={"bold"} fontSize={"sm"}>Staked: {fmtWkdt(pass.pass.stakingInfo.tokensStaked, true)}</Text>
+                  <Spacer/>
+                  <Button size={"sm"}>Request unstake</Button>
+                </Stack>
+                <Stack direction={"row"} align={"center"}>
+                  <Text fontWeight={"bold"} fontSize={"sm"}>Requested to unstake: {fmtWkdt(pass.pass.stakingInfo.tokensRequestedToUnstake, true)}</Text>
+                  <Spacer/>
+                  <Button size={"sm"} disabled={Number(pass.pass.stakingInfo.tokensRequestedToUnstake) === 0}>Restake</Button>
+                </Stack>
+                <Stack direction={"row"} align={"center"}>
+                  <Text fontWeight={"bold"} fontSize={"sm"}>Committed: {fmtWkdt(pass.pass.stakingInfo.tokensCommitted, true)}</Text>
+                </Stack>
+                <Divider/>
+                <Stack direction={"row"} align={"center"}>
+                  <Text fontWeight={"bold"} fontSize={"sm"}>Rewarded: {fmtWkdt(pass.pass.stakingInfo.tokensRewarded, true)}</Text>
+                  <Spacer/>
+                  <Button size={"sm"} disabled={Number(pass.pass.stakingInfo.tokensRewarded) === 0}>Receive</Button>
+                </Stack>
+                <Stack direction={"row"} align={"center"}>
+                  <Text fontWeight={"bold"} fontSize={"sm"}>Unstaked: {fmtWkdt(pass.pass.stakingInfo.tokensUnstaked, true)}</Text>
+                  <Spacer/>
+                  <Button size={"sm"} disabled={Number(pass.pass.stakingInfo.tokensUnstaked) === 0}>Receive</Button>
+                </Stack>
+              </Stack>
+
+
+
             </TabPanel>
             <TabPanel>
-              <p>Stamp</p>
               {/*<Text>{pass.pass.stamps}</Text>*/}
             </TabPanel>
           </TabPanels>
