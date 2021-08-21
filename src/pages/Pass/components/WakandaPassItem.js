@@ -9,15 +9,17 @@ import {
 } from "@chakra-ui/react";
 import {useProfileHook} from "../../../hooks/use-profile.hook";
 import {useWakandaPassDetail} from "../../../hooks/use-pass-detail.hook";
+import {useHistory} from "react-router-dom";
 
 export function WakandaPassItem({address, id}) {
   const pass = useWakandaPassDetail(address, id).pass
   const originOwner = useProfileHook(pass.originalOwner)
   const owner = useProfileHook(pass.owner)
+  const history = useHistory()
 
   return (
     <Stack spacing={3} border="1px" boxShadow="xs" borderColor="gray.100" rounded="md" height="400px" maxW={"250px"} p={4}
-           direction={"column"}>
+           direction={"column"} onClick={() => history.push("/pass/" + id)}>
       <Stack direction={"row"} align={"center"}>
         <AvatarGroup size="sm" max={2}>
           <Avatar name={originOwner.profile.name} src={originOwner.profile.avatar} colorScheme={"cyan"}/>
