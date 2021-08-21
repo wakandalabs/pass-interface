@@ -1,15 +1,17 @@
 import React, {Suspense} from "react";
 import {
   Avatar,
-  AvatarGroup,
-  Heading,
+  AvatarGroup, Skeleton,
+  SkeletonCircle, SkeletonText,
   Spacer,
   Stack,
   Text
 } from "@chakra-ui/react";
 import {useProfileHook} from "../hooks/use-profile.hook";
+import {useWakandaPassDetail} from "../hooks/use-pass-detail.hook";
 
-export function WakandaPassItem({pass}) {
+export function WakandaPassItem({address, id}) {
+  const pass = useWakandaPassDetail(address, id).pass
   const originOwner = useProfileHook(pass.originalOwner)
   const owner = useProfileHook(pass.owner)
 
@@ -38,8 +40,14 @@ export function WakandaPassItem({pass}) {
 
 export function WakandaPassItemSkeleton() {
   return (
-    <Stack>
-      <Heading>Pass</Heading>
+    <Stack spacing={3} border="2px" borderColor="gray.600" borderRadius={"lg"} height="400px" maxW={"250px"} p={4}
+           direction={"column"}>
+      <SkeletonCircle size={10}/>
+      <Skeleton height="240px" />
+      <Spacer/>
+      <Stack spacing={0}>
+        <SkeletonText mt="4" noOfLines={4}/>
+      </Stack>
     </Stack>
   )
 }

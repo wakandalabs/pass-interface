@@ -9,7 +9,7 @@ pub fun main(address: Address, id: UInt64): WakandaPass.ReadOnly? {
 }
 `
 
-export function fetchWakandaPassById(address, id) {
+export function fetchWakandaPassDetail(address, id) {
   if (address == null) return Promise.resolve(false)
   if (id == null) return Promise.resolve(false)
   // prettier-ignore

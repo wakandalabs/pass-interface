@@ -1,12 +1,12 @@
 import React, {Suspense} from "react";
 import {Heading, SimpleGrid, Stack} from "@chakra-ui/react";
-import WakandaPassItem from "./WakandaPassItem";
+import WakandaPassIdItem from "./WakandaPassItem";
 
-export function WakandaPassList({items}) {
+export function WakandaPassList({address ,ids}) {
   return (
     <SimpleGrid minChildWidth="230px" spacing="40px" mt={12}>
-      {items.map(pass => (
-        <WakandaPassItem pass={pass} key={pass.id}/>
+      {ids.map(id => (
+        <WakandaPassIdItem address={address} id={id} key={id}/>
       ))}
     </SimpleGrid>
   )

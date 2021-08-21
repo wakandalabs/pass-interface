@@ -1,20 +1,20 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {txMintPass} from "../flow/tx.mint-pass";
-import {fetchWakandaPassAllDetail} from "../flow/script.fetch-pass-all-detail";
+import {fetchWakandaPassList} from "../flow/script.fetch-pass-list";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {sleep} from "../util/sleep";
 import {txMintPassCustom} from "../flow/tx.mint-pass-custom";
 
 export const valueAtom = atomFamily({
-  key: "wakandapass::state",
+  key: address => address + "-pass-list::state",
   default: selectorFamily({
-    key: "wakandapass::default",
-    get: address => async () => fetchWakandaPassAllDetail(address),
+    key: address => address + "-pass-list::default",
+    get: address => async () => fetchWakandaPassList(address),
   }),
 })
 
 export const statusAtom = atomFamily({
-  key: "wakandapass::status",
+  key: address => address + "-pass-list::status",
   default: IDLE,
 })
 
@@ -24,7 +24,7 @@ export function useWakandaPass(address) {
 
   async function refresh() {
     setStatus(PROCESSING)
-    await fetchWakandaPassAllDetail(address).then(setPass)
+    await fetchWakandaPassList(address).then(setPass)
     setStatus(IDLE)
   }
 
