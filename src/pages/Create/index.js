@@ -18,7 +18,7 @@ import {IDLE, PROCESSING} from "../../global/constants";
 import {ScheduleEditItem} from "./components/ScheduleEditItem";
 import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
 import {fmtWkdt} from "../../util/fmt-wkdt";
-import {toUFix64} from "../../global/common";
+import {parseUFix64} from "../../global/common";
 
 export function Create() {
   const [cu] = useCurrentUserHook()
@@ -58,7 +58,7 @@ export function Create() {
       wakandapass.mint(receiver, metadata)
     } else if (showLockup === true && wkdt.balance > 0) {
       let fmtSche = schedule.filter(item => (item["key"] !== "" && item["value"] !== "" && !isNaN(item["key"])))
-      wakandapass.mintWithCustom(receiver, metadata, toUFix64(Number(lockAmount)), fmtSche)
+      wakandapass.mintWithCustom(receiver, metadata, parseUFix64(Number(lockAmount)), fmtSche)
     }
   }
 

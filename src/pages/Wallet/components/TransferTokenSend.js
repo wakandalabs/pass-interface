@@ -4,7 +4,7 @@ import React from "react";
 import {useWkdtBalanceHook} from "../../../hooks/use-wkdt-balance.hook";
 import {fmtWkdt} from "../../../util/fmt-wkdt";
 import {IDLE} from "../../../global/constants";
-import {toUFix64} from "../../../global/common";
+import {parseUFix64} from "../../../global/common";
 
 export function TransferTokenSend({address}) {
   const parse = (val) => val.replace(/^\$/, "")
@@ -41,7 +41,7 @@ export function TransferTokenSend({address}) {
         <Button
           isLoading={wkdt.status !== IDLE}
           spinner={<BeatLoader size={8} color="white"/>}
-          onClick={() => wkdt.transfer(toUFix64(Number(amount)).toString(), to)}
+          onClick={() => wkdt.transfer(parseUFix64(Number(amount)).toString(), to)}
         >Send</Button>
       </HStack>
       <Text fontSize="xs" textColor={"gray.500"}>You may not be able to send transactions to exchanges

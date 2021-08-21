@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
-import {Button, Divider, Spacer, Stack, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr} from "@chakra-ui/react";
+import {Divider, Stack, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr} from "@chakra-ui/react";
 import {fmtWkdt} from "../../../../util/fmt-wkdt";
-import {toDate} from "../../../../global/common";
+import {parseDate} from "../../../../global/common";
 
 export function Lockup({pass}){
   const schedule = Object.entries(pass.pass.lockupSchedule)
@@ -24,7 +24,7 @@ export function Lockup({pass}){
           {schedule.map((item) => (
             <Tr>
               <Td>
-                <Text>{toDate(Number(item[0] * 1000))}</Text>
+                <Text>{parseDate(Number(item[0] * 1000))}</Text>
               </Td>
               <Td>{Number(item[1])}</Td>
               <Td isNumeric>0</Td>

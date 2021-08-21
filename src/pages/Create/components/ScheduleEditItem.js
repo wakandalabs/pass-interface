@@ -1,6 +1,6 @@
 import {Box, Input, Stack, Text} from "@chakra-ui/react";
 import {useState} from "react";
-import {toUFix64} from "../../../global/common";
+import {parseUFix64} from "../../../global/common";
 
 export function ScheduleEditItem({index, items, callback}) {
   const [date, setDate] = useState("")
@@ -8,13 +8,13 @@ export function ScheduleEditItem({index, items, callback}) {
 
   function handleDate(date) {
     setDate(date)
-    items[index] = {"key": toUFix64(Date.parse(date)/1000).toString(), "value": toUFix64(Number(percent)).toString()}
+    items[index] = {"key": parseUFix64(Date.parse(date)/1000).toString(), "value": parseUFix64(Number(percent)).toString()}
     callback(items)
   }
 
   function handleValue(percent) {
     setPercent(percent)
-    items[index] = {"key": toUFix64(Date.parse(date)/1000).toString(), "value": toUFix64(Number(percent)).toString()}
+    items[index] = {"key": parseUFix64(Date.parse(date)/1000).toString(), "value": parseUFix64(Number(percent)).toString()}
     callback(items)
   }
 
