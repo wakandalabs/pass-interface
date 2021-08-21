@@ -67,7 +67,7 @@ export function PassItem() {
                 <Stack direction={"row"} align={"center"}>
                   <Text fontWeight={"bold"} fontSize={"sm"}>Idle balance: {fmtWkdt(pass.pass.idleBalance, true)}</Text>
                   <Spacer/>
-                  <Button size={"sm"}
+                  <Button size={"sm"} onClick={pass.withdraw}
                           disabled={Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Receive</Button>
                 </Stack>
                 <Divider/>
