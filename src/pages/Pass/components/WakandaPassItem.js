@@ -19,7 +19,6 @@ export function WakandaPassItem({address, id}) {
   const owner = useProfileHook(pass.pass.owner)
   const history = useHistory()
 
-  console.log(pass)
   return (
     <Stack spacing={3} border="1px" boxShadow="xs" borderColor="gray.100" rounded="md" height="400px" maxW={"250px"}
            p={4}

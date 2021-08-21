@@ -1,0 +1,59 @@
+import React, {Suspense} from "react";
+import {Button, Divider, Spacer, Stack, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr} from "@chakra-ui/react";
+import {fmtWkdt} from "../../../../util/fmt-wkdt";
+import {toDate} from "../../../../global/common";
+
+export function Lockup({pass}){
+  const schedule = Object.entries(pass.pass.lockupSchedule)
+
+  return (
+    <Stack spacing={6} mt={4}>
+      <Text fontWeight={"bold"} fontSize={"sm"}>Lockup
+        amount: {fmtWkdt(pass.pass.lockupAmount, false)} / {fmtWkdt(pass.pass.totalBalance, true)}</Text>
+      <Stack direction={"row"} align={"center"}>
+        <Text fontWeight={"bold"} fontSize={"sm"}>Idle balance: {fmtWkdt(pass.pass.idleBalance, true)}</Text>
+        <Spacer/>
+        <Button size={"sm"} onClick={pass.withdraw}
+                disabled={Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Receive</Button>
+        <Button size={"sm"}
+                disabled={Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Stake</Button>
+      </Stack>
+      <Divider/>
+      <Table variant="simple">
+        <TableCaption>Lockup schedule</TableCaption>
+        <Thead>
+          <Tr>
+            <Th>Time</Th>
+            <Th>lockup</Th>
+            <Th isNumeric>WKDT</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {schedule.map((item) => (
+            <Tr>
+              <Td>
+                <Text>{toDate(Number(item[0] * 1000))}</Text>
+              </Td>
+              <Td>{Number(item[1])}</Td>
+              <Td isNumeric>0</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </Stack>
+  )
+}
+
+export function LockupSkeleton(){
+  return (
+    <></>
+  )
+}
+
+export default function WrappedLockupSkeleton(props){
+  return(
+    <Suspense fallback={<LockupSkeleton/>}>
+      <Lockup {...props}/>
+    </Suspense>
+  )
+}
