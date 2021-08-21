@@ -10,14 +10,6 @@ export function Lockup({pass}){
     <Stack spacing={6} mt={4}>
       <Text fontWeight={"bold"} fontSize={"sm"}>Lockup
         amount: {fmtWkdt(pass.pass.lockupAmount, false)} / {fmtWkdt(pass.pass.totalBalance, true)}</Text>
-      <Stack direction={"row"} align={"center"}>
-        <Text fontWeight={"bold"} fontSize={"sm"}>Idle balance: {fmtWkdt(pass.pass.idleBalance, true)}</Text>
-        <Spacer/>
-        <Button size={"sm"} onClick={pass.withdraw}
-                disabled={Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Receive</Button>
-        <Button size={"sm"}
-                disabled={Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Stake</Button>
-      </Stack>
       <Divider/>
       <Table variant="simple">
         <TableCaption>Lockup schedule</TableCaption>

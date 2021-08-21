@@ -4,6 +4,7 @@ import {fetchWakandaPassDetail} from "../flow/script.fetch-pass-detail";
 import {txWithdrawAllFromPass} from "../flow/tx.withdraw-all-from-pass";
 import {sleep} from "../util/sleep";
 import {useWkdtBalanceHook} from "./use-wkdt-balance.hook";
+import {txTransferWkdtToPass} from "../flow/tx.transfer-wkdt-to-pass";
 
 export const valueAtom = atomFamily({
   key: ({address, id}) => address + "-pass-id-" + id + "::state",
@@ -35,6 +36,25 @@ export function useWakandaPassDetail(address, id) {
     refresh,
     async withdraw() {
       await txWithdrawAllFromPass({id}, {
+        onStart() {
+          setStatus(PROCESSING)
+        },
+        async onSuccess() {
+          await refresh()
+          await wkdt.refresh()
+          setStatus(SUCCESS)
+        },
+        async onComplete() {
+          await sleep(IDLE_DELAY)
+          setStatus(IDLE)
+        },
+        async onError() {
+          setStatus(ERROR)
+        },
+      })
+    },
+    async deposit(amount) {
+      await txTransferWkdtToPass({amount, id}, {
         onStart() {
           setStatus(PROCESSING)
         },
