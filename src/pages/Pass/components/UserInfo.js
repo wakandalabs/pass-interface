@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/react";
 import {EditIcon} from "@chakra-ui/icons";
 import React, {Suspense} from "react";
-import {useProfileHook} from "../../hooks/use-profile.hook";
+import {useProfileHook} from "../../../hooks/use-profile.hook";
 import {useHistory} from "react-router-dom";
-import {PROCESSING} from "../../global/constants";
+import {PROCESSING} from "../../../global/constants";
 import {AiOutlineGlobal, AiOutlineMail} from "react-icons/all";
 
 export function UserInfo({address}) {

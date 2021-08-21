@@ -1,8 +1,8 @@
 import {Heading, Spacer, Stack} from "@chakra-ui/react";
 import {BeatLoader} from "react-spinners";
-import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
+import {useCurrentUserHook} from "../../../hooks/use-current-user.hook";
 import React, {Suspense} from "react";
-import {useInitWkdtHook} from "../../hooks/use-init-wkdt.hook";
+import {useInitWkdtHook} from "../../../hooks/use-init-wkdt.hook";
 import {StatusItem} from "./StatusItem";
 
 export function WakandaTokenStatus() {

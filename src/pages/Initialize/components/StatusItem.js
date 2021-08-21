@@ -1,5 +1,5 @@
 import {Button, Heading, Spacer, Stack} from "@chakra-ui/react";
-import {IDLE, PROCESSING} from "../../global/constants";
+import {IDLE, PROCESSING} from "../../../global/constants";
 import {BeatLoader} from "react-spinners";
 import {CheckCircleIcon} from "@chakra-ui/icons";
 import React from "react";

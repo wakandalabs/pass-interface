@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import {TransferTokenReceive} from "./TransferTokenReceive";
 import {TransferTokenSend} from "./TransferTokenSend";
-import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
+import {useCurrentUserHook} from "../../../hooks/use-current-user.hook";
 
 export function TransferToken() {
   const {isOpen, onOpen, onClose} = useDisclosure()

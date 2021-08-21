@@ -1,6 +1,6 @@
 import {Box, Input, Stack, Text} from "@chakra-ui/react";
 import {useState} from "react";
-import {toUFix64} from "../../global/common";
+import {toUFix64} from "../../../global/common";
 
 export function ScheduleEditItem({index, items, callback}) {
   const [date, setDate] = useState("")

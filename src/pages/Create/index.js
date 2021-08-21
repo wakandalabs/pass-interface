@@ -15,7 +15,7 @@ import React, {Suspense, useState} from "react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {useWakandaPass} from "../../hooks/use-pass-list.hook";
 import {IDLE, PROCESSING} from "../../global/constants";
-import {ScheduleEditItem} from "./ScheduleEditItem";
+import {ScheduleEditItem} from "./components/ScheduleEditItem";
 import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
 import {fmtWkdt} from "../../util/fmt-wkdt";
 import {toUFix64} from "../../global/common";

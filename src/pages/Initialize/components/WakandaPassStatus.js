@@ -1,7 +1,7 @@
 import {Heading, Spacer, Stack} from "@chakra-ui/react";
 import {BeatLoader} from "react-spinners";
-import {useInitPassHook} from "../../hooks/use-init-pass.hook";
-import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
+import {useInitPassHook} from "../../../hooks/use-init-pass.hook";
+import {useCurrentUserHook} from "../../../hooks/use-current-user.hook";
 import React, {Suspense} from "react";
 import {StatusItem} from "./StatusItem";
 

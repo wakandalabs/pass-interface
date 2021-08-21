@@ -1,9 +1,9 @@
 import {Box, Center, Heading, Spinner, Stack} from "@chakra-ui/react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import React from "react";
-import WakandaPassStatus from "./WakandaPassStatus";
-import WakandaTokenStatus from "./WakandaTokenStatus";
-import WakandaProfileStatus from "./WakandaProfileStatus";
+import WakandaPassStatus from "./components/WakandaPassStatus";
+import WakandaTokenStatus from "./components/WakandaTokenStatus";
+import WakandaProfileStatus from "./components/WakandaProfileStatus";
 
 export function Initialize() {
   const [cu, loggedIn] = useCurrentUserHook()

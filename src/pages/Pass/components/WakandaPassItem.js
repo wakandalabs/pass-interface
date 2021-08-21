@@ -7,8 +7,8 @@ import {
   Stack,
   Text
 } from "@chakra-ui/react";
-import {useProfileHook} from "../hooks/use-profile.hook";
-import {useWakandaPassDetail} from "../hooks/use-pass-detail.hook";
+import {useProfileHook} from "../../../hooks/use-profile.hook";
+import {useWakandaPassDetail} from "../../../hooks/use-pass-detail.hook";
 
 export function WakandaPassItem({address, id}) {
   const pass = useWakandaPassDetail(address, id).pass
@@ -16,7 +16,7 @@ export function WakandaPassItem({address, id}) {
   const owner = useProfileHook(pass.owner)
 
   return (
-    <Stack spacing={3} border="2px" borderColor="gray.600" borderRadius={"lg"} height="400px" maxW={"250px"} p={4}
+    <Stack spacing={3} border="1px" boxShadow="xs" borderColor="gray.100" rounded="md" height="400px" maxW={"250px"} p={4}
            direction={"column"}>
       <Stack direction={"row"} align={"center"}>
         <AvatarGroup size="sm" max={2}>

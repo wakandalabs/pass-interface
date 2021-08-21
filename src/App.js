@@ -1,6 +1,6 @@
 import Providers from "./global/providers.comp";
-import TheHeader from "./parts/TheHeader";
-import InitializeAlert from "./parts/InitializeAlert";
+import TheHeader from "./components/TheHeader";
+import InitializeAlert from "./components/InitializeAlert";
 import {Route, Switch} from "react-router-dom";
 import Explore from "./pages/Explore";
 import Following from "./pages/Following";
@@ -12,7 +12,7 @@ import Initialize from "./pages/Initialize";
 import Setting from "./pages/Setting";
 import Create from "./pages/Create";
 import NotFound from "./pages/not-found";
-import TheFooter from "./parts/TheFooter";
+import TheFooter from "./components/TheFooter";
 import React from "react";
 
 export default function App(){

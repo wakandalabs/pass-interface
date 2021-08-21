@@ -1,8 +1,8 @@
 import {Center, Spinner, Stack} from "@chakra-ui/react";
 import React, {Suspense} from "react";
-import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
-import {useWakandaPassIds} from "../../hooks/use-pass-ids.hook";
-import {WakandaPassList} from "../../parts/WakandaPassList";
+import {useCurrentUserHook} from "../../../hooks/use-current-user.hook";
+import {useWakandaPassIds} from "../../../hooks/use-pass-ids.hook";
+import {WakandaPassList} from "./WakandaPassList";
 
 
 export function OwnedPass({address}) {

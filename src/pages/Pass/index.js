@@ -9,11 +9,11 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import UserInfo, {UserInfoSkeleton} from "./UserInfo";
-import SalePass from "./SalePass";
-import OwnedPass from "./OwnedPass";
-import LikedPass from "./LikedPass";
-import About from "./About";
+import UserInfo, {UserInfoSkeleton} from "./components/UserInfo";
+import SalePass from "./components/SalePass";
+import OwnedPass from "./components/OwnedPass";
+import LikedPass from "./components/LikedPass";
+import About from "./components/About";
 import {useHistory} from "react-router-dom";
 import qs from "qs";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";

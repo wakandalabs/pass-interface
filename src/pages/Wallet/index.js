@@ -9,7 +9,7 @@ import {
   StatNumber,
   Button, Text, Switch, Center, Spacer, Box, Divider, IconButton, Skeleton
 } from "@chakra-ui/react";
-import {TransferToken} from "./TransferToken";
+import {TransferToken} from "./components/TransferToken";
 import {fmtWkdt} from "../../util/fmt-wkdt";
 import {fmtFlow} from "../../util/fmt-flow";
 import {useFlowBalanceHook} from "../../hooks/use-flow-balance.hook";

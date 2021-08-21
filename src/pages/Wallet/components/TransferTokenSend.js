@@ -1,10 +1,10 @@
 import {Box, Button, HStack, Input, NumberInput, NumberInputField, Spacer, Spinner, Text} from "@chakra-ui/react";
 import {BeatLoader} from "react-spinners";
 import React from "react";
-import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
-import {fmtWkdt} from "../../util/fmt-wkdt";
-import {IDLE} from "../../global/constants";
-import {toUFix64} from "../../global/common";
+import {useWkdtBalanceHook} from "../../../hooks/use-wkdt-balance.hook";
+import {fmtWkdt} from "../../../util/fmt-wkdt";
+import {IDLE} from "../../../global/constants";
+import {toUFix64} from "../../../global/common";
 
 export function TransferTokenSend({address}) {
   const parse = (val) => val.replace(/^\$/, "")
