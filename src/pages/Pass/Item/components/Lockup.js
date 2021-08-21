@@ -21,8 +21,8 @@ export function Lockup({pass}){
           </Tr>
         </Thead>
         <Tbody>
-          {schedule.map((item) => (
-            <Tr>
+          {schedule.map((item,index) => (
+            <Tr key={index}>
               <Td>
                 <Text>{parseDate(Number(item[0] * 1000))}</Text>
               </Td>

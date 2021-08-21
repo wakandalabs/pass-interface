@@ -5,8 +5,8 @@ export function Stamp({pass}){
   const stamps = pass.pass.stamps
   return (
     <Stack>
-      {stamps.map(item => (
-        <Text>{item}</Text>
+      {stamps.map((item, index) => (
+        <Text key={index}>{item}</Text>
       ))}
     </Stack>
   )

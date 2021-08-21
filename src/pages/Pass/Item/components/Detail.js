@@ -63,7 +63,7 @@ export function Detail({pass}) {
             <Button variant={"ghost"} mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme={"cyan"} onClick={() => pass.deposit(parseUFix64(amount).toString())}>Deposit</Button>
+            <Button colorScheme={"cyan"} onClick={() => pass.deposit(parseUFix64(Number(amount)).toString())}>Deposit</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
