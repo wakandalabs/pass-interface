@@ -11,7 +11,7 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import {fmtWkdt} from "../../../../util/fmt-wkdt";
-import {IDLE} from "../../../../global/constants";
+import {IDLE, PROCESSING} from "../../../../global/constants";
 import {useWkdtBalanceHook} from "../../../../hooks/use-wkdt-balance.hook";
 import {useCurrentUserHook} from "../../../../hooks/use-current-user.hook";
 import {parseUFix64} from "../../../../global/common";
@@ -28,7 +28,7 @@ export function Detail({pass}) {
       <Text fontWeight={"bold"} fontSize={"sm"}>Owner: {pass.pass.owner}</Text>
       <Text fontWeight={"bold"} fontSize={"sm"}>Idle balance: {fmtWkdt(pass.pass.idleBalance, true)}</Text>
       <Stack direction={"row"}>
-        <Button size={"sm"} onClick={onOpen}>Deposit</Button>
+        <Button size={"sm"} onClick={onOpen} disabled>Deposit</Button>
         <Button size={"sm"} onClick={pass.withdraw}
                        disabled={Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Withdraw</Button>
         <Button size={"sm"}
@@ -63,7 +63,8 @@ export function Detail({pass}) {
             <Button variant={"ghost"} mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme={"cyan"} onClick={() => pass.deposit(parseUFix64(Number(amount)).toString())}>Deposit</Button>
+            <Button colorScheme={"cyan"} isLoading={pass.status === PROCESSING}
+                    onClick={() => pass.deposit(parseUFix64(Number(amount)).toString())}>Deposit</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
