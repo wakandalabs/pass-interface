@@ -12,20 +12,16 @@ import {
 import UserInfo, {UserInfoSkeleton} from "./UserInfo";
 import SalePass from "./SalePass";
 import OwnedPass from "./OwnedPass";
-import CreatedPass from "./CreatedPass";
 import LikedPass from "./LikedPass";
 import About from "./About";
 import {useHistory} from "react-router-dom";
 import qs from "qs";
-import HiddenPass from "./HiddenPass";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 
 export function Pass() {
   const tabs = [
     {key: "sale", label: "Sale", path: "sale"},
     {key: "owned", label: "Owned", path: "owned"},
-    {key: "created", label: "Created", path: "created"},
-    {key: "hidden", label: "Hidden", path: "hidden"},
     {key: "liked", label: "Liked", path: "liked"},
     {key: "about", label: "About", path: "about"},
   ]
@@ -74,12 +70,6 @@ export function Pass() {
             </TabPanel>
             <TabPanel>
               <OwnedPass address={address}/>
-            </TabPanel>
-            <TabPanel>
-              <CreatedPass address={address}/>
-            </TabPanel>
-            <TabPanel>
-              <HiddenPass address={address}/>
             </TabPanel>
             <TabPanel>
               <LikedPass address={address}/>

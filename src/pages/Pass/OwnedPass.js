@@ -1,6 +1,5 @@
 import {Center, Spinner, Stack} from "@chakra-ui/react";
 import React, {Suspense} from "react";
-import {CreatedPassSkeleton} from "./CreatedPass";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {useWakandaPassIds} from "../../hooks/use-pass-ids.hook";
 import {WakandaPassIdsList} from "../../parts/WakandaPassIdsList";
@@ -8,17 +7,17 @@ import {WakandaPassIdsList} from "../../parts/WakandaPassIdsList";
 
 export function OwnedPass({address}) {
   const [cu, loggedIn] = useCurrentUserHook()
-  const passes = useWakandaPassIds(address)
+  const ids = useWakandaPassIds(address)
 
   if (!loggedIn) {
     return (
-      <CreatedPassSkeleton />
+      <OwnedPassSkeleton />
     )
   }
 
   return (
     <Stack>
-      <WakandaPassIdsList ids={passes.ids} address={address}/>
+      <WakandaPassIdsList ids={ids.ids} address={address}/>
     </Stack>
   )
 }
