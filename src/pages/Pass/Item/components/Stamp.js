@@ -1,7 +1,14 @@
 import React, {Suspense} from "react";
+import {Stack, Text} from "@chakra-ui/react";
+
 export function Stamp({pass}){
+  const stamps = pass.pass.stamps
   return (
-    <></>
+    <Stack>
+      {stamps.map(item => (
+        <Text>{item}</Text>
+      ))}
+    </Stack>
   )
 }
 
