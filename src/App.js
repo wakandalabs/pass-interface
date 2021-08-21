@@ -6,6 +6,9 @@ import Explore from "./pages/Explore";
 import Following from "./pages/Following";
 import Search from "./pages/Search";
 import Pass from "./pages/Pass";
+import PassItem from "./pages/Pass/Item";
+import UserPass from "./pages/User";
+import UserPassItem from "./pages/User/Item";
 import Wkdt from "./pages/Wkdt";
 import Wallet from "./pages/Wallet";
 import Initialize from "./pages/Initialize";
@@ -25,6 +28,9 @@ export default function App(){
         <Route exact path="/following" component={Following}/>
         <Route exact path="/search" component={Search}/>
         <Route exact path="/pass" component={Pass}/>
+        <Route exact path="/pass/:id" component={PassItem}/>
+        <Route exact path="/:account" component={UserPass}/>
+        <Route exact path="/:account/:id" component={UserPassItem}/>
         <Route exact path="/wkdt" component={Wkdt}/>
         <Route exact path="/wallet" component={Wallet}/>
         <Route exact path="/initialize" component={Initialize}/>

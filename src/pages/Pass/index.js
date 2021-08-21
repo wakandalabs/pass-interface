@@ -18,7 +18,7 @@ import {useHistory} from "react-router-dom";
 import qs from "qs";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 
-export function Pass() {
+export function Account() {
   const tabs = [
     {key: "sale", label: "Sale", path: "sale"},
     {key: "owned", label: "Owned", path: "owned"},
@@ -84,10 +84,10 @@ export function Pass() {
   );
 }
 
-export default function WrappedPass() {
+export default function WrappedAccount() {
   return (
     <Suspense fallback={<UserInfoSkeleton />}>
-      <Pass/>
+      <Account/>
     </Suspense>
   )
 }
