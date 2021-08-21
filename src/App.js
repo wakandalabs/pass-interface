@@ -29,13 +29,13 @@ export default function App(){
         <Route exact path="/search" component={Search}/>
         <Route exact path="/pass" component={Pass}/>
         <Route exact path="/pass/:id" component={PassItem}/>
-        <Route exact path="/:account" component={UserPass}/>
-        <Route exact path="/:account/:id" component={UserPassItem}/>
         <Route exact path="/wkdt" component={Wkdt}/>
         <Route exact path="/wallet" component={Wallet}/>
         <Route exact path="/initialize" component={Initialize}/>
         <Route exact path="/setting" component={Setting}/>
         <Route exact path="/create" component={Create}/>
+        <Route exact path="/:account" component={UserPass}/>
+        <Route exact path="/:account/:id" component={UserPassItem}/>
         <Route component={NotFound}/>
       </Switch>
       <TheFooter/>
