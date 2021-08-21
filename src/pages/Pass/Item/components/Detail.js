@@ -27,6 +27,8 @@ export function Detail({pass}) {
     <Stack mt={4}>
       <Text fontWeight={"bold"} fontSize={"sm"}>Owner: {pass.pass.owner}</Text>
       <Text fontWeight={"bold"} fontSize={"sm"}>Idle balance: {fmtWkdt(pass.pass.idleBalance, true)}</Text>
+      <Text fontWeight={"bold"} fontSize={"sm"}>Lockup amount: {fmtWkdt(pass.pass.lockupAmount, true)}</Text>
+      <Text fontWeight={"bold"} fontSize={"sm"}>Total balance: {fmtWkdt(pass.pass.totalBalance, true)}</Text>
       <Stack direction={"row"}>
         <Button size={"sm"} onClick={onOpen} disabled>Deposit</Button>
         <Button size={"sm"} onClick={pass.withdraw}

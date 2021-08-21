@@ -1,6 +1,5 @@
 import React, {Suspense} from "react";
-import {Divider, Stack, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr} from "@chakra-ui/react";
-import {fmtWkdt} from "../../../../util/fmt-wkdt";
+import {Stack, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr} from "@chakra-ui/react";
 import {parseDate} from "../../../../global/common";
 
 export function Lockup({pass}){
@@ -8,15 +7,12 @@ export function Lockup({pass}){
 
   return (
     <Stack spacing={6} mt={4}>
-      <Text fontWeight={"bold"} fontSize={"sm"}>Lockup
-        amount: {fmtWkdt(pass.pass.lockupAmount, false)} / {fmtWkdt(pass.pass.totalBalance, true)}</Text>
-      <Divider/>
       <Table variant="simple">
         <TableCaption>Lockup schedule</TableCaption>
         <Thead>
           <Tr>
             <Th>Time</Th>
-            <Th>lockup</Th>
+            <Th isNumeric>lockup</Th>
             <Th isNumeric>WKDT</Th>
           </Tr>
         </Thead>
@@ -26,8 +22,8 @@ export function Lockup({pass}){
               <Td>
                 <Text>{parseDate(Number(item[0] * 1000))}</Text>
               </Td>
-              <Td>{Number(item[1])}</Td>
-              <Td isNumeric>0</Td>
+              <Td isNumeric>{Number(item[1])*100} %</Td>
+              <Td isNumeric>{Number(item[1]) * pass.pass.totalBalance}</Td>
             </Tr>
           ))}
         </Tbody>
