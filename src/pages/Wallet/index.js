@@ -18,6 +18,7 @@ import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {IDLE, PROCESSING} from "../../global/constants";
 import {BeatLoader} from "react-spinners";
 import {RepeatIcon} from "@chakra-ui/icons";
+import {TheFooter} from "../../components/TheFooter";
 
 export function Wallet() {
   const [cu, loggedIn] = useCurrentUserHook()
@@ -251,6 +252,7 @@ export default function WrappedWallet() {
   return (
     <Suspense fallback={<WalletSkeleton/>}>
       <Wallet/>
+      <TheFooter/>
     </Suspense>
   )
 }

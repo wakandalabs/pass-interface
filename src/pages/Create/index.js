@@ -152,6 +152,7 @@ export function Create() {
         </FormControl>
         <Button size={"lg"} colorScheme={"cyan"} onClick={handleMintPass}
                 isLoading={wakandapass.status === PROCESSING} loadingText={"Creating"}>Create item</Button>
+        <Stack h={20}/>
       </Stack>
     </Center>
   )

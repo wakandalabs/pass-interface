@@ -1,6 +1,7 @@
 import React, {Suspense} from 'react';
 import {Box, Center, Spinner} from "@chakra-ui/react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
+import {TheFooter} from "../../components/TheFooter";
 
 export function Following() {
   const [cu, loggedIn] = useCurrentUserHook()
@@ -30,6 +31,7 @@ export default function WrappedFollowing() {
   return (
     <Suspense fallback={<FollowingSkeleton />}>
       <Following/>
+      <TheFooter/>
     </Suspense>
 
   )

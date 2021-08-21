@@ -9,6 +9,7 @@ import {
   Select, Spinner, Stack
 } from "@chakra-ui/react";
 import {Search2Icon} from "@chakra-ui/icons";
+import {TheFooter} from "../../components/TheFooter";
 
 export function Search() {
   return (
@@ -51,6 +52,7 @@ export default function WrappedSearch() {
   return (
     <Suspense fallback={<SearchSkeleton />}>
       <Search/>
+      <TheFooter/>
     </Suspense>
   )
 }

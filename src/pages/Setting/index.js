@@ -6,6 +6,7 @@ import React, {Suspense} from "react";
 import {useProfileHook} from "../../hooks/use-profile.hook";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import {PROCESSING} from "../../global/constants";
+import {TheFooter} from "../../components/TheFooter";
 
 export function Setting() {
   const [cu, loggedIn] = useCurrentUserHook()
@@ -28,8 +29,6 @@ export function Setting() {
       "email": profile.profile.email
     })
   }
-
-  console.log(profile.status)
 
   return (
     <Center>
@@ -119,6 +118,7 @@ export default function WrappedSetting() {
   return (
     <Suspense fallback={<SettingSkeleton/>}>
       <Setting/>
+      <TheFooter/>
     </Suspense>
   )
 }

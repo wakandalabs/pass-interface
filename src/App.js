@@ -15,7 +15,6 @@ import Initialize from "./pages/Initialize";
 import Setting from "./pages/Setting";
 import Create from "./pages/Create";
 import NotFound from "./pages/not-found";
-import TheFooter from "./components/TheFooter";
 import React from "react";
 
 export default function App(){
@@ -38,7 +37,6 @@ export default function App(){
         <Route exact path="/:account/:id" component={UserPassItem}/>
         <Route component={NotFound}/>
       </Switch>
-      <TheFooter/>
     </Providers>
   )
 }

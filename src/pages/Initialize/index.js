@@ -1,9 +1,10 @@
 import {Box, Center, Heading, Spinner, Stack} from "@chakra-ui/react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
-import React from "react";
+import React, {Suspense} from "react";
 import WakandaPassStatus from "./components/WakandaPassStatus";
 import WakandaTokenStatus from "./components/WakandaTokenStatus";
 import WakandaProfileStatus from "./components/WakandaProfileStatus";
+import {TheFooter} from "../../components/TheFooter";
 
 export function Initialize() {
   const [cu, loggedIn] = useCurrentUserHook()
@@ -22,9 +23,10 @@ export function Initialize() {
         <Box mb={8}>
           <Heading>Initialize account</Heading>
         </Box>
-        <WakandaTokenStatus />
-        <WakandaPassStatus />
-        <WakandaProfileStatus />
+        <WakandaTokenStatus/>
+        <WakandaPassStatus/>
+        <WakandaProfileStatus/>
+        <Stack h={20}/>
       </Stack>
     </Center>
   )
@@ -32,6 +34,13 @@ export function Initialize() {
 
 export default function WrappedInitialize() {
   return (
-    <Initialize/>
+    <Suspense fallback={
+      <Center h={40}>
+        <Spinner/>
+      </Center>
+    }>
+      <Initialize/>
+      <TheFooter/>
+    </Suspense>
   )
 }

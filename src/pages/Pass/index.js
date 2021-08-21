@@ -1,6 +1,5 @@
 import React, {Suspense} from 'react';
 import {
-  Box,
   Heading,
   Stack,
   Tab,
@@ -17,6 +16,7 @@ import About from "./components/About";
 import {useHistory} from "react-router-dom";
 import qs from "qs";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
+import {TheFooter} from "../../components/TheFooter";
 
 export function Account() {
   const tabs = [
@@ -53,7 +53,7 @@ export function Account() {
   }
 
   return (
-    <Box pl={4} pr={4} minH={"60vh"}>
+    <Stack pl={4} pr={4} minH={"60vh"}>
       <Stack height={500} direction={"row"} mb={4}>
         <UserInfo address={address}/>
       </Stack>
@@ -80,7 +80,8 @@ export function Account() {
           </TabPanels>
         </Tabs>
       </Stack>
-    </Box>
+      <Stack h={20} />
+    </Stack>
   );
 }
 
@@ -88,6 +89,7 @@ export default function WrappedAccount() {
   return (
     <Suspense fallback={<UserInfoSkeleton />}>
       <Account/>
+      <TheFooter/>
     </Suspense>
   )
 }
