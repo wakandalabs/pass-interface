@@ -40,7 +40,7 @@ export function WakandaPassItem({address, id}) {
 
 export function WakandaPassItemSkeleton() {
   return (
-    <Stack spacing={3} border="2px" borderColor="gray.600" borderRadius={"lg"} height="400px" maxW={"250px"} p={4}
+    <Stack spacing={3} border="1px" boxShadow="xs" borderColor="gray.100" borderRadius={"lg"} height="400px" maxW={"250px"} p={4}
            direction={"column"}>
       <SkeletonCircle size={10}/>
       <Skeleton height="240px" />
