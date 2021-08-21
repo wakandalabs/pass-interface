@@ -8,37 +8,34 @@ import FungibleToken from 0xFungibleToken
 import WakandaToken from 0xWakandaToken
 import WakandaPass from 0xWakandaPass
 
-transaction(id: UInt64) {
-    let vaultRef: &WakandaToken.Vault
+transaction(amount: UFix64, id: UInt64) {
+    let sentVault: @FungibleToken.Vault
     let wakandaPassRef: &WakandaPass.NFT
-
     prepare(signer: AuthAccount) {
-        self.vaultRef = signer.borrow<&WakandaToken.Vault>(from: WakandaToken.TokenStoragePath)
+        let vaultRef = signer.borrow<&WakandaToken.Vault>(from: WakandaToken.TokenStoragePath)
     ?? panic("Could not borrow reference to the owner's Vault!")
-
+        self.sentVault <- vaultRef.withdraw(amount: amount)
         let wakandaPassCollectionRef = signer.borrow<&WakandaPass.Collection>(from: WakandaPass.CollectionStoragePath)
     ?? panic("Could not borrow reference to the owner's WakandaPass collection!")
-
         self.wakandaPassRef = wakandaPassCollectionRef.borrowWakandaPassPrivate(id: id)
     }
 
     execute {
-        let vault <- self.wakandaPassRef.withdrawAllUnlockedTokens()
-
-        self.vaultRef.deposit(from: <- vault)
+        self.wakandaPassRef.vault.deposit(from: <- self.sentVault)
     }
 }
-
 `
 
 // prettier-ignore
-export function txWithdrawAllFromPass({id}, opts = {}) {
-  invariant(id != null, "txWithdrawAllFromPass({address, id}) -- id required")
+export function txTransferWkdtToPass({amount, id}, opts = {}) {
+  invariant(amount != null, "txTransferWkdtToPass({amount, id}) -- amount required")
+  invariant(id != null, "txTransferWkdtToPass({amount, id}) -- id required")
 
   return tx([
     transaction(CODE),
     args([
-      arg(id, t.UInt64)
+      arg(amount, t.UFix64),
+      arg(id, t.UInt64),
     ]),
     proposer(authz),
     payer(authz),
