@@ -9,7 +9,7 @@ import {
   TabList,
   Tab,
   TabPanels,
-  TabPanel, Button, Spacer, Divider, Table, TableCaption, Thead, Tr, Th, Tbody, Td,
+  TabPanel, Button, Spacer, Divider, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Skeleton,
 } from "@chakra-ui/react";
 import {useCurrentUserHook} from "../../../hooks/use-current-user.hook";
 import {useWakandaPassDetail} from "../../../hooks/use-pass-detail.hook";
@@ -29,9 +29,9 @@ export function PassItem() {
   const schedule = Object.entries(pass.pass.lockupSchedule)
 
   return (
-    <Stack pl={4} pr={4} minH={"60vh"} direction={"row"} spacing={12}>
+    <Stack pl={4} pr={4} minH={"60vh"} direction={"row"} spacing={8}>
       <Stack width={"60%"}>
-        <Text>Media in Pass</Text>
+        <Skeleton h={"80vh"}/>
       </Stack>
       <Stack width={"40%"} spacing={6}>
         <Stack>
@@ -84,7 +84,7 @@ export function PassItem() {
                     {schedule.map((item) => (
                       <Tr>
                         <Td>
-                          <Text>{toDate(Number(item[0]*1000))}</Text>
+                          <Text>{toDate(Number(item[0] * 1000))}</Text>
                         </Td>
                         <Td>{Number(item[1])}</Td>
                         <Td isNumeric>0</Td>
@@ -112,8 +112,13 @@ export function PassItem() {
 
 export function PassItemSkeleton() {
   return (
-    <Stack pl={4} pr={4} minH={"60vh"}>
-      <SkeletonText/>
+    <Stack pl={4} pr={4} minH={"60vh"} direction={"row"} spacing={12}>
+      <Stack width={"60%"}>
+        <Skeleton h={"100%"}/>
+      </Stack>
+      <Stack width={"40%"} spacing={6}>
+        <SkeletonText noOfLines={6} spacing={12}/>
+      </Stack>
     </Stack>
   )
 }
