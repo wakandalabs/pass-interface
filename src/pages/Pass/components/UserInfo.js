@@ -48,14 +48,12 @@ export function UserInfo({address}) {
       <Spacer/>
       <Stack direction={"row"} spacing={6}>
         <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
-        <Button>Follow</Button>
       </Stack>
     </Stack>
   )
 }
 
 export function UserInfoSkeleton() {
-  const history = useHistory()
   return (
     <Stack height={"100%"} p={16} spacing={6} minH={"60vh"} width={"100%"}>
       <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
