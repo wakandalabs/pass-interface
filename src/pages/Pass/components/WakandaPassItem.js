@@ -11,13 +11,15 @@ import {useProfileHook} from "../../../hooks/use-profile.hook";
 import {useWakandaPassDetail} from "../../../hooks/use-pass-detail.hook";
 import {useHistory} from "react-router-dom";
 import {FiMoreHorizontal} from "react-icons/all";
+import {fmtWkdt} from "../../../util/fmt-wkdt";
 
 export function WakandaPassItem({address, id}) {
-  const pass = useWakandaPassDetail(address, id).pass
-  const originOwner = useProfileHook(pass.originalOwner)
-  const owner = useProfileHook(pass.owner)
+  const pass = useWakandaPassDetail(address, id)
+  const originOwner = useProfileHook(pass.pass.originalOwner)
+  const owner = useProfileHook(pass.pass.owner)
   const history = useHistory()
 
+  console.log(pass)
   return (
     <Stack spacing={3} border="1px" boxShadow="xs" borderColor="gray.100" rounded="md" height="400px" maxW={"250px"}
            p={4}
@@ -35,9 +37,11 @@ export function WakandaPassItem({address, id}) {
       {/*</AspectRatio>*/}
       <Spacer/>
       <Stack spacing={0}>
-        <Text fontSize={"md"} fontWeight={"bold"}>{pass.metadata.title} #{pass.id}</Text>
+        <Text fontSize={"md"} fontWeight={"bold"}>{pass.pass.metadata.title} #{pass.pass.id}</Text>
         <Text fontSize={"sm"} fontWeight={"bold"} color={"gray"}>Not for sale</Text>
-        <Text fontSize={"sm"} fontWeight={"bold"} color={"cyan.500"}>Stake:</Text>
+        { parseInt(pass.pass.totalBalance) > 0 && (
+          <Text fontSize={"sm"} fontWeight={"bold"} color={"cyan.500"}>Lockup: {fmtWkdt(pass.pass.lockupAmount, false)} / {fmtWkdt(pass.pass.totalBalance, true)}</Text>
+        ) }
       </Stack>
     </Stack>
   )
