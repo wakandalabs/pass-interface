@@ -2,7 +2,7 @@ import {
   Avatar,
   Button,
   Heading,
-  IconButton, Link, Skeleton, SkeletonCircle,
+  IconButton, Link, SkeletonCircle, SkeletonText,
   Spacer,
   Stack,
   Text,
@@ -25,7 +25,7 @@ export function UserInfo({address}) {
   }
 
   return (
-    <Stack height={"100%"} p={16} spacing={6} minH={"60vh"}>
+    <Stack height={"100%"} p={16} spacing={6} minH={"60vh"} width={"100%"}>
       <Avatar bg="teal.500"/>
       <Stack direction={"row"} align={"center"} spacing={4}>
         <Heading fontSize="2xl" bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">{profile.profile.name}</Heading>
@@ -57,20 +57,9 @@ export function UserInfo({address}) {
 export function UserInfoSkeleton() {
   const history = useHistory()
   return (
-    <Stack height={"100%"} p={16} spacing={6} minH={"60vh"}>
+    <Stack height={"100%"} p={16} spacing={6} minH={"60vh"} width={"100%"}>
       <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
-      <Stack direction={"row"} align={"center"} spacing={4}>
-        <Skeleton w={"100px"} h={"30px"}/>
-        <Skeleton w={"200px"} h={"30px"}/>
-      </Stack>
-      <Skeleton h={"20px"}/>
-      <Skeleton h={"20px"}/>
-      <Skeleton h={"20px"} w={"200px"}/>
-      <Spacer/>
-      <Stack direction={"row"} spacing={6}>
-        <IconButton aria-label={"edit"} icon={<EditIcon/>} onClick={() => history.push("/setting")}/>
-        <Button>Follow</Button>
-      </Stack>
+      <SkeletonText noOfLines={5} mt={12} spacing={6}/>
     </Stack>
   )
 }
