@@ -18,20 +18,20 @@ import {scriptIsProfileInit} from "../flow/script.is-profile-init";
 import {txInitProfile} from "../flow/tx.init-profile";
 
 export const $status = atomFamily({
-  key: "initwakandaprofile::status",
+  key: address => address + "-init-profile::status",
   default: IDLE,
 })
 
 export const $init = atomFamily({
-  key: "initwakandaprofile::state",
+  key: address => address + "-init-profile::state",
   default: selectorFamily({
-    key: "initwakandaprofile::default",
+    key: address => address + "init-profile::default",
     get: address => () => scriptIsProfileInit(address),
   }),
 })
 
 export const $computedInit = selectorFamily({
-  key: "initwakandaprofile::computed",
+  key: address => address + "-init-profile::computed",
   get:
     address =>
       async ({get}) => {

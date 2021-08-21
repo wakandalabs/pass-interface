@@ -9,7 +9,7 @@ pub fun main(address: Address): Bool {
 }
 `
 
-export function scriptIsProfileInit(address) {
+export function scriptIsStorefrontInit(address) {
   if (address == null) return Promise.resolve(false)
 
   // prettier-ignore

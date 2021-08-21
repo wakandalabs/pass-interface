@@ -14,24 +14,24 @@ import {
 } from "../global/constants";
 
 import {sleep} from "../util/sleep";
-import {scriptIsWkdtInit} from "../flow/script.is-wkdt-init";
-import {txInitWkdt} from "../flow/tx.init-wkdt";
+import {scriptIsStorefrontInit} from "../flow/script.is-storefront-init";
+import {txInitStorefront} from "../flow/tx.init-storefront";
 
 export const $status = atomFamily({
-  key: address => address + "-init-wkdt::status",
+  key: address => address + "-init-store::status",
   default: IDLE,
 })
 
 export const $init = atomFamily({
-  key: address => address + "-init-wkdt::state",
+  key: address => address + "-init-store::state",
   default: selectorFamily({
-    key: address => address + "-init-wkdt::default",
-    get: address => () => scriptIsWkdtInit(address),
+    key: address => address + "-init-store::default",
+    get: address => () => scriptIsStorefrontInit(address),
   }),
 })
 
 export const $computedInit = selectorFamily({
-  key: address => address + "-init-wkdt::computed",
+  key: address => address + "-init-store::computed",
   get:
     address =>
       async ({get}) => {
@@ -39,13 +39,13 @@ export const $computedInit = selectorFamily({
       },
 })
 
-export function useInitWkdtHook(address) {
+export function useInitStorefrontHook(address) {
   const [init, setInit] = useRecoilState($init(address))
   const isInitialized = useRecoilValue($computedInit(address))
   const [status, setStatus] = useRecoilState($status(address))
 
   function recheck() {
-    scriptIsWkdtInit(address).then(setInit)
+    scriptIsStorefrontInit(address).then(setInit)
   }
 
   return {
@@ -54,7 +54,7 @@ export function useInitWkdtHook(address) {
     status: isInitialized == null ? LOADING : status,
     recheck,
     async initialize() {
-      await txInitWkdt(address, {
+      await txInitStorefront(address, {
         onStart() {
           setStatus(PROCESSING)
         },

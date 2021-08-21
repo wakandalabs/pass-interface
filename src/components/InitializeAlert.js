@@ -4,14 +4,16 @@ import {useCurrentUserHook} from "../hooks/use-current-user.hook";
 import {useInitWkdtHook} from "../hooks/use-init-wkdt.hook";
 import {useInitProfileHook} from "../hooks/use-init-profile.hook";
 import {useInitPassHook} from "../hooks/use-init-pass.hook";
+import {useInitStorefrontHook} from "../hooks/use-init-store.hook";
 
 export function InitializeAlert() {
   const [cu, loggedIn] = useCurrentUserHook()
   const wkdt = useInitWkdtHook(cu.addr)
   const profile = useInitProfileHook(cu.addr)
   const pass = useInitPassHook(cu.addr)
+  const storefront = useInitStorefrontHook(cu.addr)
 
-  if ((!loggedIn) || (loggedIn && wkdt.isInitialized && profile.isInitialized && pass.isInitialized)) {
+  if ((!loggedIn) || (loggedIn && wkdt.isInitialized && profile.isInitialized && pass.isInitialized && storefront.isInitialized)) {
     return <InitializeAlertSkeleton/>
   }
 

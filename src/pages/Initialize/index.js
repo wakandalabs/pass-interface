@@ -4,6 +4,7 @@ import React, {Suspense} from "react";
 import WakandaPassStatus from "./components/WakandaPassStatus";
 import WakandaTokenStatus from "./components/WakandaTokenStatus";
 import WakandaProfileStatus from "./components/WakandaProfileStatus";
+import WakandaStorefrontStatus from "./components/WakandaStorefrontStatus";
 import {TheFooter} from "../../components/TheFooter";
 
 export function Initialize() {
@@ -26,6 +27,7 @@ export function Initialize() {
         <WakandaTokenStatus/>
         <WakandaPassStatus/>
         <WakandaProfileStatus/>
+        <WakandaStorefrontStatus/>
         <Stack h={20}/>
       </Stack>
     </Center>
