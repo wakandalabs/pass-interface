@@ -25,7 +25,7 @@ export const $status = atomFamily({
 export const $init = atomFamily({
   key: "init-profile::state",
   default: selectorFamily({
-    key: address => address + "init-profile::default",
+    key: "init-profile::default",
     get: address => () => scriptIsProfileInit(address),
   }),
 })

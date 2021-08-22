@@ -18,7 +18,7 @@ import {scriptIsStorefrontInit} from "../flow/script.is-storefront-init";
 import {txInitStorefront} from "../flow/tx.init-storefront";
 
 export const $status = atomFamily({
-  key: address => address + "-init-store::status",
+  key: "init-store::status",
   default: IDLE,
 })
 

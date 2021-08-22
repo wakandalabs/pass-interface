@@ -25,7 +25,7 @@ export const $status = atomFamily({
 export const $init = atomFamily({
   key: "init-wkdt::state",
   default: selectorFamily({
-    key: address => address + "-init-wkdt::default",
+    key: "init-wkdt::default",
     get: address => () => scriptIsWkdtInit(address),
   }),
 })
