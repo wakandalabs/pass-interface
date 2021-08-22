@@ -19,9 +19,9 @@ pub struct SaleItem {
 }
 
 pub fun main(address: Address, saleOfferResourceID: UInt64): SaleItem? {
-    let account = getAccount(address)
-
-    if let storefrontRef = account.getCapability<&WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}>(WakandaStorefront.StorefrontPublicPath).borrow() {
+    if let storefrontRef = getAccount(address)
+        .getCapability<&WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}>(WakandaStorefront.StorefrontPublicPath).borrow() {
+        
         if let saleOffer = storefrontRef.borrowSaleOffer(saleOfferResourceID: saleOfferResourceID) {
             let details = saleOffer.getDetails()
 

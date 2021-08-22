@@ -4,8 +4,8 @@ import {Address, UInt64} from "@onflow/types";
 const CODE = cdc`
 import WakandaStorefront from 0xWakandaStorefront
 
-pub fun main(account: Address, saleOfferResourceID: UInt64): WakandaStorefront.SaleOfferDetails {
-    let storefrontRef = account
+pub fun main(address: Address, saleOfferResourceID: UInt64): WakandaStorefront.SaleOfferDetails {
+    let storefrontRef = getAccount(address)
         .getCapability<&WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}>(
             WakandaStorefront.StorefrontPublicPath
         )
