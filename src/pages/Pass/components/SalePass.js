@@ -4,7 +4,7 @@ import React, {Suspense} from "react";
 export function SalePass({address}) {
 
   return (
-    <Stack>
+    <Stack minH={"50vh"}>
       {/*<WakandaPassList/>*/}
     </Stack>
   )

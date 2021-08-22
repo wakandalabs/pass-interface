@@ -21,7 +21,6 @@ export function Account() {
   const tabs = [
     {key: "owned", label: "Owned", path: "owned"},
     {key: "sale", label: "Sale", path: "sale"},
-    {key: "about", label: "About", path: "about"},
   ]
 
   const history = useHistory();
@@ -52,6 +51,7 @@ export function Account() {
 
   return (
       <Stack pl={4} pr={4}>
+        <About address={address}/>
         <Tabs index={tabIndex} onChange={handleTabsChange}>
           <TabList>
             {tabs.map((tab, index) => (
@@ -64,9 +64,6 @@ export function Account() {
             </TabPanel>
             <TabPanel>
               <SalePass address={address}/>
-            </TabPanel>
-            <TabPanel>
-              <About address={address}/>
             </TabPanel>
           </TabPanels>
         </Tabs>
