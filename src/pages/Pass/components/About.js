@@ -1,5 +1,5 @@
 import {
-  Avatar,
+  Avatar, Box,
   Button,
   Heading,
   Link, SkeletonCircle, SkeletonText,
@@ -48,9 +48,11 @@ export function About({address}) {
 
 export function AboutSkeleton() {
   return (
-    <Stack height={"100%"} p={16} spacing={6} minH={"60vh"} width={"100%"}>
-      <SkeletonCircle size="12" startColor="pink.500" endColor="orange.500"/>
-      <SkeletonText noOfLines={5} mt={12} spacing={6}/>
+    <Stack direction={"row"} spacing={4} pl={4} pr={4} mb={4}>
+      <SkeletonCircle/>
+      <Box w={"100%"}>
+        <SkeletonText noOfLines={4} spacing={8}/>
+      </Box>
     </Stack>
   )
 }
