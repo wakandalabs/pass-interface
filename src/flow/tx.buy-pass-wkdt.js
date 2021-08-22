@@ -12,44 +12,45 @@ import WakandaStorefront from 0xWakandaStorefront
 
 transaction(saleOfferResourceID: UInt64, storefrontAddress: Address) {
 
-  let paymentVault: @FungibleToken.Vault
-  let wakandaPassCollection: &WakandaPass.Collection{NonFungibleToken.Receiver}
-  let storefront: &WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}
-  let saleOffer: &WakandaStorefront.SaleOffer{WakandaStorefront.SaleOfferPublic}
+    let paymentVault: @FungibleToken.Vault
+    let wakandaPassCollection: &WakandaPass.Collection{NonFungibleToken.Receiver}
+    let storefront: &WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}
+    let saleOffer: &WakandaStorefront.SaleOffer{WakandaStorefront.SaleOfferPublic}
 
-  prepare(account: AuthAccount) {
-    self.storefront = getAccount(storefrontAddress)
-      .getCapability<&WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}>(
-      WakandaStorefront.StorefrontPublicPath
-    )!
-  .borrow()
-    ?? panic("Cannot borrow Storefront from provided address")
+    prepare(account: AuthAccount) {
+        self.storefront = getAccount(storefrontAddress)
+            .getCapability<&WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}>(
+                WakandaStorefront.StorefrontPublicPath
+            )!
+            .borrow()
+            ?? panic("Cannot borrow Storefront from provided address")
 
-    self.saleOffer = self.storefront.borrowSaleOffer(saleOfferResourceID: saleOfferResourceID)
-  ?? panic("No offer with that ID in Storefront")
+        self.saleOffer = self.storefront.borrowSaleOffer(saleOfferResourceID: saleOfferResourceID)
+            ?? panic("No offer with that ID in Storefront")
+        
+        let price = self.saleOffer.getDetails().salePrice
 
-    let price = self.saleOffer.getDetails().salePrice
+        let mainWakandaTokenVault = account.borrow<&WakandaToken.Vault>(from: WakandaToken.TokenStoragePath)
+            ?? panic("Cannot borrow WakandaToken vault from account storage")
+        
+        self.paymentVault <- mainWakandaTokenVault.withdraw(amount: price)
 
-    let mainWakandaTokenVault = account.borrow<&WakandaToken.Vault>(from: WakandaToken.TokenStoragePath)
-      ?? panic("Cannot borrow WakandaToken vault from account storage")
+        self.wakandaPassCollection = account.borrow<&WakandaPass.Collection{NonFungibleToken.Receiver}>(
+            from: WakandaPass.CollectionStoragePath
+        ) ?? panic("Cannot borrow WakandaPass collection receiver from account")
+    }
 
-    self.paymentVault <- mainWakandaTokenVault.withdraw(amount: price)
+    execute {
+        let item <- self.saleOffer.accept(
+            payment: <-self.paymentVault
+        )
 
-    self.wakandaPassCollection = account.borrow<&WakandaPass.CollectionPublic{NonFungibleToken.Receiver}>(
-      from: WakandaPass.CollectionStoragePath
-    ) ?? panic("Cannot borrow WakandaPass collection receiver from account")
-  }
+        self.wakandaPassCollection.deposit(token: <-item)
 
-  execute {
-    let item <- self.saleOffer.accept(
-      payment: <-self.paymentVault
-  )
-
-    self.wakandaPassCollection.deposit(token: <-item)
-
-    self.storefront.cleanup(saleOfferResourceID: saleOfferResourceID)
-  }
+        self.storefront.cleanup(saleOfferResourceID: saleOfferResourceID)
+    }
 }
+
 `
 
 // prettier-ignore
