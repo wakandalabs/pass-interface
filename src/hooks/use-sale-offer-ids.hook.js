@@ -1,7 +1,5 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {fetchWakandaProfile} from "../flow/script.fetch-profile";
-import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
-import {sleep} from "../util/sleep";
+import {IDLE, PROCESSING} from "../global/constants";
 import {fetchSellOfferIds} from "../flow/script.fetch-sell-offer-ids";
 
 export const valueAtom = atomFamily({
@@ -17,7 +15,7 @@ export const statusAtom = atomFamily({
   default: IDLE,
 })
 
-export function useSellOfferIdsHook(address) {
+export function useSaleOfferIdsHook(address) {
   const [saleOfferIds, setSaleOfferIds] = useRecoilState(valueAtom(address))
   const [status, setStatus] = useRecoilState(statusAtom(address))
 
@@ -30,12 +28,6 @@ export function useSellOfferIdsHook(address) {
   return {
     saleOfferIds,
     status,
-    refresh,
-    async removeSellOffer(){
-
-    },
-    async cleanItem() {
-
-    },
+    refresh
   }
 }
