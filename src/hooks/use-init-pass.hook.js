@@ -18,20 +18,20 @@ import {scriptIsPassInit} from "../flow/script.is-pass-init";
 import {txInitPass} from "../flow/tx.init-pass";
 
 export const $status = atomFamily({
-  key: address => address + "-init-pass::status",
+  key: "init-pass::status",
   default: IDLE,
 })
 
 export const $init = atomFamily({
-  key: address => address +  "-init-wkdt::state",
+  key: "init-wkdt::state",
   default: selectorFamily({
-    key: "-init-pass::default",
+    key: "init-pass::default",
     get: address => () => scriptIsPassInit(address),
   }),
 })
 
 export const $computedInit = selectorFamily({
-  key: address => address + "-init-pass::computed",
+  key: "init-pass::computed",
   get:
     address =>
       async ({get}) => {

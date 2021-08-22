@@ -4,15 +4,15 @@ import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants"
 import {sleep} from "../util/sleep";
 
 export const valueAtom = atomFamily({
-  key: address => address + "-storefront::state",
+  key: "storefront::state",
   default: selectorFamily({
-    key: address => address + "-storefront::default",
+    key: "storefront::default",
     get: address => async () => fetchWakandaProfile(address),
   }),
 })
 
 export const statusAtom = atomFamily({
-  key: address => address + "-storefront::status",
+  key: "storefront::status",
   default: IDLE,
 })
 

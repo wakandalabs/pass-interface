@@ -23,15 +23,15 @@ export const $status = atomFamily({
 })
 
 export const $init = atomFamily({
-  key: address => address + "-init-store::state",
+  key: "init-store::state",
   default: selectorFamily({
-    key: address => address + "-init-store::default",
+    key: "init-store::default",
     get: address => () => scriptIsStorefrontInit(address),
   }),
 })
 
 export const $computedInit = selectorFamily({
-  key: address => address + "-init-store::computed",
+  key: "init-store::computed",
   get:
     address =>
       async ({get}) => {

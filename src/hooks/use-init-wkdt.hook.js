@@ -18,12 +18,12 @@ import {scriptIsWkdtInit} from "../flow/script.is-wkdt-init";
 import {txInitWkdt} from "../flow/tx.init-wkdt";
 
 export const $status = atomFamily({
-  key: address => address + "-init-wkdt::status",
+  key: "init-wkdt::status",
   default: IDLE,
 })
 
 export const $init = atomFamily({
-  key: address => address + "-init-wkdt::state",
+  key: "init-wkdt::state",
   default: selectorFamily({
     key: address => address + "-init-wkdt::default",
     get: address => () => scriptIsWkdtInit(address),
@@ -31,7 +31,7 @@ export const $init = atomFamily({
 })
 
 export const $computedInit = selectorFamily({
-  key: address => address + "-init-wkdt::computed",
+  key: "init-wkdt::computed",
   get:
     address =>
       async ({get}) => {

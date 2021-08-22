@@ -8,15 +8,15 @@ import {txTransferWkdtToPass} from "../flow/tx.transfer-wkdt-to-pass";
 import {txSellPassWkdt} from "../flow/tx.sell-pass-wkdt";
 
 export const valueAtom = atomFamily({
-  key: ({address, id}) => address + "-pass-id-" + id + "::state",
+  key: "pass-id::state",
   default: selectorFamily({
-    key: ({address, id}) => address + "-pass-id-" + id + "::default",
+    key: "pass-id::default",
     get: ({address, id}) => async () => fetchWakandaPassDetail(address, id),
   }),
 })
 
 export const statusAtom = atomFamily({
-  key: ({address, id}) => address + "-pass-id-" + id + "::status",
+  key: "pass-id::status",
   default: IDLE,
 })
 

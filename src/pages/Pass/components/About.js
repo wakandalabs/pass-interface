@@ -13,7 +13,6 @@ import {PROCESSING} from "../../../global/constants";
 import {AiOutlineGlobal, AiOutlineMail} from "react-icons/all";
 
 export function About({address}) {
-  console.log(address)
   const {hasCopied, onCopy} = useClipboard(address)
   const profile = useProfileHook(address)
 

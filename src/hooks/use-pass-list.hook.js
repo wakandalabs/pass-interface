@@ -6,15 +6,15 @@ import {sleep} from "../util/sleep";
 import {txMintPassCustom} from "../flow/tx.mint-pass-custom";
 
 export const valueAtom = atomFamily({
-  key: address => address + "-pass-list::state",
+  key: "pass-list::state",
   default: selectorFamily({
-    key: address => address + "-pass-list::default",
+    key: "pass-list::default",
     get: address => async () => fetchWakandaPassList(address),
   }),
 })
 
 export const statusAtom = atomFamily({
-  key: address => address + "-pass-list::status",
+  key: "pass-list::status",
   default: IDLE,
 })
 
