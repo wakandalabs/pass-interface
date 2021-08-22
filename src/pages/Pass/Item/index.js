@@ -21,10 +21,10 @@ import Stamp from "./components/Stamp";
 export function PassItem() {
   const history = useHistory()
   const [cu, loggedIn] = useCurrentUserHook()
-  const id = Number(history.location.pathname.slice(6))
+  const id = Number(history.location.pathname.split("/")[2])
   const pass = useWakandaPassDetail(cu.addr, id)
 
-  if (!loggedIn || pass.pass === false) {
+  if (!loggedIn || pass.pass === false || isNaN(id)) {
     return <PassItemSkeleton/>
   }
 

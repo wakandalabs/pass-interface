@@ -22,7 +22,7 @@ export function WakandaPassItem({address, id}) {
   return (
     <Stack spacing={3} border="1px" boxShadow="xs" borderColor="gray.100" rounded="md" height="400px" maxW={"250px"}
            p={4}
-           direction={"column"} onClick={() => history.push("/pass/" + id)}>
+           direction={"column"} onClick={() => history.push("/" + address + "/" + String(id))}>
       <Stack direction={"row"} align={"center"}>
         <AvatarGroup size="sm" max={2}>
           <Avatar name={originOwner.profile.name} src={originOwner.profile.avatar} colorScheme={"cyan"}/>

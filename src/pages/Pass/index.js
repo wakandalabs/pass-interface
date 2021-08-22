@@ -16,6 +16,7 @@ import {useHistory} from "react-router-dom";
 import qs from "qs";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
 import TheFooter from "../../components/TheFooter";
+import {withPrefix} from "@onflow/fcl";
 
 export function Account() {
   const tabs = [
@@ -27,7 +28,7 @@ export function Account() {
   const {tab} = qs.parse(history.location.search.replace(/^\?/, ''))
   const [tabIndex, setTabIndex] = React.useState(getTabIndex(tab))
   const [user, loggedIn] = useCurrentUserHook()
-  const address = user.addr
+  const address = withPrefix(history.location.pathname.slice(1))
 
   function getTabIndex(tab) {
     const index = tabs.findIndex((item) => item.key === tab)
