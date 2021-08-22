@@ -7,7 +7,7 @@ import WakandaStorefront from 0xWakandaStorefront
 // This script returns an array of all the NFTs uuids for sale through a Storefront
 
 pub fun main(account: Address): [UInt64] {
-    let storefrontRef = account
+    let storefrontRef = getAccount(account)
         .getCapability<&WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}>(
             WakandaStorefront.StorefrontPublicPath
         )
