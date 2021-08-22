@@ -1,6 +1,7 @@
 import React, {Suspense} from 'react';
 import {
-  Heading,
+  Center,
+  Heading, Spinner,
   Stack,
   Tab,
   TabList,
@@ -8,21 +9,18 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import UserInfo, {UserInfoSkeleton} from "./components/UserInfo";
 import SalePass from "./components/SalePass";
 import OwnedPass from "./components/OwnedPass";
-import LikedPass from "./components/LikedPass";
 import About from "./components/About";
 import {useHistory} from "react-router-dom";
 import qs from "qs";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
-import {TheFooter} from "../../components/TheFooter";
+import TheFooter from "../../components/TheFooter";
 
 export function Account() {
   const tabs = [
-    {key: "sale", label: "Sale", path: "sale"},
     {key: "owned", label: "Owned", path: "owned"},
-    {key: "liked", label: "Liked", path: "liked"},
+    {key: "sale", label: "Sale", path: "sale"},
     {key: "about", label: "About", path: "about"},
   ]
 
@@ -48,16 +46,12 @@ export function Account() {
 
   if (!loggedIn) {
     return (
-      <UserInfoSkeleton />
+      <AccountSkeleton />
     )
   }
 
   return (
-    <Stack pl={4} pr={4} minH={"60vh"}>
-      <Stack height={500} direction={"row"} mb={4}>
-        <UserInfo address={address}/>
-      </Stack>
-      <Stack>
+      <Stack pl={4} pr={4}>
         <Tabs index={tabIndex} onChange={handleTabsChange}>
           <TabList>
             {tabs.map((tab, index) => (
@@ -66,28 +60,32 @@ export function Account() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <SalePass address={address}/>
-            </TabPanel>
-            <TabPanel>
               <OwnedPass address={address}/>
             </TabPanel>
             <TabPanel>
-              <LikedPass address={address}/>
+              <SalePass address={address}/>
             </TabPanel>
             <TabPanel>
               <About address={address}/>
             </TabPanel>
           </TabPanels>
         </Tabs>
+        <Stack h={20} />
       </Stack>
-      <Stack h={20} />
-    </Stack>
   );
+}
+
+export function AccountSkeleton() {
+  return (
+    <Center minH={"60vh"}>
+      <Spinner />
+    </Center>
+  )
 }
 
 export default function WrappedAccount() {
   return (
-    <Suspense fallback={<UserInfoSkeleton />}>
+    <Suspense fallback={<AccountSkeleton />}>
       <Account/>
       <TheFooter/>
     </Suspense>

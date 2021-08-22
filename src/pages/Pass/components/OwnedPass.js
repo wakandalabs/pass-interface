@@ -16,7 +16,7 @@ export function OwnedPass({address}) {
   }
 
   return (
-    <Stack>
+    <Stack mt={6}>
       <WakandaPassList ids={ids.ids} address={address}/>
     </Stack>
   )

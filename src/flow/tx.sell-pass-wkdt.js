@@ -22,15 +22,6 @@ transaction(salePassID: UInt64, salePassPrice: UFix64) {
         
         assert(self.wakandaTokenReceiver.borrow() != nil, message: "Missing or mis-typed WakandaToken receiver")
 
-        if !getAccount(address)
-            .getCapability<&{WakandaPass.CollectionPublic}>(WakandaPass.CollectionPublicPath)
-            .check() {
-            account.link<&{NonFungibleToken.CollectionPublic, WakandaPass.CollectionPublic}>(
-            self.CollectionPublicPath,
-            target: self.CollectionStoragePath
-        )
-        }
-
         self.wakandaPassProvider = account.getCapability<&{WakandaPass.CollectionPublic}>(WakandaPass.CollectionPublicPath)!
         assert(self.wakandaPassProvider.borrow() != nil, message: "Missing or mis-typed WakandaPass.Collection provider")
 

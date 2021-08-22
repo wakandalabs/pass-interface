@@ -18,7 +18,7 @@ export function SellPass({pass}){
   const parse = (val) => val.replace(/^\$/, "")
   const [cu] = useCurrentUserHook()
   const wkdt = useWkdtBalanceHook(cu.addr)
-  const [amount ,setAmount] = useState(0)
+  const [price ,setPrice] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return(
@@ -34,8 +34,8 @@ export function SellPass({pass}){
             <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
                          max={wkdt.balance}
                          errorBorderColor="red.200" mb={4}
-                         onChange={(valueString) => setAmount(parse(valueString))}
-                         value={amount}
+                         onChange={(valueString) => setPrice(parse(valueString))}
+                         value={price}
             >
               <NumberInputField/>
             </NumberInput>
@@ -44,7 +44,8 @@ export function SellPass({pass}){
             <Button variant={"ghost"} mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme={"cyan"} isLoading={pass.status === PROCESSING}>Sell</Button>
+            <Button colorScheme={"cyan"} isLoading={pass.status === PROCESSING}
+                    onClick={() => pass.sell(pass.pass.id, parseUFix64(Number(price)).toString())}>Sell</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

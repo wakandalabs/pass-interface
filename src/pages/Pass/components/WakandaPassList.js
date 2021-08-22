@@ -4,7 +4,7 @@ import WakandaPassIdItem from "./WakandaPassItem";
 
 export function WakandaPassList({address ,ids}) {
   return (
-    <SimpleGrid minChildWidth="230px" spacing="40px" mt={12}>
+    <SimpleGrid minChildWidth="230px" spacing="40px">
       {ids.map(id => (
         <WakandaPassIdItem address={address} id={id} key={id}/>
       ))}
