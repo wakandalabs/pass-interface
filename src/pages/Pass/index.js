@@ -38,9 +38,9 @@ export function Account() {
   const handleTabsChange = (index) => {
     setTabIndex(index)
     if (index === 0) {
-      history.push("pass")
+      history.push(address)
     } else {
-      history.push("pass?tab=" + tabs[index].path)
+      history.push(address + "?tab=" + tabs[index].path)
     }
   }
 
