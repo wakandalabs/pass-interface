@@ -12,17 +12,23 @@ import WakandaStorefront from 0xWakandaStorefront
 
 transaction(salePassID: UInt64, salePassPrice: UFix64) {
 
-    let wakandaTokenReceiver: Capability<&WakandaToken.Vault{FungibleToken.Receiver}>
-    let wakandaPassProvider: Capability<&{WakandaPass.CollectionPublic}>
+    let wkdtReceiver: Capability<&WakandaToken.Vault{FungibleToken.Receiver}>
+    let wakandaPassProvider: Capability<&WakandaPass.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>
     let storefront: &WakandaStorefront.Storefront
 
     prepare(account: AuthAccount) {
-   
-        self.wakandaTokenReceiver = account.getCapability<&WakandaToken.Vault{FungibleToken.Receiver}>(WakandaToken.TokenPublicReceiverPath)!
-        
-        assert(self.wakandaTokenReceiver.borrow() != nil, message: "Missing or mis-typed WakandaToken receiver")
+        // We need a provider capability, but one is not provided by default so we create one if needed.
+        let wakandaPassCollectionProviderPrivatePath = /private/wakandaPassCollectionProvider
 
-        self.wakandaPassProvider = account.getCapability<&{WakandaPass.CollectionPublic}>(WakandaPass.CollectionPublicPath)!
+        self.wkdtReceiver = account.getCapability<&WakandaToken.Vault{FungibleToken.Receiver}>(WakandaToken.TokenPublicReceiverPath)!
+        
+        assert(self.wkdtReceiver.borrow() != nil, message: "Missing or mis-typed WakandaToken receiver")
+
+        if !account.getCapability<&WakandaPass.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(wakandaPassCollectionProviderPrivatePath)!.check() {
+            account.link<&WakandaPass.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(wakandaPassCollectionProviderPrivatePath, target: WakandaPass.CollectionStoragePath)
+        }
+
+        self.wakandaPassProvider = account.getCapability<&WakandaPass.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(wakandaPassCollectionProviderPrivatePath)!
         assert(self.wakandaPassProvider.borrow() != nil, message: "Missing or mis-typed WakandaPass.Collection provider")
 
         self.storefront = account.borrow<&WakandaStorefront.Storefront>(from: WakandaStorefront.StorefrontStoragePath)
@@ -31,7 +37,7 @@ transaction(salePassID: UInt64, salePassPrice: UFix64) {
 
     execute {
         let saleCut = WakandaStorefront.SaleCut(
-            receiver: self.wakandaTokenReceiver,
+            receiver: self.wkdtReceiver,
             amount: salePassPrice
         )
         self.storefront.createSaleOffer(
@@ -43,6 +49,7 @@ transaction(salePassID: UInt64, salePassPrice: UFix64) {
         )
     }
 }
+
 
 `
 
