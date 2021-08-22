@@ -49,8 +49,6 @@ transaction(salePassID: UInt64, salePassPrice: UFix64) {
         )
     }
 }
-
-
 `
 
 // prettier-ignore
