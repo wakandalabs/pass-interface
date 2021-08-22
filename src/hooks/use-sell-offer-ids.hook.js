@@ -2,35 +2,39 @@ import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {fetchWakandaProfile} from "../flow/script.fetch-profile";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {sleep} from "../util/sleep";
+import {fetchSellOfferIds} from "../flow/script.fetch-sell-offer-ids";
 
 export const valueAtom = atomFamily({
-  key: "storefront::state",
+  key: "saleOfferIds::state",
   default: selectorFamily({
-    key: "storefront::default",
-    get: address => async () => fetchWakandaProfile(address),
+    key: "saleOfferIds::default",
+    get: address => async () => fetchSellOfferIds(address),
   }),
 })
 
 export const statusAtom = atomFamily({
-  key: "storefront::status",
+  key: "saleOfferIds::status",
   default: IDLE,
 })
 
-export function useStorefrontHook(address) {
-  const [profile, setProfile] = useRecoilState(valueAtom(address))
+export function useSellOfferIdsHook(address) {
+  const [saleOfferIds, setSaleOfferIds] = useRecoilState(valueAtom(address))
   const [status, setStatus] = useRecoilState(statusAtom(address))
 
   async function refresh() {
     setStatus(PROCESSING)
-    await fetchWakandaProfile(address).then(setProfile)
+    await fetchSellOfferIds(address).then(setSaleOfferIds)
     setStatus(IDLE)
   }
 
   return {
-    profile,
+    saleOfferIds,
     status,
     refresh,
-    async buy(profile) {
+    async removeSellOffer(){
+
+    },
+    async cleanItem() {
 
     },
   }

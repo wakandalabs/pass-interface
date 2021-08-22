@@ -1,5 +1,5 @@
 import {send, decode, script, args, arg, cdc} from "@onflow/fcl";
-import {Address} from "@onflow/types";
+import {Address, UInt64} from "@onflow/types";
 
 const CODE = cdc`
 import NonFungibleToken from 0xNonFungibleToken
@@ -41,14 +41,16 @@ pub fun main(address: Address, saleOfferResourceID: UInt64): SaleItem? {
 
 `
 
-export function fetchSellOfferItem(address) {
+export function fetchSellOfferItem(address, saleOfferResourceID) {
   if (address == null) return Promise.resolve(false)
+  if (saleOfferResourceID == null) return Promise.resolve(false)
 
   // prettier-ignore
   return send([
     script(CODE),
     args([
-      arg(address, Address)
+      arg(address, Address),
+      arg(saleOfferResourceID, UInt64),
     ])
   ]).then(decode)
 }

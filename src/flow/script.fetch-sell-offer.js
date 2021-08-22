@@ -19,15 +19,15 @@ pub fun main(account: Address, saleOfferResourceID: UInt64): WakandaStorefront.S
 }
 `
 
-export function fetchSellOffer(account, saleOfferResourceID) {
-  if (account == null) return Promise.resolve(false)
+export function fetchSellOffer(address, saleOfferResourceID) {
+  if (address == null) return Promise.resolve(false)
   if (saleOfferResourceID == null) return Promise.resolve(false)
 
   // prettier-ignore
   return send([
     script(CODE),
     args([
-      arg(account, Address),
+      arg(address, Address),
       arg(saleOfferResourceID, UInt64),
     ])
   ]).then(decode)
