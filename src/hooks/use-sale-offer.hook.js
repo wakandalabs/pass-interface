@@ -38,7 +38,6 @@ export function useSaleOfferHook(address, saleOfferResourceID) {
           setStatus(PROCESSING)
         },
         async onSuccess() {
-          await refresh()
           setStatus(SUCCESS)
         },
         async onComplete() {

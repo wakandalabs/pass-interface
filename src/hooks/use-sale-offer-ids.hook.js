@@ -1,12 +1,12 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {IDLE, PROCESSING} from "../global/constants";
-import {fetchSellOfferIds} from "../flow/script.fetch-sell-offer-ids";
+import {fetchSaleOfferIds} from "../flow/script.fetch-sell-offer-ids";
 
 export const valueAtom = atomFamily({
   key: "saleOfferIds::state",
   default: selectorFamily({
     key: "saleOfferIds::default",
-    get: address => async () => fetchSellOfferIds(address),
+    get: address => async () => fetchSaleOfferIds(address),
   }),
 })
 
@@ -21,7 +21,7 @@ export function useSaleOfferIdsHook(address) {
 
   async function refresh() {
     setStatus(PROCESSING)
-    await fetchSellOfferIds(address).then(setSaleOfferIds)
+    await fetchSaleOfferIds(address).then(setSaleOfferIds)
     setStatus(IDLE)
   }
 

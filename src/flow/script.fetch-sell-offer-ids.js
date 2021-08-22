@@ -18,7 +18,7 @@ pub fun main(address: Address): [UInt64] {
 }
 `
 
-export function fetchSellOfferIds(address) {
+export function fetchSaleOfferIds(address) {
   if (address == null) return Promise.resolve(false)
 
   // prettier-ignore
