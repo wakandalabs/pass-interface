@@ -31,7 +31,6 @@ pub fun main(address: Address, saleOfferResourceID: UInt64): SaleItem? {
     }
     return nil
 }
-
 `
 
 export function fetchSellOfferItem(address, saleOfferResourceID) {

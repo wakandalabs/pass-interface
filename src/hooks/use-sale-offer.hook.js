@@ -1,7 +1,7 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../global/constants";
 import {sleep} from "../util/sleep";
-import {fetchSellOfferItem} from "../flow/script.fetch-sell-offer-item";
+import {fetchSellOfferItem} from "../flow/script.fetch-sale-offer-item";
 import {txRemoveSaleOffer} from "../flow/tx.remove-sale-offer";
 import {txStorefrontCleanItem} from "../flow/tx.storefront-clean-item";
 import {txBuyPassWkdt} from "../flow/tx.buy-pass-wkdt";

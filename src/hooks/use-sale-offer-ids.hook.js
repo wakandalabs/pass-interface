@@ -1,6 +1,6 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {IDLE, PROCESSING} from "../global/constants";
-import {fetchSaleOfferIds} from "../flow/script.fetch-sell-offer-ids";
+import {fetchSaleOfferIds} from "../flow/script.fetch-sale-offer-ids";
 
 export const valueAtom = atomFamily({
   key: "saleOfferIds::state",
