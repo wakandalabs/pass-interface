@@ -6,6 +6,7 @@ import {sleep} from "../util/sleep";
 import {useWkdtBalanceHook} from "./use-wkdt-balance.hook";
 import {txTransferWkdtToPass} from "../flow/tx.transfer-wkdt-to-pass";
 import {txSellPassWkdt} from "../flow/tx.sell-pass-wkdt";
+import {txTransferPass} from "../flow/tx.transfer-pass";
 
 export const valueAtom = atomFamily({
   key: "pass-id::state",
@@ -75,6 +76,25 @@ export function useWakandaPassDetail(address, id) {
     },
     async sale(salePassID, salePassPrice) {
       await txSellPassWkdt({salePassID, salePassPrice}, {
+        onStart() {
+          setStatus(PROCESSING)
+        },
+        async onSuccess() {
+          await refresh()
+          await wkdt.refresh()
+          setStatus(SUCCESS)
+        },
+        async onComplete() {
+          await sleep(IDLE_DELAY)
+          setStatus(IDLE)
+        },
+        async onError() {
+          setStatus(ERROR)
+        },
+      })
+    },
+    async transfer(recipient) {
+      await txTransferPass({recipient, id}, {
         onStart() {
           setStatus(PROCESSING)
         },

@@ -5,7 +5,7 @@ import {
   ModalCloseButton,
   ModalContent, ModalFooter,
   ModalHeader,
-  ModalOverlay, NumberInput, NumberInputField, Stack,
+  ModalOverlay, Stack,
   Text, useDisclosure
 } from "@chakra-ui/react";
 import {PROCESSING} from "../../../../global/constants";
@@ -33,6 +33,7 @@ export function TransferPass({pass}){
               Close
             </Button>
             <Button colorScheme={"cyan"} isLoading={pass.status === PROCESSING}
+                    onClick={() => pass.transfer(address)}
                     >Transfer</Button>
           </ModalFooter>
         </ModalContent>

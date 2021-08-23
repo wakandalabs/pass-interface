@@ -13,23 +13,26 @@ import {
 } from "@chakra-ui/react";
 import React, {Suspense, useState} from "react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
-import {useWakandaPass} from "../../hooks/use-pass-list.hook";
 import {IDLE, PROCESSING} from "../../global/constants";
 import {ScheduleEditItem} from "./components/ScheduleEditItem";
 import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
 import {fmtWkdt} from "../../util/fmt-wkdt";
 import {parseUFix64} from "../../global/common";
+import {useWakandaPassIds} from "../../hooks/use-pass-ids.hook";
 
 export function Create() {
   const [cu] = useCurrentUserHook()
+  const wakandapass = useWakandaPassIds(cu.addr)
   const [showLockup, setShowLockup] = React.useState(false)
   const [schedule, setSchedule] = useState([{"key": "", "value": "0.0"}])
   const [lockAmount, setLockAmount] = useState("0.0")
   const [post, setPost] = React.useState({})
   const [receiver, setReceiver] = React.useState(cu.addr)
-  const wakandapass = useWakandaPass(cu.addr)
   const wkdt = useWkdtBalanceHook(cu.addr)
   const parse = (val) => val.replace(/^\$/, "")
+
+
+  console.log(wakandapass)
 
   function handleSwitch() {
     setSchedule([{"key": "", "value": "0.0"}])

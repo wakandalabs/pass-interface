@@ -11,6 +11,7 @@ import {useCurrentUserHook} from "../../../../hooks/use-current-user.hook";
 import qs from "qs";
 import {useSaleOfferIdsHook} from "../../../../hooks/use-sale-offer-ids.hook";
 import {useHistory} from "react-router-dom";
+import {TransferPass} from "./TransferPass";
 
 export function Detail({pass}) {
   const [cu] = useCurrentUserHook()
@@ -32,9 +33,8 @@ export function Detail({pass}) {
         <Stack direction={"row"}>
           <Button size={"sm"} onClick={pass.withdraw}
                   disabled={pass.status === PROCESSING || Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Withdraw</Button>
-          <Button size={"sm"} hidden
-                  disabled={pass.status === PROCESSING || Number(pass.pass.idleBalance) === 0 || isNaN(Number(pass.pass.idleBalance))}>Stake</Button>
           <SalePass pass={pass}/>
+          <TransferPass pass={pass}/>
         </Stack>
       )}
     </Stack>
