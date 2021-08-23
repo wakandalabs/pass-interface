@@ -14,7 +14,7 @@ import React, {useState} from "react";
 import {useWkdtBalanceHook} from "../../../../hooks/use-wkdt-balance.hook";
 import {useCurrentUserHook} from "../../../../hooks/use-current-user.hook";
 
-export function SellPass({pass}){
+export function SalePass({pass}){
   const parse = (val) => val.replace(/^\$/, "")
   const [cu] = useCurrentUserHook()
   const wkdt = useWkdtBalanceHook(cu.addr)
@@ -23,11 +23,11 @@ export function SellPass({pass}){
 
   return(
     <Stack>
-      <Button size={"sm"} disabled={pass.status === PROCESSING} onClick={onOpen}>Sell</Button>
+      <Button size={"sm"} disabled={pass.status === PROCESSING} onClick={onOpen}>Sale</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        <ModalOverlay/>
         <ModalContent>
-          <ModalHeader>Sell WakandaPass</ModalHeader>
+          <ModalHeader>Sale WakandaPass</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Text fontSize={"xs"} fontWeight={"bold"}>Enter the price</Text>
@@ -45,7 +45,7 @@ export function SellPass({pass}){
               Close
             </Button>
             <Button colorScheme={"cyan"} isLoading={pass.status === PROCESSING}
-                    onClick={() => pass.sell(pass.pass.id, parseUFix64(Number(price)).toString())}>Sell</Button>
+                    onClick={() => pass.sell(pass.pass.id, parseUFix64(Number(price)).toString())}>Sale</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -55,6 +55,6 @@ export function SellPass({pass}){
 
 export default function WrappedSellPass(props){
   return(
-    <SellPass {...props}/>
+    <SalePass {...props}/>
   )
 }

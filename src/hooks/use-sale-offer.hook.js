@@ -4,6 +4,7 @@ import {sleep} from "../util/sleep";
 import {fetchSellOfferItem} from "../flow/script.fetch-sell-offer-item";
 import {txRemoveSaleOffer} from "../flow/tx.remove-sale-offer";
 import {txStorefrontCleanItem} from "../flow/tx.storefront-clean-item";
+import {txBuyPassWkdt} from "../flow/tx.buy-pass-wkdt";
 
 export const saleOfferItemAtom = atomFamily({
   key: "saleOfferItem::state",
@@ -67,5 +68,23 @@ export function useSaleOfferHook(address, saleOfferResourceID) {
         },
       })
     },
+    async buyPass() {
+      await txBuyPassWkdt({saleOfferResourceID, address}, {
+        onStart() {
+          setStatus(PROCESSING)
+        },
+        async onSuccess() {
+          await refresh()
+          setStatus(SUCCESS)
+        },
+        async onComplete() {
+          await sleep(IDLE_DELAY)
+          setStatus(IDLE)
+        },
+        async onError() {
+          setStatus(ERROR)
+        },
+      })
+    }
   }
 }

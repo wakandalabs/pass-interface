@@ -44,10 +44,9 @@ export function SalePassItem({address, id}){
       {/*</AspectRatio>*/}
       <Spacer/>
       <Stack spacing={0}>
-        <Text fontSize={"md"} fontWeight={"bold"} onClick={() => history.push("/" + address + "/" + String(pass.id))}>{pass.metadata.title} #{pass.id}</Text>
+        <Text fontSize={"md"} fontWeight={"bold"} onClick={() => history.push("/" + address + "/" + String(pass.id) + "?sale=" + String(id))}>{pass.metadata.title} #{pass.id}</Text>
         {price !== null && (
           <Stack direction={"row"} align={"center"}>
-
             <Text fontSize={"sm"} fontWeight={"bold"} color={"gray"}>Sale {fmtWkdt(price, true)}</Text>
             <Spacer/>
             {cu.addr === address ? (

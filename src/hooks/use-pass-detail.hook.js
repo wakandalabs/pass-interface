@@ -73,7 +73,7 @@ export function useWakandaPassDetail(address, id) {
         },
       })
     },
-    async sell(salePassID, salePassPrice) {
+    async sale(salePassID, salePassPrice) {
       await txSellPassWkdt({salePassID, salePassPrice}, {
         onStart() {
           setStatus(PROCESSING)
