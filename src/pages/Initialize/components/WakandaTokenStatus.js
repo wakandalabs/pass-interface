@@ -17,7 +17,7 @@ export function WakandaTokenStatus() {
 export function WakandaTokenStatusSkeleton() {
   return(
     <Stack direction={"row"} align={"center"} h={8}>
-      <Heading fontSize={"md"}>WakandaProfile</Heading>
+      <Heading fontSize={"md"}>WakandaToken</Heading>
       <Spacer/>
       <BeatLoader size={6}/>
     </Stack>

@@ -15,8 +15,6 @@ import {useCurrentUserHook} from "../../../hooks/use-current-user.hook";
 import {useWakandaPassDetail} from "../../../hooks/use-pass-detail.hook";
 import Detail from "./components/Detail";
 import Lockup from "./components/Lockup";
-import Stake from "./components/Stake";
-import Stamp from "./components/Stamp";
 
 export function PassItem() {
   const history = useHistory()
@@ -47,8 +45,6 @@ export function PassItem() {
           <TabList>
             <Tab fontWeight={"bold"}>Detail</Tab>
             <Tab fontWeight={"bold"}>Lockup</Tab>
-            <Tab fontWeight={"bold"}>Stake</Tab>
-            <Tab fontWeight={"bold"}>Stamp</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -56,12 +52,6 @@ export function PassItem() {
             </TabPanel>
             <TabPanel>
               <Lockup pass={pass}/>
-            </TabPanel>
-            <TabPanel>
-              <Stake pass={pass}/>
-            </TabPanel>
-            <TabPanel>
-              <Stamp pass={pass}/>
             </TabPanel>
           </TabPanels>
         </Tabs>

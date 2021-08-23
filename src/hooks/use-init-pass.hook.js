@@ -23,7 +23,7 @@ export const $status = atomFamily({
 })
 
 export const $init = atomFamily({
-  key: "init-wkdt::state",
+  key: "init-pass::state",
   default: selectorFamily({
     key: "init-pass::default",
     get: address => () => scriptIsPassInit(address),

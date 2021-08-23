@@ -5,24 +5,21 @@ import {invariant} from "@onflow/util-invariant";
 
 const CODE = cdc`
 import WakandaStorefront from 0xWakandaStorefront
-transaction(saleOfferResourceID: UInt64, storefrontAddress: Address) {
-  let storefront: &WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}
+
+transaction(saleOfferResourceID: UInt64) {
+  let storefront: &WakandaStorefront.Storefront{WakandaStorefront.StorefrontManager}
 
   prepare(acct: AuthAccount) {
-    self.storefront = getAccount(storefrontAddress)
-      .getCapability<&WakandaStorefront.Storefront{WakandaStorefront.StorefrontPublic}>(
-      WakandaStorefront.StorefrontPublicPath
-    )!
-  .borrow()
-    ?? panic("Cannot borrow Storefront from provided address")
+    self.storefront = acct.borrow<&WakandaStorefront.Storefront{WakandaStorefront.StorefrontManager}>(from: WakandaStorefront.StorefrontStoragePath)
+    ?? panic("Missing or mis-typed WakandaStorefront.Storefront")
   }
 
   execute {
-    // Be kind and recycle
     self.storefront.cleanup(saleOfferResourceID: saleOfferResourceID)
   }
 }
 `
+
 
 // prettier-ignore
 export function txStorefrontCleanItem({salePassID, salePassPrice}, opts = {}) {
