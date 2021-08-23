@@ -28,7 +28,6 @@ transaction(id: UInt64) {
         self.vaultRef.deposit(from: <- vault)
     }
 }
-
 `
 
 // prettier-ignore
