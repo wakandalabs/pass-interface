@@ -94,7 +94,7 @@ export function useWakandaPassDetail(address, id) {
       })
     },
     async transfer(recipient) {
-      await txTransferPass({recipient, id}, {
+      await txTransferPass({recipient, withdrawID: id}, {
         onStart() {
           setStatus(PROCESSING)
         },

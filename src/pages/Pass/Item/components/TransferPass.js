@@ -12,7 +12,6 @@ import {PROCESSING} from "../../../../global/constants";
 import React, {useState} from "react";
 
 export function TransferPass({pass}){
-  const parse = (val) => val.replace(/^\$/, "")
   const [address ,setAddress] = useState("")
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -26,7 +25,7 @@ export function TransferPass({pass}){
           <ModalCloseButton />
           <ModalBody>
             <Text fontSize={"xs"} fontWeight={"bold"}>Enter receiver</Text>
-            <Input onChange={(valueString) => setAddress(parse(valueString))}/>
+            <Input onChange={(e) => setAddress(e.target.value)}/>
           </ModalBody>
           <ModalFooter>
             <Button variant={"ghost"} mr={3} onClick={onClose}>
