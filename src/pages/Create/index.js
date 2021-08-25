@@ -19,6 +19,7 @@ import {useWkdtBalanceHook} from "../../hooks/use-wkdt-balance.hook";
 import {fmtWkdt} from "../../util/fmt-wkdt";
 import {parseUFix64} from "../../global/common";
 import {useWakandaPassIds} from "../../hooks/use-pass-ids.hook";
+import {CreatedError, CreatingSuccess} from "./components/CreatingSuccess";
 
 export function Create() {
   const [cu] = useCurrentUserHook()
@@ -31,9 +32,6 @@ export function Create() {
   const wkdt = useWkdtBalanceHook(cu.addr)
   const parse = (val) => val.replace(/^\$/, "")
 
-
-  console.log(wakandapass)
-
   function handleSwitch() {
     setSchedule([{"key": "", "value": "0.0"}])
     setShowLockup(!showLockup)
@@ -45,7 +43,7 @@ export function Create() {
     for (const item of schedule) {
       if (item["key"] === "" || isNaN(item["key"])) {
         check.push(false)
-      }else{
+      } else {
         check.push(true)
       }
     }
@@ -57,7 +55,7 @@ export function Create() {
   }
 
   function handleMintPass() {
-    if (showLockup === false || wkdt.balance === 0){
+    if (showLockup === false || wkdt.balance === 0) {
       wakandapass.mint(receiver, metadata)
     } else if (showLockup === true && wkdt.balance > 0) {
       let fmtSche = schedule.filter(item => (item["key"] !== "" && item["value"] !== "" && !isNaN(item["key"])))
@@ -69,92 +67,104 @@ export function Create() {
     key, value
   }))
 
+  if (wakandapass.tx !== null && wakandapass.tx !== undefined && wakandapass.tx.statusCode === 0) {
+    return <CreatingSuccess wakandapass={wakandapass}/>
+  }
+
+  if (wakandapass.tx === undefined){
+    return <CreatedError wakandapass={wakandapass}/>
+  }
+
+
   return (
     <Center>
       <Stack pl={4} pr={4} spacing={12} w={650} minH={"60vh"}>
         <Box mb={8}>
           <Heading>Create WakandaPass</Heading>
         </Box>
-        <FormControl id="media">
-          <FormLabel fontWeight={"bold"}>Upload media</FormLabel>
-          <Stack textAlign={"center"} p={12} spacing={12} borderWidth="1px" borderRadius={"lg"} border={"gary"}>
-            <Text color={"gray"}>PNG, GIF, WEBP, MP4 or MP3. Max 100mb.</Text>
-            <Box>
-              <Badge colorScheme={"cyan"}>Comming soon</Badge>
-            </Box>
-            <Box>
-              <Button disabled>Choose file</Button>
-            </Box>
-          </Stack>
-        </FormControl>
-        <FormControl id="title">
-          <FormLabel fontWeight={"bold"}>Title</FormLabel>
-          <Input placeholder="e.g. Wakanda item" size="md" disabled={wakandapass.status === PROCESSING} variant={"flushed"}
-                 onChange={e => setPost({...post, title: e.target.value})}/>
-        </FormControl>
-        <FormControl id="description">
-          <FormLabel fontWeight={"bold"}>Description</FormLabel>
-          <Input placeholder="e.g. An amazing thing" size="md" disabled={wakandapass.status === PROCESSING}
-                 variant={"flushed"}
-                 onChange={e => setPost({...post, description: e.target.value})}/>
-        </FormControl>
-        <FormControl id="isLockup">
-          <Stack direction={"row"} align={"center"}>
-            <FormLabel fontWeight={"bold"} bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">Lockup WKDT and set
-              schedule</FormLabel>
-            <Spacer/>
-            {wkdt.balance > 0 ? (
-              <Switch id={"lockupSwitch"} value={showLockup} onChange={handleSwitch}/>
-            ): (
-              <Badge variant="subtle" colorScheme="cyan">Need WKDT</Badge>
-            )}
-          </Stack>
-          <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
-        </FormControl>
-        {showLockup && (
-          <FormControl id="lockupAmount">
-            <FormLabel fontWeight={"bold"}>Lockup amount</FormLabel>
-            <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
-                         max={wkdt.balance} disabled={wakandapass.status === PROCESSING}
-                         errorBorderColor="red.200" mb={4} variant={"flushed"} size="md"
-                         onChange={(valueString) => setLockAmount(parse(valueString))}
-                         value={lockAmount} placeholder="Amount of WKDT"
-            >
-              <NumberInputField/>
-            </NumberInput>
-            <FormHelperText>Total amount that's subject to lockup schedule. Your balance:
-              {wkdt.status === IDLE ? (
-                fmtWkdt(wkdt.balance)
-              ) : (
-                <Spinner size={"sm"}/>
-              ) }
-            </FormHelperText>
-          </FormControl>
-        )}
-        {showLockup && (
-          <FormControl id="lockupSchedule">
-            <FormLabel fontWeight={"bold"}>Lockup schedule</FormLabel>
-            <Stack>
-              {schedule.map((item, index) => (
-                <ScheduleEditItem key={index} index={index} items={schedule} callback={callback}/>
-              ))}
+        <Stack spacing={12}>
+          <FormControl id="media">
+            <FormLabel fontWeight={"bold"}>Upload media</FormLabel>
+            <Stack textAlign={"center"} p={12} spacing={12} borderWidth="1px" borderRadius={"lg"} border={"gary"}>
+              <Text color={"gray"}>PNG, GIF, WEBP, MP4 or MP3. Max 100mb.</Text>
+              <Box>
+                <Badge colorScheme={"cyan"}>Comming soon</Badge>
+              </Box>
+              <Box>
+                <Button disabled>Choose file</Button>
+              </Box>
             </Stack>
-            <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
           </FormControl>
-        )}
-        <FormControl id="receiver">
-          <FormLabel fontWeight={"bold"}>Receiver</FormLabel>
-          <InputGroup>
-            <Input placeholder="Flow account" size="md" variant={"flushed"}
-                   disabled={wakandapass.status === PROCESSING}
-                   value={receiver} onChange={e => setReceiver(e.target.value)}/>
-            <InputRightElement children={<Button size="sm" onClick={() => setReceiver(cu.addr)}>myself</Button>}
-                               width={"auto"}/>
-          </InputGroup>
-          <FormHelperText>You can create WakandaPass for others</FormHelperText>
-        </FormControl>
-        <Button size={"lg"} colorScheme={"cyan"} onClick={handleMintPass}
-                isLoading={wakandapass.status === PROCESSING} loadingText={"Creating"}>Create item</Button>
+          <FormControl id="title">
+            <FormLabel fontWeight={"bold"}>Title</FormLabel>
+            <Input placeholder="e.g. Wakanda item" size="md" disabled={wakandapass.status === PROCESSING}
+                   variant={"flushed"}
+                   onChange={e => setPost({...post, title: e.target.value})}/>
+          </FormControl>
+          <FormControl id="description">
+            <FormLabel fontWeight={"bold"}>Description</FormLabel>
+            <Input placeholder="e.g. An amazing thing" size="md" disabled={wakandapass.status === PROCESSING}
+                   variant={"flushed"}
+                   onChange={e => setPost({...post, description: e.target.value})}/>
+          </FormControl>
+          <FormControl id="isLockup">
+            <Stack direction={"row"} align={"center"}>
+              <FormLabel fontWeight={"bold"} bgGradient="linear(to-l, pink.500,cyan)" bgClip="text">Lockup WKDT and set
+                schedule</FormLabel>
+              <Spacer/>
+              {wkdt.balance > 0 ? (
+                <Switch id={"lockupSwitch"} value={showLockup} onChange={handleSwitch}/>
+              ) : (
+                <Badge variant="subtle" colorScheme="cyan">Need WKDT</Badge>
+              )}
+            </Stack>
+            <FormHelperText>WakandaPass is capable of hosting WKDT</FormHelperText>
+          </FormControl>
+          {showLockup && (
+            <FormControl id="lockupAmount">
+              <FormLabel fontWeight={"bold"}>Lockup amount</FormLabel>
+              <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
+                           max={wkdt.balance} disabled={wakandapass.status === PROCESSING}
+                           errorBorderColor="red.200" mb={4} variant={"flushed"} size="md"
+                           onChange={(valueString) => setLockAmount(parse(valueString))}
+                           value={lockAmount} placeholder="Amount of WKDT"
+              >
+                <NumberInputField/>
+              </NumberInput>
+              <FormHelperText>Total amount that's subject to lockup schedule. Your balance:
+                {wkdt.status === IDLE ? (
+                  fmtWkdt(wkdt.balance)
+                ) : (
+                  <Spinner size={"sm"}/>
+                )}
+              </FormHelperText>
+            </FormControl>
+          )}
+          {showLockup && (
+            <FormControl id="lockupSchedule">
+              <FormLabel fontWeight={"bold"}>Lockup schedule</FormLabel>
+              <Stack>
+                {schedule.map((item, index) => (
+                  <ScheduleEditItem key={index} index={index} items={schedule} callback={callback}/>
+                ))}
+              </Stack>
+              <FormHelperText>Defines how much WKDT must remain in the WakandaPass on different dates</FormHelperText>
+            </FormControl>
+          )}
+          <FormControl id="receiver">
+            <FormLabel fontWeight={"bold"}>Receiver</FormLabel>
+            <InputGroup>
+              <Input placeholder="Flow account" size="md" variant={"flushed"}
+                     disabled={wakandapass.status === PROCESSING}
+                     value={receiver} onChange={e => setReceiver(e.target.value)}/>
+              <InputRightElement children={<Button size="sm" onClick={() => setReceiver(cu.addr)}>myself</Button>}
+                                 width={"auto"}/>
+            </InputGroup>
+            <FormHelperText>You can create WakandaPass for others</FormHelperText>
+          </FormControl>
+          <Button size={"lg"} colorScheme={"cyan"} onClick={handleMintPass}
+                  isLoading={wakandapass.status === PROCESSING} loadingText={"Creating"}>Create item</Button>
+        </Stack>
         <Stack h={20}/>
       </Stack>
     </Center>

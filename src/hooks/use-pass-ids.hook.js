@@ -18,9 +18,15 @@ export const statusAtom = atomFamily({
   default: IDLE,
 })
 
+export const txAtom = atomFamily({
+  key: "pass-mint::tx",
+  default: null,
+})
+
 export function useWakandaPassIds(address) {
   const [ids, setIds] = useRecoilState(valueAtom(address))
   const [status, setStatus] = useRecoilState(statusAtom(address))
+  const [tx, setTx] = useRecoilState(txAtom(address))
 
   async function refresh() {
     setStatus(PROCESSING)
@@ -31,9 +37,10 @@ export function useWakandaPassIds(address) {
   return {
     ids,
     status,
+    tx,
     refresh,
     async mint(receiver, metadata) {
-      await txMintPass({receiver, metadata}, {
+      const tx = await txMintPass({receiver, metadata}, {
         onStart() {
           setStatus(PROCESSING)
         },
@@ -49,9 +56,11 @@ export function useWakandaPassIds(address) {
           setStatus(ERROR)
         },
       })
+      console.log(tx)
+      setTx(tx)
     },
     async mintWithCustom(receiver, metadata, lockupAmount, lockupSchedule) {
-      await txMintPassCustom({receiver, metadata, lockupAmount, lockupSchedule},{
+      const tx = await txMintPassCustom({receiver, metadata, lockupAmount, lockupSchedule}, {
         onStart() {
           setStatus(PROCESSING)
         },
@@ -67,6 +76,11 @@ export function useWakandaPassIds(address) {
           setStatus(ERROR)
         },
       })
+      console.log(tx)
+      setTx(tx)
+    },
+    resetTx(){
+      setTx(null)
     }
   }
 }
