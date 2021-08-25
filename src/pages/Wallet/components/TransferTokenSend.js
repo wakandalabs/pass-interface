@@ -24,7 +24,7 @@ export function TransferTokenSend({address}) {
         )}
         <Text fontSize={"xs"} fontWeight={"bold"}>WKDT</Text>
       </HStack>
-      <NumberInput inputMode="decimal" min={0} allowMouseWheel={true}
+      <NumberInput inputMode="decimal" min={0}
                    max={wkdt.balance}
                    errorBorderColor="red.200" mb={4}
                    onChange={(valueString) => setAmount(parse(valueString))}
