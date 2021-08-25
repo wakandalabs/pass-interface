@@ -22,10 +22,10 @@ export function TheHeaderUserInfo() {
           {user.addr}
         </MenuButton>
         <MenuList>
-          <MenuItem onClick={() => history.push("/wallet")}>
+          <MenuItem onClick={() => window.location.href = "https://pocket.wakanda.cn"}>
             <Stack direction={"row"} align={"center"} p={2} spacing={4}>
               <AiOutlineWallet/>
-              <Heading fontSize="md">My wallet</Heading>
+              <Heading fontSize="md">My pocket</Heading>
             </Stack>
           </MenuItem>
           <MenuItem onClick={() => history.push("/initialize")}>
