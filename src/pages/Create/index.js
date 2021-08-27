@@ -42,7 +42,7 @@ export function Create() {
   async function handleUploadFile(e) {
     const file = e.target.files[0]
     const result = await ipfs.uploadFile(file)
-    setPost({...post, url: result.path})
+    setPost({...post, tokenURI: "https://ipfs.io/ipfs/" + result.path})
   }
 
   const callback = (items) => {
