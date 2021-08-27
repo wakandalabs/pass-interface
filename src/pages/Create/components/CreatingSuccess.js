@@ -4,6 +4,7 @@ import React from "react";
 export function CreatingSuccess({wakandapass}){
   function handleNextCreate(){
     wakandapass.resetTx()
+
   }
 
   return(

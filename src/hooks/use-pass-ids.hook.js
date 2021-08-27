@@ -56,7 +56,6 @@ export function useWakandaPassIds(address) {
           setStatus(ERROR)
         },
       })
-      console.log(tx)
       setTx(tx)
     },
     async mintWithCustom(receiver, metadata, lockupAmount, lockupSchedule) {
@@ -76,7 +75,6 @@ export function useWakandaPassIds(address) {
           setStatus(ERROR)
         },
       })
-      console.log(tx)
       setTx(tx)
     },
     resetTx(){

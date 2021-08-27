@@ -62,18 +62,20 @@ export function Create() {
     }
   }
 
-  function handleMintPass() {
+  async function handleMintPass() {
+    const metadata = Object.entries(post).map(([key, value]) => ({
+      key, value
+    }))
+
+    console.log(metadata)
+
     if (showLockup === false || wkdt.balance === 0) {
-      wakandapass.mint(receiver, metadata)
+      await wakandapass.mint(receiver, metadata)
     } else if (showLockup === true && wkdt.balance > 0) {
       let fmtSche = schedule.filter(item => (item["key"] !== "" && item["value"] !== "" && !isNaN(item["key"])))
-      wakandapass.mintWithCustom(receiver, metadata, parseUFix64(Number(lockAmount)), fmtSche)
+      await wakandapass.mintWithCustom(receiver, metadata, parseUFix64(Number(lockAmount)), fmtSche)
     }
   }
-
-  const metadata = Object.entries(post).map(([key, value]) => ({
-    key, value
-  }))
 
   if (wakandapass.tx !== null && wakandapass.tx !== undefined && wakandapass.tx.statusCode === 0) {
     return <CreatingSuccess wakandapass={wakandapass}/>
