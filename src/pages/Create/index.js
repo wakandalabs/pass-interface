@@ -9,7 +9,7 @@ import {
   Heading,
   Input, InputGroup, InputRightElement, NumberInput, NumberInputField, Spacer,
   Spinner,
-  Stack, Switch, Text
+  Stack, Switch,
 } from "@chakra-ui/react";
 import React, {Suspense, useState} from "react";
 import {useCurrentUserHook} from "../../hooks/use-current-user.hook";
@@ -20,6 +20,7 @@ import {fmtWkdt} from "../../util/fmt-wkdt";
 import {parseUFix64} from "../../global/common";
 import {useWakandaPassIds} from "../../hooks/use-pass-ids.hook";
 import {CreatedError, CreatingSuccess} from "./components/CreatingSuccess";
+import {useIpfs} from "../../hooks/use-ipfs.hook";
 
 export function Create() {
   const [cu] = useCurrentUserHook()
@@ -31,10 +32,17 @@ export function Create() {
   const [receiver, setReceiver] = React.useState(cu.addr)
   const wkdt = useWkdtBalanceHook(cu.addr)
   const parse = (val) => val.replace(/^\$/, "")
+  const ipfs = useIpfs()
 
   function handleSwitch() {
     setSchedule([{"key": "", "value": "0.0"}])
     setShowLockup(!showLockup)
+  }
+
+  async function handleUploadFile(e) {
+    const file = e.target.files[0]
+    const result = await ipfs.uploadFile(file)
+    setPost({...post, url: result.path})
   }
 
   const callback = (items) => {
@@ -71,10 +79,9 @@ export function Create() {
     return <CreatingSuccess wakandapass={wakandapass}/>
   }
 
-  if (wakandapass.tx === undefined){
+  if (wakandapass.tx === undefined) {
     return <CreatedError wakandapass={wakandapass}/>
   }
-
 
   return (
     <Center>
@@ -85,15 +92,9 @@ export function Create() {
         <Stack spacing={12}>
           <FormControl id="media">
             <FormLabel fontWeight={"bold"}>Upload media</FormLabel>
-            <Stack textAlign={"center"} p={12} spacing={12} borderWidth="1px" borderRadius={"lg"} border={"gary"}>
-              <Text color={"gray"}>PNG, GIF, WEBP, MP4 or MP3. Max 100mb.</Text>
-              <Box>
-                <Badge colorScheme={"cyan"}>Comming soon</Badge>
-              </Box>
-              <Box>
-                <Button disabled>Choose file</Button>
-              </Box>
-            </Stack>
+            <Input type="file" multiple size="md" variant={"flushed"} accept="*/*"
+                   onChange={handleUploadFile}/>
+            <FormHelperText>{post.url}</FormHelperText>
           </FormControl>
           <FormControl id="title">
             <FormLabel fontWeight={"bold"}>Title</FormLabel>
