@@ -67,8 +67,6 @@ export function Create() {
       key, value
     }))
 
-    console.log(metadata)
-
     if (showLockup === false || wkdt.balance === 0) {
       await wakandapass.mint(receiver, metadata)
     } else if (showLockup === true && wkdt.balance > 0) {
@@ -96,7 +94,7 @@ export function Create() {
             <FormLabel fontWeight={"bold"}>Upload media</FormLabel>
             <Input type="file" multiple size="md" variant={"flushed"} accept="*/*"
                    onChange={handleUploadFile}/>
-            <FormHelperText>{post.url}</FormHelperText>
+            <FormHelperText>{post.tokenURI}</FormHelperText>
           </FormControl>
           <FormControl id="title">
             <FormLabel fontWeight={"bold"}>Title</FormLabel>
