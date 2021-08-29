@@ -27,6 +27,7 @@ export function Detail({pass}) {
       <Text fontWeight={"bold"} fontSize={"sm"}>Owner: {pass.pass.owner}</Text>
       <Text fontWeight={"bold"} fontSize={"sm"}>Idle balance: {fmtWkdt(pass.pass.idleBalance, true)}</Text>
       <Text fontWeight={"bold"} fontSize={"sm"}>Lockup amount: {fmtWkdt(pass.pass.lockupAmount, true)}</Text>
+      <Text fontWeight={"bold"} fontSize={"sm"}>TokenURI: {pass.pass.metadata.tokenURI}</Text>
       <Spacer/>
       {pass.pass.owner === cu.addr && (
         <Stack direction={"row"}>
