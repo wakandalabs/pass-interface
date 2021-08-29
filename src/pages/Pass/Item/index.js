@@ -9,7 +9,7 @@ import {
   TabList,
   Tab,
   TabPanels,
-  TabPanel, Skeleton,
+  TabPanel, Skeleton, AspectRatio, Image
 } from "@chakra-ui/react";
 import {useCurrentUserHook} from "../../../hooks/use-current-user.hook";
 import {useWakandaPassDetail} from "../../../hooks/use-pass-detail.hook";
@@ -27,11 +27,13 @@ export function PassItem() {
   }
 
   return (
-    <Stack pl={4} pr={4} minH={"60vh"} direction={"row"} spacing={8}>
-      <Stack width={"60%"}>
-        <Skeleton h={"80vh"}/>
+    <Stack pl={4} pr={4} minH={"60vh"} direction={"row"} spacing={16}>
+      <Stack width={"50%"}>
+        <AspectRatio ratio={1}>
+          <Image src={pass.pass.metadata.tokenURI} alt="WakandaPass" objectFit="cover" borderRadius="16" fallbackSrc={"https://via.placeholder.com/1024?text=WakandaPass"}/>
+        </AspectRatio>
       </Stack>
-      <Stack width={"40%"} spacing={6}>
+      <Stack width={"50%"} spacing={6}>
         <Stack>
           <Heading>{pass.pass.metadata.title} #{pass.pass.id}</Heading>
           <Text color={"gray"} fontWeight={"bold"}>Not for sale</Text>
@@ -62,11 +64,11 @@ export function PassItem() {
 
 export function PassItemSkeleton() {
   return (
-    <Stack pl={4} pr={4} minH={"60vh"} direction={"row"} spacing={12}>
-      <Stack width={"60%"}>
+    <Stack pl={4} pr={4} minH={"60vh"} direction={"row"} spacing={16}>
+      <Stack width={"50%"}>
         <Skeleton h={"100%"}/>
       </Stack>
-      <Stack width={"40%"} spacing={6}>
+      <Stack width={"50%"} spacing={6}>
         <SkeletonText noOfLines={6} spacing={12}/>
       </Stack>
     </Stack>

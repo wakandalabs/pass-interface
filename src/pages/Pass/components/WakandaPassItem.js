@@ -1,7 +1,8 @@
 import React, {Suspense} from "react";
 import {
+  AspectRatio,
   Avatar,
-  AvatarGroup, IconButton, Skeleton,
+  AvatarGroup, IconButton, Image, Skeleton,
   SkeletonCircle, SkeletonText,
   Spacer,
   Stack,
@@ -31,9 +32,9 @@ export function WakandaPassItem({address, id}) {
         <Spacer/>
         <IconButton aria-label={"more"} icon={<FiMoreHorizontal />} variant={"ghost"} size={"sm"}/>
       </Stack>
-      {/*<AspectRatio>*/}
-      {/*  <Image src="" alt="naruto" objectFit="cover" />*/}
-      {/*</AspectRatio>*/}
+      <AspectRatio ratio={1}>
+        <Image src={pass.pass.metadata.tokenURI} alt="WakandaPass" objectFit="cover" borderRadius="8" fallbackSrc={"https://via.placeholder.com/1024?text=WakandaPass"}/>
+      </AspectRatio>
       <Spacer/>
       <Stack spacing={0}>
         <Text fontSize={"md"} fontWeight={"bold"}>{pass.pass.metadata.title} #{pass.pass.id}</Text>
