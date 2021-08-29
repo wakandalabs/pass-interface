@@ -38,7 +38,7 @@ export function WakandaPassItem({address, id}) {
       <Spacer/>
       <Stack spacing={0}>
         <Text fontSize={"md"} fontWeight={"bold"}>{pass.pass.metadata.title} #{pass.pass.id}</Text>
-        <Text fontSize={"sm"} fontWeight={"bold"} color={"gray"}>Not for sale</Text>
+        <Text fontSize={"md"} color={"gray"}>{pass.pass.metadata.description}</Text>
         { parseInt(pass.pass.totalBalance) > 0 && (
           <Text fontSize={"sm"} fontWeight={"bold"} color={"cyan.500"}>Lockup: {fmtWkdt(pass.pass.lockupAmount, false)} / {fmtWkdt(pass.pass.totalBalance, true)}</Text>
         ) }

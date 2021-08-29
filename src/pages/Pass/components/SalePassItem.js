@@ -2,9 +2,10 @@ import React, {Suspense} from "react";
 import {useProfileHook} from "../../../hooks/use-profile.hook";
 import {useHistory} from "react-router-dom";
 import {
+  AspectRatio,
   Avatar,
   AvatarGroup, Button,
-  IconButton,
+  IconButton, Image,
   Skeleton,
   SkeletonCircle,
   SkeletonText,
@@ -39,9 +40,9 @@ export function SalePassItem({address, id}){
         <Spacer/>
         <IconButton aria-label={"more"} icon={<FiMoreHorizontal />} variant={"ghost"} size={"sm"}/>
       </Stack>
-      {/*<AspectRatio>*/}
-      {/*  <Image src="" alt="naruto" objectFit="cover" />*/}
-      {/*</AspectRatio>*/}
+      <AspectRatio ratio={1}>
+        <Image src={pass.metadata.tokenURI} alt="WakandaPass" objectFit="cover" borderRadius="8" fallbackSrc={"https://via.placeholder.com/1024?text=WakandaPass"}/>
+      </AspectRatio>
       <Spacer/>
       <Stack spacing={0}>
         <Text fontSize={"md"} fontWeight={"bold"} onClick={() => history.push("/" + address + "/" + String(pass.id) + "?sale=" + String(id))}>{pass.metadata.title} #{pass.id}</Text>

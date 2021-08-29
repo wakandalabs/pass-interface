@@ -45,7 +45,7 @@ export function SalePass({pass}){
               Close
             </Button>
             <Button colorScheme={"cyan"} isLoading={pass.status === PROCESSING}
-                    onClick={() => pass.sell(pass.pass.id, parseUFix64(Number(price)).toString())}>Sale</Button>
+                    onClick={() => pass.sale(pass.pass.id, parseUFix64(Number(price)).toString())}>Sale</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
