@@ -23,7 +23,7 @@ transaction(amount: UFix64, id: UInt64) {
     }
 
     execute {
-        self.wakandaPassRef.vault.deposit(from: <- self.sentVault)
+        self.wakandaPassRef.deposit(from: <- self.sentVault)
     }
 }
 `
